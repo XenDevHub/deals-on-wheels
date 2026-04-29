@@ -1,0 +1,123 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #050505; /* Deeper, richer black */
+  --color-surface: #0a0a0a;
+  --color-primary: #2563eb;
+  --color-secondary: #f59e0b;
+  --color-text-heading: #ffffff;
+  --color-text-body: #94a3b8;
+  --font-bebas: var(--font-bebas);
+  --font-inter: var(--font-inter);
+}
+
+:root {
+  --background: #050505;
+  --foreground: #ffffff;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--color-text-body);
+  font-family: var(--font-inter), sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-bebas), sans-serif;
+  color: var(--color-text-heading);
+  letter-spacing: 0.02em; /* Slightly tighter for a premium feel on large text */
+}
+
+/* Redefined Luxury Glassmorphism */
+.glass {
+  background: rgba(255, 255, 255, 0.02); /* More transparent */
+  backdrop-filter: blur(16px); /* Stronger blur */
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.05); /* Thinner, subtler border */
+  border-radius: 12px; /* Sharper corners for modern luxury */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Custom Animations */
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(37, 99, 235, 0.1); }
+  50% { box-shadow: 0 0 40px rgba(37, 99, 235, 0.3); }
+}
+
+.glow-blue:hover {
+  animation: glow-pulse 2s infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); } /* Subtler float */
+}
+
+.animate-float {
+  animation: float 8s ease-in-out infinite; /* Slower, more elegant float */
+}
+
+/* Custom Scrollbar for rest */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2563eb;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #1d4ed8;
+}
+
+/* Navbar blur on scroll */
+.nav-blur {
+  background: rgba(5, 5, 5, 0.7);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Magnetic Button / Luxury Outline effect */
+.btn-luxury {
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.btn-luxury::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  z-index: -1;
+}
+
+.btn-luxury:hover {
+  color: #050505;
+  border-color: #ffffff;
+}
+
+.btn-luxury:hover::before {
+  transform: scaleY(1);
+}
+
+/* Cinematic Mask Reveal Utilities */
+.mask-container {
+  overflow: hidden;
+}
