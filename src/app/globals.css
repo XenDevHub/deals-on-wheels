@@ -1,19 +1,19 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: #050505; /* Deeper, richer black */
-  --color-surface: #0a0a0a;
-  --color-primary: #2563eb;
-  --color-secondary: #f59e0b;
-  --color-text-heading: #ffffff;
+  --color-background: #080c14; /* Deep Midnight Navy */
+  --color-surface: #0c1220;
+  --color-primary: #cbd5e1; /* Icy Slate/Silver */
+  --color-secondary: #64748b;
+  --color-text-heading: #f8fafc;
   --color-text-body: #94a3b8;
   --font-bebas: var(--font-bebas);
   --font-inter: var(--font-inter);
 }
 
 :root {
-  --background: #050505;
-  --foreground: #ffffff;
+  --background: #080c14;
+  --foreground: #f8fafc;
 }
 
 body {
@@ -92,6 +92,7 @@ h1, h2, h3, h4, h5, h6 {
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.2);
   transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  cursor: pointer;
 }
 
 .btn-luxury::before {

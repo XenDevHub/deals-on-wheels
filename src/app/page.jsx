@@ -11,14 +11,14 @@ export default function Home() {
   const { t } = useLanguage();
 
   return (
-    <main className="relative min-h-screen bg-[#050505] selection:bg-white/20 selection:text-white">
+    <main className="relative min-h-screen bg-[#080c14] selection:bg-white/20 selection:text-white">
       <Navbar />
       <HeroSection />
       <RentalSection />
       <SalesSection />
       
       {/* Monumental Luxury Footer */}
-      <footer className="relative py-24 md:py-32 bg-[#050505] border-t border-white/5 overflow-hidden flex flex-col items-center justify-center text-center">
+      <footer className="relative py-24 md:py-32 bg-[#080c14] border-t border-white/5 overflow-hidden flex flex-col items-center justify-center text-center">
         <div className="container mx-auto px-6 z-10 flex flex-col items-center">
           
           <div className="mb-16 md:mb-24 flex flex-col items-center">

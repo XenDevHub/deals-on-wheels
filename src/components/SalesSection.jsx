@@ -35,7 +35,7 @@ const SalesSection = () => {
   }, []);
 
   return (
-    <section id="sales" className="relative py-32 md:py-48 bg-[#0a0a0a] overflow-hidden">
+    <section id="sales" className="relative py-32 md:py-48 bg-[#080c14] overflow-hidden">
       {/* Watermark Text */}
       <div className="absolute top-20 right-0 w-full overflow-hidden flex justify-center pointer-events-none opacity-[0.03] select-none">
         <span className="text-[15vw] font-bebas whitespace-nowrap">SHOWROOM</span>

@@ -76,18 +76,18 @@ const HeroSection = () => {
     <section
       id="hero"
       ref={containerRef}
-      className="relative h-screen w-full flex flex-col justify-center items-center overflow-hidden bg-[#0a0a0a]"
+      className="relative h-screen w-full flex flex-col justify-center items-center overflow-hidden bg-[#080c14]"
     >
       {/* Exclusive Background Glow */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] bg-[radial-gradient(circle_at_center,rgba(0,68,255,0.08)_0%,transparent_50%)]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] bg-[radial-gradient(circle_at_center,rgba(30,58,138,0.1)_0%,transparent_50%)]" />
       </div>
       {/* Background Gradient */}
       <motion.div
         style={{ y, opacity }}
         className="absolute inset-0 w-full h-[120%] -top-[10%]"
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/40 via-transparent to-[#050505] z-10" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#080c14]/40 via-transparent to-[#080c14] z-10" />
         <div className="absolute inset-0 bg-black/40 z-10" />
       </motion.div>
 
@@ -126,14 +126,14 @@ const HeroSection = () => {
           >
             <button
               onClick={() => scrollTo("rentals")}
-              className="btn-luxury px-12 py-5 text-white font-bold rounded-full uppercase tracking-widest text-xs z-10"
+              className="btn-luxury px-12 py-5 text-white font-bold rounded-full uppercase tracking-widest text-xs z-10 cursor-pointer"
             >
               {t.hero.rentBtn}
             </button>
 
             <button
               onClick={() => scrollTo("sales")}
-              className="group relative px-12 py-5 text-white font-bold rounded-full uppercase tracking-widest text-xs z-10 border border-transparent hover:border-white/20 transition-all"
+              className="group relative px-12 py-5 text-white font-bold rounded-full uppercase tracking-widest text-xs z-10 border border-transparent hover:border-white/20 transition-all cursor-pointer"
             >
               <span className="relative z-10">{t.hero.buyBtn}</span>
               <div className="absolute inset-0 bg-white/5 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity" />

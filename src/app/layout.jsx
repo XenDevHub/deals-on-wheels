@@ -23,7 +23,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="bn" className="dark">
-      <body className={`${bebasNeue.variable} ${inter.variable} antialiased bg-[#050505] text-white selection:bg-primary/30 selection:text-white`}>
+      <body className={`${bebasNeue.variable} ${inter.variable} antialiased bg-[#080c14] text-white selection:bg-primary/30 selection:text-white`}>
         <LanguageProvider>
           <SmoothScroll>
             {children}
