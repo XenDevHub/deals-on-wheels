@@ -5,7 +5,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useLanguage } from "@/lib/LanguageContext";
 import { useRef, Suspense, useLayoutEffect } from "react";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Stage, useGLTF } from "@react-three/drei";
+import { OrbitControls, Stage, useGLTF, Environment } from "@react-three/drei";
 import * as THREE from "three";
 
 function CarModel() {
@@ -14,21 +14,22 @@ function CarModel() {
   useLayoutEffect(() => {
     scene.traverse((child) => {
       if (child.isMesh && child.material) {
-        // Find the main body material (Ferrari model uses "body" or very red colors)
-        if (child.name.toLowerCase().includes("body") || child.material.name.toLowerCase().includes("body") || 
-           (child.material.color && child.material.color.r > 0.5 && child.material.color.g < 0.2)) {
-          
-          // Apply a stunning Metallic Blue finish
-          child.material.color = new THREE.Color("#0044ff");
-          if (child.material.metalness !== undefined) child.material.metalness = 0.7;
-          if (child.material.roughness !== undefined) child.material.roughness = 0.2;
-          if (child.material.clearcoat !== undefined) child.material.clearcoat = 1.0;
+        // Apply a high-contrast Arctic White & Obsidian Black finish
+        if (child.name.toLowerCase().includes("body") || child.material.name.toLowerCase().includes("body")) {
+          child.material.color = new THREE.Color("#ffffff"); // Arctic White
+          child.material.metalness = 0.7;
+          child.material.roughness = 0.05;
+        } else {
+          child.material.color = new THREE.Color("#050505"); // Obsidian Black
+          child.material.metalness = 0.8;
+          child.material.roughness = 0.2;
         }
+        if (child.material.clearcoat !== undefined) child.material.clearcoat = 1.0;
       }
     });
   }, [scene]);
 
-  return <primitive object={scene} scale={2.8} position={[0, -0.5, 0]} />;
+  return <primitive object={scene} scale={1.8} position={[0, 0, 0]} />;
 }
 const HeroSection = () => {
   const { t, lang } = useLanguage();
@@ -75,8 +76,12 @@ const HeroSection = () => {
     <section
       id="hero"
       ref={containerRef}
-      className="relative h-screen w-full flex flex-col justify-center items-center overflow-hidden bg-[#050505]"
+      className="relative h-screen w-full flex flex-col justify-center items-center overflow-hidden bg-[#0a0a0a]"
     >
+      {/* Exclusive Background Glow */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] bg-[radial-gradient(circle_at_center,rgba(0,68,255,0.08)_0%,transparent_50%)]" />
+      </div>
       {/* Background Gradient */}
       <motion.div
         style={{ y, opacity }}
@@ -136,25 +141,27 @@ const HeroSection = () => {
           </motion.div>
         </div>
 
-        {/* Right Side: 3D Car Model */}
+        {/* Right Side: Interactive 3D Car */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
+          initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.4, duration: 1.2 }}
-          className="w-full lg:w-1/2 h-[50vh] lg:h-[80vh] cursor-grab active:cursor-grabbing relative z-30"
+          className="w-full lg:w-[60%] h-[50vh] lg:h-[80vh] cursor-grab active:cursor-grabbing relative z-30"
         >
-          <Canvas shadows camera={{ position: [4, 2, 5], fov: 45 }}>
+          <Canvas shadows camera={{ position: [5, 3, 5], fov: 40 }}>
             <Suspense fallback={null}>
-              <Stage environment="city" intensity={0.5} adjustCamera={false}>
+              <Stage environment="city" intensity={0.6} adjustCamera={true}>
                 <CarModel />
               </Stage>
+              <Environment preset="city" />
             </Suspense>
             <OrbitControls 
               enableZoom={false} 
               autoRotate 
-              autoRotateSpeed={0.5} 
-              maxPolarAngle={Math.PI / 2 + 0.1} 
-              minPolarAngle={Math.PI / 3}
+              autoRotateSpeed={1} 
+              maxPolarAngle={Math.PI / 2} 
+              minPolarAngle={0}
+              makeDefault
             />
           </Canvas>
         </motion.div>

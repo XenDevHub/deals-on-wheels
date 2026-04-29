@@ -17,6 +17,7 @@ import {
 } from "firebase/storage";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function AdminPage() {
   const [user, setUser] = useState(null);
@@ -35,7 +36,17 @@ export default function AdminPage() {
   const [carFormData, setCarFormData] = useState({
     name: "", brand: "", model: "", year: new Date().getFullYear(),
     type: "rental", price: 0, rentalDaily: 0, rentalWeekly: 0,
-    description: "", available: true, images: []
+    description: "", available: true, images: [],
+    // New fields
+    premium: false,
+    seats: 5,
+    suitcases: 2,
+    bags: 2,
+    transmission: "Automatic",
+    doors: 4,
+    gps: true,
+    minAge: 25,
+    terms: "01. Minimum Age: Driver must be at least 25 years old with a valid driving license.\n02. Identification: Passport or National ID required for security verification.\n03. Security Deposit: A refundable security deposit of ৳20,000 is required upon delivery.\n04. Usage: Vehicle must be driven within national boundaries only.\n05. Fuel Policy: Vehicle will be delivered with a full tank and must be returned with a full tank."
   });
   const [uploadingImages, setUploadingImages] = useState(false);
   const [tempImageUrl, setTempImageUrl] = useState("");
@@ -101,7 +112,9 @@ export default function AdminPage() {
       setCarFormData({
         name: "", brand: "", model: "", year: new Date().getFullYear(),
         type: "rental", price: 0, rentalDaily: 0, rentalWeekly: 0,
-        description: "", available: true, images: []
+        description: "", available: true, images: [],
+        premium: false, seats: 5, suitcases: 2, bags: 2, transmission: "Automatic", doors: 4, gps: true, minAge: 25,
+        terms: "01. Minimum Age: Driver must be at least 25 years old with a valid driving license.\n02. Identification: Passport or National ID required for security verification.\n03. Security Deposit: A refundable security deposit of ৳20,000 is required upon delivery.\n04. Usage: Vehicle must be driven within national boundaries only.\n05. Fuel Policy: Vehicle will be delivered with a full tank and must be returned with a full tank."
       });
       fetchData();
     } catch (error) {
@@ -234,8 +247,11 @@ export default function AdminPage() {
       {/* Header */}
       <header className="border-b border-white/5 bg-[#0a0a0a]/80 backdrop-blur-xl sticky top-0 z-30">
         <div className="container mx-auto px-6 h-20 flex justify-between items-center">
-          <h1 className="text-2xl font-bebas text-white tracking-widest">DEALS ON WHEELS <span className="text-primary ml-2">ADMIN</span></h1>
+          <Link href="/" className="text-2xl font-bebas text-white tracking-widest hover:text-white/80 transition-colors">DEALS ON WHEELS <span className="text-primary ml-2">ADMIN</span></Link>
           <div className="flex items-center gap-6">
+            <Link href="/" className="text-[10px] font-bold text-white/60 hover:text-white border border-white/10 px-4 py-2 uppercase tracking-widest transition-colors hidden md:block">
+              BACK TO SITE
+            </Link>
             <span className="text-xs text-white/40 tracking-widest uppercase hidden md:block">{user.email}</span>
             <button onClick={handleLogout} className="text-[10px] font-bold text-white/60 hover:text-white border border-white/10 px-4 py-2 uppercase tracking-widest transition-colors">
               LOGOUT
@@ -321,7 +337,13 @@ export default function AdminPage() {
               <button 
                 onClick={() => {
                   setEditingCar(null);
-                  setCarFormData({ name: "", brand: "", model: "", year: new Date().getFullYear(), type: "rental", price: 0, rentalDaily: 0, rentalWeekly: 0, description: "", available: true, images: [] });
+                  setCarFormData({ 
+                    name: "", brand: "", model: "", year: new Date().getFullYear(), 
+                    type: "rental", price: 0, rentalDaily: 0, rentalWeekly: 0, 
+                    description: "", available: true, images: [],
+                    premium: false, seats: 5, suitcases: 2, bags: 2, transmission: "Automatic", doors: 4, gps: true, minAge: 25,
+                    terms: "01. Minimum Age: Driver must be at least 25 years old with a valid driving license.\n02. Identification: Passport or National ID required for security verification.\n03. Security Deposit: A refundable security deposit of ৳20,000 is required upon delivery.\n04. Usage: Vehicle must be driven within national boundaries only.\n05. Fuel Policy: Vehicle will be delivered with a full tank and must be returned with a full tank."
+                  });
                   setIsCarModalOpen(true);
                 }}
                 className="px-6 py-3 bg-white text-black text-xs font-bold uppercase tracking-widest hover:bg-white/90 transition-colors"
@@ -442,6 +464,69 @@ export default function AdminPage() {
                           <label className="text-[10px] text-white/40 uppercase tracking-[0.15em] mb-2 block">Weekly Rental Rate (BDT)</label>
                           <input type="number" value={carFormData.rentalWeekly} onChange={(e) => setCarFormData({...carFormData, rentalWeekly: parseInt(e.target.value) || 0})} className="w-full bg-[#050505] border border-white/10 p-4 text-sm font-mono text-white outline-none focus:border-primary transition-colors" placeholder="e.g. 30000" />
                         </div>
+                      </div>
+                    </div>
+
+                    <div className="border-t border-white/5 pt-6 mt-6 space-y-6">
+                      <h3 className="text-xs font-bold text-white uppercase tracking-widest mb-4">Detailed Specifications</h3>
+                      
+                      <div className="grid grid-cols-2 gap-6">
+                        <label className="flex items-center gap-3 cursor-pointer p-4 border border-white/5 bg-[#050505] hover:border-white/20 transition-colors">
+                          <div className={`w-4 h-4 border flex items-center justify-center transition-colors ${carFormData.premium ? 'bg-primary border-primary' : 'border-white/20'}`}>
+                            {carFormData.premium && <span className="text-white text-[10px]">✓</span>}
+                          </div>
+                          <input type="checkbox" checked={carFormData.premium} onChange={(e) => setCarFormData({...carFormData, premium: e.target.checked})} className="hidden" />
+                          <span className="text-[10px] tracking-widest uppercase text-white/70">Premium Brand</span>
+                        </label>
+                        
+                        <label className="flex items-center gap-3 cursor-pointer p-4 border border-white/5 bg-[#050505] hover:border-white/20 transition-colors">
+                          <div className={`w-4 h-4 border flex items-center justify-center transition-colors ${carFormData.gps ? 'bg-primary border-primary' : 'border-white/20'}`}>
+                            {carFormData.gps && <span className="text-white text-[10px]">✓</span>}
+                          </div>
+                          <input type="checkbox" checked={carFormData.gps} onChange={(e) => setCarFormData({...carFormData, gps: e.target.checked})} className="hidden" />
+                          <span className="text-[10px] tracking-widest uppercase text-white/70">GPS Included</span>
+                        </label>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-6">
+                        <div>
+                          <label className="text-[10px] text-white/40 uppercase tracking-[0.15em] mb-2 block">Seats</label>
+                          <input type="number" value={carFormData.seats} onChange={(e) => setCarFormData({...carFormData, seats: parseInt(e.target.value) || 0})} className="w-full bg-[#050505] border border-white/10 p-4 text-sm text-white outline-none focus:border-primary transition-colors" />
+                        </div>
+                        <div>
+                          <label className="text-[10px] text-white/40 uppercase tracking-[0.15em] mb-2 block">Transmission</label>
+                          <select value={carFormData.transmission} onChange={(e) => setCarFormData({...carFormData, transmission: e.target.value})} className="w-full bg-[#050505] border border-white/10 p-4 text-sm text-white outline-none focus:border-primary transition-colors appearance-none">
+                            <option value="Automatic">Automatic</option>
+                            <option value="Manual">Manual</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-6">
+                        <div>
+                          <label className="text-[10px] text-white/40 uppercase tracking-[0.15em] mb-2 block">Suitcases (Large)</label>
+                          <input type="number" value={carFormData.suitcases} onChange={(e) => setCarFormData({...carFormData, suitcases: parseInt(e.target.value) || 0})} className="w-full bg-[#050505] border border-white/10 p-4 text-sm text-white outline-none focus:border-primary transition-colors" />
+                        </div>
+                        <div>
+                          <label className="text-[10px] text-white/40 uppercase tracking-[0.15em] mb-2 block">Bags (Small)</label>
+                          <input type="number" value={carFormData.bags} onChange={(e) => setCarFormData({...carFormData, bags: parseInt(e.target.value) || 0})} className="w-full bg-[#050505] border border-white/10 p-4 text-sm text-white outline-none focus:border-primary transition-colors" />
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-6">
+                        <div>
+                          <label className="text-[10px] text-white/40 uppercase tracking-[0.15em] mb-2 block">Doors</label>
+                          <input type="number" value={carFormData.doors} onChange={(e) => setCarFormData({...carFormData, doors: parseInt(e.target.value) || 0})} className="w-full bg-[#050505] border border-white/10 p-4 text-sm text-white outline-none focus:border-primary transition-colors" />
+                        </div>
+                        <div>
+                          <label className="text-[10px] text-white/40 uppercase tracking-[0.15em] mb-2 block">Min Driver Age</label>
+                          <input type="number" value={carFormData.minAge} onChange={(e) => setCarFormData({...carFormData, minAge: parseInt(e.target.value) || 0})} className="w-full bg-[#050505] border border-white/10 p-4 text-sm text-white outline-none focus:border-primary transition-colors" />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="text-[10px] text-white/40 uppercase tracking-[0.15em] mb-2 block">Rental Terms & Conditions</label>
+                        <textarea value={carFormData.terms} onChange={(e) => setCarFormData({...carFormData, terms: e.target.value})} className="w-full h-32 bg-[#050505] border border-white/10 p-4 text-sm text-white outline-none focus:border-primary transition-colors resize-none" placeholder="Enter rental rules and conditions..." />
                       </div>
                     </div>
 
