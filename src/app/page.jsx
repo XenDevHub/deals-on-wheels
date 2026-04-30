@@ -1,58 +1,53 @@
 // src/app/page.jsx
 "use client";
 
+import { Suspense, lazy } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import RentalSection from "@/components/RentalSection";
-import SalesSection from "@/components/SalesSection";
-import { useLanguage } from "@/lib/LanguageContext";
+
+// Lazy load sections to improve initial performance and scroll fluidity
+const RentalSection = lazy(() => import("@/components/RentalSection"));
+const SalesSection = lazy(() => import("@/components/SalesSection"));
+
+const SectionLoader = () => (
+  <div className="w-full py-24 flex items-center justify-center bg-background">
+    <div className="w-8 h-8 border-2 border-accent border-t-transparent rounded-full animate-spin" />
+  </div>
+);
 
 export default function Home() {
-  const { t } = useLanguage();
-
   return (
-    <main className="relative min-h-screen bg-[#080c14] selection:bg-white/20 selection:text-white">
+    <main className="relative min-h-screen bg-background selection:bg-accent selection:text-white overflow-x-hidden">
       <Navbar />
-      <HeroSection />
-      <RentalSection />
-      <SalesSection />
       
-      {/* Monumental Luxury Footer */}
-      <footer className="relative py-24 md:py-32 bg-[#080c14] border-t border-white/5 overflow-hidden flex flex-col items-center justify-center text-center">
+      {/* Hero is above the fold, so we load it immediately */}
+      <HeroSection />
+      
+      <div className="relative">
+        <Suspense fallback={<SectionLoader />}>
+          <RentalSection />
+        </Suspense>
+
+        <Suspense fallback={<SectionLoader />}>
+          <SalesSection />
+        </Suspense>
+      </div>
+      
+      {/* Footer */}
+      <footer className="relative py-20 bg-background-darkest border-t border-accent/5 flex flex-col items-center justify-center text-center">
         <div className="container mx-auto px-6 z-10 flex flex-col items-center">
-          
-          <div className="mb-16 md:mb-24 flex flex-col items-center">
-            <h2 className="text-[12vw] md:text-[8vw] font-bebas text-white leading-none tracking-tighter hover:tracking-normal transition-all duration-700 select-none">
-              DEALS ON WHEELS
-            </h2>
-            <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent mt-8 mb-8" />
-            <p className="text-xs md:text-sm text-white/40 uppercase tracking-[0.3em] font-medium max-w-xl">
-              {t.footer.slogan}
-            </p>
+          <h2 className="text-[10vw] font-bebas text-heading/10 leading-none tracking-tighter select-none mb-12">
+            DEALS ON WHEELS
+          </h2>
+          <div className="flex gap-8 mb-8 text-[10px] uppercase tracking-widest font-bold text-body/40">
+            <a href="#" className="hover:text-accent transition-colors">Facebook</a>
+            <a href="#" className="hover:text-accent transition-colors">Instagram</a>
+            <a href="#" className="hover:text-accent transition-colors">WhatsApp</a>
           </div>
-
-          <div className="flex flex-wrap justify-center gap-8 md:gap-16 mb-16 text-xs uppercase tracking-[0.2em] font-bold text-white/50">
-            <a href="#" className="hover:text-white transition-colors relative group">
-              Facebook
-              <span className="absolute -bottom-2 left-1/2 w-0 h-[1px] bg-white transition-all group-hover:w-full group-hover:left-0"></span>
-            </a>
-            <a href="#" className="hover:text-white transition-colors relative group">
-              Instagram
-              <span className="absolute -bottom-2 left-1/2 w-0 h-[1px] bg-white transition-all group-hover:w-full group-hover:left-0"></span>
-            </a>
-            <a href="#" className="hover:text-white transition-colors relative group">
-              WhatsApp
-              <span className="absolute -bottom-2 left-1/2 w-0 h-[1px] bg-white transition-all group-hover:w-full group-hover:left-0"></span>
-            </a>
-          </div>
-
-          <p className="text-[9px] text-white/20 uppercase tracking-[0.2em]">
-            © {new Date().getFullYear()} Deals on Wheels. {t.footer.rights}
+          <p className="text-[8px] text-body/20 uppercase tracking-widest">
+            © {new Date().getFullYear()} Deals on Wheels. All Rights Reserved.
           </p>
         </div>
-        
-        {/* Subtle background glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-4xl bg-white/5 blur-[120px] rounded-full pointer-events-none z-0" />
       </footer>
     </main>
   );

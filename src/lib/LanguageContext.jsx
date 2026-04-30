@@ -1,22 +1,18 @@
 // src/lib/LanguageContext.jsx
 "use client";
 
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState } from "react";
 import { translations } from "./translations";
 
 const LanguageContext = createContext();
 
 export const LanguageProvider = ({ children }) => {
-  const [lang, setLang] = useState("en"); // Default to Bangla
+  const [lang] = useState("en"); // Hardcoded to English
 
   const t = translations[lang];
 
-  const toggleLanguage = () => {
-    setLang((prev) => (prev === "bn" ? "en" : "bn"));
-  };
-
   return (
-    <LanguageContext.Provider value={{ lang, setLang, t, toggleLanguage }}>
+    <LanguageContext.Provider value={{ lang, t }}>
       {children}
     </LanguageContext.Provider>
   );
@@ -29,3 +25,4 @@ export const useLanguage = () => {
   }
   return context;
 };
+

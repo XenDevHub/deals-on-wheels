@@ -1,7 +1,7 @@
 // src/components/HeroSection.jsx
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { useLanguage } from "@/lib/LanguageContext";
 import { useRef, Suspense, useLayoutEffect } from "react";
 import { Canvas } from "@react-three/fiber";
@@ -16,9 +16,9 @@ function CarModel() {
       if (child.isMesh && child.material) {
         // Apply a high-contrast Arctic White & Obsidian Black finish
         if (child.name.toLowerCase().includes("body") || child.material.name.toLowerCase().includes("body")) {
-          child.material.color = new THREE.Color("#ffffff"); // Arctic White
-          child.material.metalness = 0.7;
-          child.material.roughness = 0.05;
+          child.material.color = new THREE.Color("#ff2800"); // Rosso Corsa (Red)
+          child.material.metalness = 0.8;
+          child.material.roughness = 0.1;
         } else {
           child.material.color = new THREE.Color("#050505"); // Obsidian Black
           child.material.metalness = 0.8;
@@ -29,124 +29,105 @@ function CarModel() {
     });
   }, [scene]);
 
-  return <primitive object={scene} scale={1.8} position={[0, 0, 0]} />;
+  return <primitive object={scene} scale={1.3} position={[0, -0.5, 0]} />;
 }
+
 const HeroSection = () => {
-  const { t, lang } = useLanguage();
-  const headline = t.hero.headline;
-  const subHeadline = t.hero.subHeadline;
-  const containerRef = useRef(null);
+  const { t } = useLanguage();
 
-  const isBn = lang === "bn";
-  const titleClasses = isBn
-    ? "text-4xl md:text-5xl lg:text-6xl font-bebas tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-500 leading-[1.4] pb-2"
-    : "text-5xl md:text-6xl lg:text-7xl font-bebas tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-500 leading-[1.1] pb-2";
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  });
-
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
-
-  const scrollTo = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      const offset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      });
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.05,
+        type: "tween",
+        ease: "easeOut"
+      }
     }
   };
 
-  const textVariants = {
-    hidden: { y: "100%", opacity: 0 },
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
     visible: {
-      y: 0,
       opacity: 1,
-      transition: { duration: 1, ease: [0.16, 1, 0.3, 1] }
+      y: 0,
+      transition: { type: "tween", ease: "easeOut", duration: 0.5 }
     }
   };
 
   return (
     <section
       id="hero"
-      ref={containerRef}
-      className="relative h-screen w-full flex flex-col justify-center items-center overflow-hidden bg-[#080c14]"
+      className="relative min-h-screen flex items-center overflow-hidden pt-20 gpu bg-[#080c14]"
     >
       {/* Exclusive Background Glow */}
       <div className="absolute inset-0 z-0">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] bg-[radial-gradient(circle_at_center,rgba(30,58,138,0.1)_0%,transparent_50%)]" />
       </div>
-      {/* Background Gradient */}
-      <motion.div
-        style={{ y, opacity }}
-        className="absolute inset-0 w-full h-[120%] -top-[10%]"
-      >
-        <div className="absolute inset-0 bg-gradient-to-b from-[#080c14]/40 via-transparent to-[#080c14] z-10" />
-        <div className="absolute inset-0 bg-black/40 z-10" />
-      </motion.div>
 
-      <div className="container mx-auto px-6 flex flex-col lg:flex-row items-center justify-between z-20 mt-20 h-full w-full">
+      <div className="container mx-auto px-6 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center h-full">
         {/* Left Side: Text Content */}
-        <div className="w-full lg:w-1/2 flex flex-col justify-center text-left pt-20 lg:pt-0">
-          <div className="mask-container mb-6">
-            <motion.h1
-              variants={textVariants}
-              initial="hidden"
-              animate="visible"
-              className={titleClasses}
-            >
-              {headline.split(",")[0]},<br />
-              <span className="opacity-80">{headline.split(",")[1]}</span>
-            </motion.h1>
-          </div>
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="flex flex-col space-y-6 text-center lg:text-left pt-20 lg:pt-0"
+        >
+          <motion.div variants={itemVariants}>
+            <span className="text-accent font-bold tracking-[0.3em] uppercase text-[10px]">
+              EXCLUSIVE LUXURY
+            </span>
+          </motion.div>
 
-          <div className="mask-container mb-12">
-            <motion.p
-              variants={textVariants}
-              initial="hidden"
-              animate="visible"
-              transition={{ delay: 0.2 }}
-              className="text-sm md:text-lg text-white/60 max-w-xl font-light tracking-wide uppercase"
-            >
-              {subHeadline}
-            </motion.p>
-          </div>
+          <motion.h1
+            variants={itemVariants}
+            className="text-5xl md:text-7xl font-bebas leading-[1] text-heading tracking-tight"
+          >
+            {t.hero.headline}
+          </motion.h1>
+
+          <motion.p
+            variants={itemVariants}
+            className="text-body text-base max-w-lg mx-auto lg:mx-0 leading-relaxed opacity-80"
+          >
+            {t.hero.subHeadline}
+          </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
-            className="flex flex-col sm:flex-row items-start gap-6"
+            variants={itemVariants}
+            className="flex flex-col sm:flex-row gap-4 pt-4 justify-center lg:justify-start"
           >
-            <button
-              onClick={() => scrollTo("rentals")}
-              className="btn-luxury px-12 py-5 text-white font-bold rounded-full uppercase tracking-widest text-xs z-10 cursor-pointer"
-            >
+            <button className="btn-primary py-3 px-8 text-xs">
               {t.hero.rentBtn}
             </button>
-
-            <button
-              onClick={() => scrollTo("sales")}
-              className="group relative px-12 py-5 text-white font-bold rounded-full uppercase tracking-widest text-xs z-10 border border-transparent hover:border-white/20 transition-all cursor-pointer"
-            >
-              <span className="relative z-10">{t.hero.buyBtn}</span>
-              <div className="absolute inset-0 bg-white/5 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity" />
+            <button className="btn-secondary py-3 px-8 text-xs">
+              {t.hero.buyBtn}
             </button>
           </motion.div>
-        </div>
+
+          <motion.div
+            variants={itemVariants}
+            className="flex items-center gap-6 pt-8 justify-center lg:justify-start text-body/40"
+          >
+            <div className="flex flex-col">
+              <span className="text-xl font-bebas text-heading tracking-widest">50+</span>
+              <span className="text-[8px] uppercase tracking-widest">Luxury Cars</span>
+            </div>
+            <div className="w-[1px] h-8 bg-border-subtle" />
+            <div className="flex flex-col">
+              <span className="text-xl font-bebas text-heading tracking-widest">24/7</span>
+              <span className="text-[8px] uppercase tracking-widest">Support</span>
+            </div>
+          </motion.div>
+        </motion.div>
 
         {/* Right Side: Interactive 3D Car */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.4, duration: 1.2 }}
-          className="w-full lg:w-[60%] h-[50vh] lg:h-[80vh] cursor-grab active:cursor-grabbing relative z-30"
+          className="w-full h-[50vh] lg:h-[80vh] cursor-grab active:cursor-grabbing relative z-30"
         >
           <Canvas shadows camera={{ position: [5, 3, 5], fov: 40 }}>
             <Suspense fallback={null}>
@@ -167,15 +148,8 @@ const HeroSection = () => {
         </motion.div>
       </div>
 
-      {/* Scroll Indicator */}
-      <motion.div
-        animate={{ y: [0, 15, 0], opacity: [0.3, 1, 0.3] }}
-        transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-        className="absolute bottom-8 z-20 cursor-pointer flex flex-col items-center gap-4 left-1/2 -translate-x-1/2"
-        onClick={() => scrollTo("rentals")}
-      >
-        <div className="w-[1px] h-16 bg-gradient-to-b from-white/0 via-white/50 to-white/0" />
-      </motion.div>
+      {/* Optimized bottom transition */}
+      <div className="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-background-secondary to-transparent z-10 pointer-events-none" />
     </section>
   );
 };

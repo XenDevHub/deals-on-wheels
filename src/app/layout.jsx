@@ -2,7 +2,6 @@
 import { Bebas_Neue, Inter } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/lib/LanguageContext";
-import SmoothScroll from "@/components/SmoothScroll";
 
 const bebasNeue = Bebas_Neue({
   weight: "400",
@@ -22,12 +21,10 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="bn" className="dark">
-      <body className={`${bebasNeue.variable} ${inter.variable} antialiased bg-[#080c14] text-white selection:bg-primary/30 selection:text-white`}>
+    <html lang="en">
+      <body className={`${bebasNeue.variable} ${inter.variable} antialiased selection:bg-blue-500/30`}>
         <LanguageProvider>
-          <SmoothScroll>
-            {children}
-          </SmoothScroll>
+          {children}
         </LanguageProvider>
       </body>
     </html>
