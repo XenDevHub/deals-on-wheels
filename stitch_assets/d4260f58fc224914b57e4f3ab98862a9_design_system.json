@@ -1,0 +1,149 @@
+{
+  "displayName": "Kinetic Precision",
+  "styleGuidelines": "## Brand & Style\n\nThe design system is built on the principles of high-velocity efficiency and unwavering trust. It targets a modern consumer who values speed and professional reliability in the automotive space. By moving away from traditional, cluttered rental interfaces, this system embraces a **Corporate Modern** aesthetic infused with **High-Contrast** energy.\n\nThe visual narrative is defined by expansive whitespace, which provides the \"breathing room\" necessary for high-value decision-making in car sales and rentals. The interaction model is snappy and purposeful, evoking the feeling of a premium, well-engineered vehicle. The atmosphere is professional yet approachable, ensuring users feel both the excitement of a new ride and the security of a premium service.\n\n## Layout & Spacing\n\nThe layout philosophy follows a **Fixed Grid** model for desktop to ensure a curated, premium presentation, while transitioning to a fluid model for mobile devices. A 12-column grid is standard, utilizing generous 24px gutters to reinforce the feeling of spaciousness.\n\nThe spacing rhythm is built on an 8px base unit. Section vertical spacing is intentionally large (80px+) to clearly separate different phases of the user journey (e.g., search, featured fleet, testimonials). Inside components, the \"stack-md\" (12px) unit is the default for relating text to imagery, ensuring elements feel connected but never cramped.\n\n## Elevation & Depth\n\nTo maintain a modern and clean aesthetic, the design system avoids heavy borders in favor of **Ambient Shadows** and **Tonal Layers**. \n\nDepth is communicated through three primary levels:\n1. **Flat (Level 0):** Used for the main background and non-interactive sections.\n2. **Surface (Level 1):** Utilized for cards and input containers. These use a very subtle, diffused shadow (0px 4px 20px rgba(30, 41, 59, 0.05)) to appear slightly lifted from the background.\n3. **Elevated (Level 2):** Reserved for interactive hover states and dropdown menus. These feature a more pronounced shadow to indicate immediate priority and interactivity.\n\nBackdrop blurs are used sparingly for modal overlays to maintain focus without losing the high-energy context of the underlying interface.\n\n## Components\n\n### Buttons\nPrimary buttons use the Electric Blue background with white text, featuring a subtle scale-up effect on hover. Secondary buttons use a transparent background with a Slate border or a light Slate ghost-fill to ensure clear hierarchy.\n\n### Input Fields\nInputs are large (minimum 48px height) with a 1px Slate-gray border that transforms into a 2px Electric Blue border on focus. Labels are always persistent to ensure a trustworthy and accessible experience.\n\n### Cards\nVehicle cards are the primary \"object\" in this system. They should feature a clean white background, the Level 1 shadow, and generous internal padding (24px). The vehicle name uses Space Grotesk bold, while specs (mileage, fuel, etc.) use Inter labels with accompanying icons.\n\n### Progress Indicators\nFor the booking and sales funnel, use a \"Stepper\" component that utilizes the Electric Blue for the active path. This reinforces the \"high-energy\" and \"efficient\" brand tone.\n\n### Chips & Filters\nFilter chips should be easily tappable (min 40px height) and use a light gray fill (#F1F5F9) when inactive, switching to Sleek Slate with white text when selected to provide high-contrast visual feedback.",
+  "theme": {
+    "colorMode": "LIGHT",
+    "font": "SPACE_GROTESK",
+    "roundness": "ROUND_EIGHT",
+    "customColor": "#3B82F6",
+    "headlineFont": "SPACE_GROTESK",
+    "bodyFont": "INTER",
+    "labelFont": "INTER",
+    "namedColors": {
+      "background": "#f7f9fb",
+      "error": "#ba1a1a",
+      "error_container": "#ffdad6",
+      "inverse_on_surface": "#eff1f3",
+      "inverse_primary": "#adc6ff",
+      "inverse_surface": "#2d3133",
+      "on_background": "#191c1e",
+      "on_error": "#ffffff",
+      "on_error_container": "#93000a",
+      "on_primary": "#ffffff",
+      "on_primary_container": "#fefcff",
+      "on_primary_fixed": "#001a42",
+      "on_primary_fixed_variant": "#004395",
+      "on_secondary": "#ffffff",
+      "on_secondary_container": "#586377",
+      "on_secondary_fixed": "#111c2d",
+      "on_secondary_fixed_variant": "#3c475a",
+      "on_surface": "#191c1e",
+      "on_surface_variant": "#424754",
+      "on_tertiary": "#ffffff",
+      "on_tertiary_container": "#fdfcff",
+      "on_tertiary_fixed": "#0b1c30",
+      "on_tertiary_fixed_variant": "#38485d",
+      "outline": "#727785",
+      "outline_variant": "#c2c6d6",
+      "primary": "#0058be",
+      "primary_container": "#2170e4",
+      "primary_fixed": "#d8e2ff",
+      "primary_fixed_dim": "#adc6ff",
+      "secondary": "#545f73",
+      "secondary_container": "#d5e0f8",
+      "secondary_fixed": "#d8e3fb",
+      "secondary_fixed_dim": "#bcc7de",
+      "surface": "#f7f9fb",
+      "surface_bright": "#f7f9fb",
+      "surface_container": "#eceef0",
+      "surface_container_high": "#e6e8ea",
+      "surface_container_highest": "#e0e3e5",
+      "surface_container_low": "#f2f4f6",
+      "surface_container_lowest": "#ffffff",
+      "surface_dim": "#d8dadc",
+      "surface_tint": "#005ac2",
+      "surface_variant": "#e0e3e5",
+      "tertiary": "#4d5d73",
+      "tertiary_container": "#66768d",
+      "tertiary_fixed": "#d3e4fe",
+      "tertiary_fixed_dim": "#b7c8e1"
+    },
+    "designMd": "---\nname: Kinetic Precision\ncolors:\n  surface: '#f7f9fb'\n  surface-dim: '#d8dadc'\n  surface-bright: '#f7f9fb'\n  surface-container-lowest: '#ffffff'\n  surface-container-low: '#f2f4f6'\n  surface-container: '#eceef0'\n  surface-container-high: '#e6e8ea'\n  surface-container-highest: '#e0e3e5'\n  on-surface: '#191c1e'\n  on-surface-variant: '#424754'\n  inverse-surface: '#2d3133'\n  inverse-on-surface: '#eff1f3'\n  outline: '#727785'\n  outline-variant: '#c2c6d6'\n  surface-tint: '#005ac2'\n  primary: '#0058be'\n  on-primary: '#ffffff'\n  primary-container: '#2170e4'\n  on-primary-container: '#fefcff'\n  inverse-primary: '#adc6ff'\n  secondary: '#545f73'\n  on-secondary: '#ffffff'\n  secondary-container: '#d5e0f8'\n  on-secondary-container: '#586377'\n  tertiary: '#4d5d73'\n  on-tertiary: '#ffffff'\n  tertiary-container: '#66768d'\n  on-tertiary-container: '#fdfcff'\n  error: '#ba1a1a'\n  on-error: '#ffffff'\n  error-container: '#ffdad6'\n  on-error-container: '#93000a'\n  primary-fixed: '#d8e2ff'\n  primary-fixed-dim: '#adc6ff'\n  on-primary-fixed: '#001a42'\n  on-primary-fixed-variant: '#004395'\n  secondary-fixed: '#d8e3fb'\n  secondary-fixed-dim: '#bcc7de'\n  on-secondary-fixed: '#111c2d'\n  on-secondary-fixed-variant: '#3c475a'\n  tertiary-fixed: '#d3e4fe'\n  tertiary-fixed-dim: '#b7c8e1'\n  on-tertiary-fixed: '#0b1c30'\n  on-tertiary-fixed-variant: '#38485d'\n  background: '#f7f9fb'\n  on-background: '#191c1e'\n  surface-variant: '#e0e3e5'\ntypography:\n  display:\n    fontFamily: Space Grotesk\n    fontSize: 48px\n    fontWeight: '700'\n    lineHeight: '1.1'\n    letterSpacing: -0.02em\n  h1:\n    fontFamily: Space Grotesk\n    fontSize: 36px\n    fontWeight: '700'\n    lineHeight: '1.2'\n    letterSpacing: -0.01em\n  h2:\n    fontFamily: Space Grotesk\n    fontSize: 30px\n    fontWeight: '600'\n    lineHeight: '1.3'\n  h3:\n    fontFamily: Space Grotesk\n    fontSize: 24px\n    fontWeight: '600'\n    lineHeight: '1.4'\n  body-lg:\n    fontFamily: Inter\n    fontSize: 18px\n    fontWeight: '400'\n    lineHeight: '1.6'\n  body-md:\n    fontFamily: Inter\n    fontSize: 16px\n    fontWeight: '400'\n    lineHeight: '1.6'\n  body-sm:\n    fontFamily: Inter\n    fontSize: 14px\n    fontWeight: '400'\n    lineHeight: '1.5'\n  label-lg:\n    fontFamily: Inter\n    fontSize: 14px\n    fontWeight: '600'\n    lineHeight: '1.2'\n    letterSpacing: 0.05em\n  label-md:\n    fontFamily: Inter\n    fontSize: 12px\n    fontWeight: '500'\n    lineHeight: '1.2'\n  button:\n    fontFamily: Inter\n    fontSize: 16px\n    fontWeight: '600'\n    lineHeight: '1'\n    letterSpacing: 0.01em\nrounded:\n  sm: 0.25rem\n  DEFAULT: 0.5rem\n  md: 0.75rem\n  lg: 1rem\n  xl: 1.5rem\n  full: 9999px\nspacing:\n  base: 8px\n  container-max: 1280px\n  gutter: 24px\n  margin-mobile: 16px\n  margin-desktop: 48px\n  section-gap: 80px\n  stack-sm: 4px\n  stack-md: 12px\n  stack-lg: 24px\n---\n\n## Brand & Style\n\nThe design system is built on the principles of high-velocity efficiency and unwavering trust. It targets a modern consumer who values speed and professional reliability in the automotive space. By moving away from traditional, cluttered rental interfaces, this system embraces a **Corporate Modern** aesthetic infused with **High-Contrast** energy.\n\nThe visual narrative is defined by expansive whitespace, which provides the \"breathing room\" necessary for high-value decision-making in car sales and rentals. The interaction model is snappy and purposeful, evoking the feeling of a premium, well-engineered vehicle. The atmosphere is professional yet approachable, ensuring users feel both the excitement of a new ride and the security of a premium service.\n\n## Colors\n\nThe color palette centers on \"Electric Blue\" to signify innovation and movement, balanced against \"Sleek Slate\" for grounding and authority. \n\n- **Primary (Electric Blue):** Used for primary actions, key progress indicators, and active states to maintain high energy.\n- **Secondary (Sleek Slate):** Reserved for deep backgrounds, primary navigation, and high-level headings to establish a premium feel.\n- **Neutral (High-Contrast White/Gray):** The system uses a very light gray (#F8FAFC) for page backgrounds to reduce eye strain while maintaining a crisp, clean look that makes the Slate and Blue elements pop.\n- **Functional Accents:** Success, warning, and error states should utilize standard semantic tones but are softened slightly to remain cohesive with the professional slate-heavy environment.\n\n## Typography\n\nThis design system employs a dual-font strategy to balance character with utility. **Space Grotesk** is utilized for headlines; its geometric and technical nature mirrors automotive precision and provides a \"fast\" visual rhythm through its slightly condensed feel. \n\nFor all functional and long-form text, **Inter** is used. It offers exceptional legibility across various screen densities and ensures that technical specifications and rental terms are easily digestible. Letter spacing is tightened on large headlines to increase impact, while label styles utilize increased tracking and uppercase styling for clear categorization and hierarchy.\n\n## Layout & Spacing\n\nThe layout philosophy follows a **Fixed Grid** model for desktop to ensure a curated, premium presentation, while transitioning to a fluid model for mobile devices. A 12-column grid is standard, utilizing generous 24px gutters to reinforce the feeling of spaciousness.\n\nThe spacing rhythm is built on an 8px base unit. Section vertical spacing is intentionally large (80px+) to clearly separate different phases of the user journey (e.g., search, featured fleet, testimonials). Inside components, the \"stack-md\" (12px) unit is the default for relating text to imagery, ensuring elements feel connected but never cramped.\n\n## Elevation & Depth\n\nTo maintain a modern and clean aesthetic, the design system avoids heavy borders in favor of **Ambient Shadows** and **Tonal Layers**. \n\nDepth is communicated through three primary levels:\n1. **Flat (Level 0):** Used for the main background and non-interactive sections.\n2. **Surface (Level 1):** Utilized for cards and input containers. These use a very subtle, diffused shadow (0px 4px 20px rgba(30, 41, 59, 0.05)) to appear slightly lifted from the background.\n3. **Elevated (Level 2):** Reserved for interactive hover states and dropdown menus. These feature a more pronounced shadow to indicate immediate priority and interactivity.\n\nBackdrop blurs are used sparingly for modal overlays to maintain focus without losing the high-energy context of the underlying interface.\n\n## Shapes\n\nThe shape language is defined by a consistent **Rounded** (Level 2) approach. This 8px (0.5rem) base radius provides a friendly, modern feel that softens the \"technical\" edge of the Slate color and Space Grotesk font.\n\n- **Standard Elements (Buttons, Inputs):** 8px radius.\n- **Large Containers (Cards, Featured Sections):** 16px (1rem) radius for a more contemporary, \"app-like\" appearance.\n- **Interactive Indicators:** Small badges or tags may use a full pill-shape (999px) to distinguish them from functional UI buttons.\n\n## Components\n\n### Buttons\nPrimary buttons use the Electric Blue background with white text, featuring a subtle scale-up effect on hover. Secondary buttons use a transparent background with a Slate border or a light Slate ghost-fill to ensure clear hierarchy.\n\n### Input Fields\nInputs are large (minimum 48px height) with a 1px Slate-gray border that transforms into a 2px Electric Blue border on focus. Labels are always persistent to ensure a trustworthy and accessible experience.\n\n### Cards\nVehicle cards are the primary \"object\" in this system. They should feature a clean white background, the Level 1 shadow, and generous internal padding (24px). The vehicle name uses Space Grotesk bold, while specs (mileage, fuel, etc.) use Inter labels with accompanying icons.\n\n### Progress Indicators\nFor the booking and sales funnel, use a \"Stepper\" component that utilizes the Electric Blue for the active path. This reinforces the \"high-energy\" and \"efficient\" brand tone.\n\n### Chips & Filters\nFilter chips should be easily tappable (min 40px height) and use a light gray fill (#F1F5F9) when inactive, switching to Sleek Slate with white text when selected to provide high-contrast visual feedback.",
+    "colorVariant": "FIDELITY",
+    "overridePrimaryColor": "#3B82F6",
+    "overrideSecondaryColor": "#1E293B",
+    "overrideTertiaryColor": "#64748B",
+    "overrideNeutralColor": "#F8FAFC",
+    "spacingScale": 2,
+    "typography": {
+      "body-lg": {
+        "fontFamily": "Inter",
+        "fontSize": "18px",
+        "fontWeight": "400",
+        "lineHeight": "1.6"
+      },
+      "body-md": {
+        "fontFamily": "Inter",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "lineHeight": "1.6"
+      },
+      "body-sm": {
+        "fontFamily": "Inter",
+        "fontSize": "14px",
+        "fontWeight": "400",
+        "lineHeight": "1.5"
+      },
+      "button": {
+        "fontFamily": "Inter",
+        "fontSize": "16px",
+        "fontWeight": "600",
+        "lineHeight": "1",
+        "letterSpacing": "0.01em"
+      },
+      "display": {
+        "fontFamily": "Space Grotesk",
+        "fontSize": "48px",
+        "fontWeight": "700",
+        "lineHeight": "1.1",
+        "letterSpacing": "-0.02em"
+      },
+      "h1": {
+        "fontFamily": "Space Grotesk",
+        "fontSize": "36px",
+        "fontWeight": "700",
+        "lineHeight": "1.2",
+        "letterSpacing": "-0.01em"
+      },
+      "h2": {
+        "fontFamily": "Space Grotesk",
+        "fontSize": "30px",
+        "fontWeight": "600",
+        "lineHeight": "1.3"
+      },
+      "h3": {
+        "fontFamily": "Space Grotesk",
+        "fontSize": "24px",
+        "fontWeight": "600",
+        "lineHeight": "1.4"
+      },
+      "label-lg": {
+        "fontFamily": "Inter",
+        "fontSize": "14px",
+        "fontWeight": "600",
+        "lineHeight": "1.2",
+        "letterSpacing": "0.05em"
+      },
+      "label-md": {
+        "fontFamily": "Inter",
+        "fontSize": "12px",
+        "fontWeight": "500",
+        "lineHeight": "1.2"
+      }
+    },
+    "spacing": {
+      "base": "8px",
+      "container-max": "1280px",
+      "gutter": "24px",
+      "margin-desktop": "48px",
+      "margin-mobile": "16px",
+      "section-gap": "80px",
+      "stack-lg": "24px",
+      "stack-md": "12px",
+      "stack-sm": "4px"
+    },
+    "headlineFontFamily": "Space Grotesk",
+    "bodyFontFamily": "Inter",
+    "labelFontFamily": "Inter"
+  }
+}

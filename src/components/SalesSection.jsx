@@ -1,119 +1,102 @@
-// src/components/SalesSection.jsx
-"use client";
-
-import { useState, useEffect } from "react";
-import { supabase } from "@/lib/supabase";
-import CarCard from "./CarCard";
-import { motion } from "framer-motion";
-import { useLanguage } from "@/lib/LanguageContext";
-
-const SalesSection = () => {
-  const { t } = useLanguage();
-  const [cars, setCars] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
-      },
-      { rootMargin: "200px" }
-    );
-
-    const section = document.getElementById("sales");
-    if (section) observer.observe(section);
-
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (!isVisible) return;
-
-    const fetchCars = async () => {
-      try {
-        const { data, error } = await supabase
-          .from("cars")
-          .select("*")
-          .in("type", ["sale", "both"])
-          .limit(12)
-          .order("createdAt", { ascending: false });
-
-        if (error) throw error;
-        setCars(data || []);
-      } catch (error) {
-        console.error("Error fetching sales cars:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchCars();
-  }, [isVisible]);
-
-  const containerVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        staggerChildren: 0.05,
-        type: "tween",
-        ease: "easeOut",
-        duration: 0.5
-      }
-    }
-  };
-
+export default function SalesSection() {
   return (
-    <section id="sales" className="relative py-24 md:py-32 bg-background-darkest overflow-hidden gpu">
-      <div className="container mx-auto px-6 relative z-10">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={containerVariants}
-          className="flex flex-col items-center md:items-end mb-16 text-center md:text-right"
-        >
-          <div className="w-12 h-[1px] bg-accent/30 mb-8" />
-          <h2 className="text-4xl md:text-6xl font-bebas tracking-wide text-heading uppercase heading-underline">
-            {t.sales.title}
-          </h2>
-        </motion.div>
-
-        {loading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="glass-card h-96 animate-pulse rounded-2xl" />
-            ))}
+    <section className="py-section-gap max-w-7xl mx-auto px-8">
+      <div className="flex justify-between items-end mb-stack-lg">
+        <div className="space-y-stack-sm">
+          <span className="text-primary font-label-lg uppercase tracking-widest">Certified Sales</span>
+          <h2 className="font-h2 text-h2">Find Your Permanent Drive</h2>
+        </div>
+        <div className="flex gap-2">
+          <button className="w-10 h-10 flex items-center justify-center rounded-full border border-outline-variant text-outline hover:border-primary hover:text-primary transition-all">
+            <span className="material-symbols-outlined">chevron_left</span>
+          </button>
+          <button className="w-10 h-10 flex items-center justify-center rounded-full border border-outline-variant text-outline hover:border-primary hover:text-primary transition-all">
+            <span className="material-symbols-outlined">chevron_right</span>
+          </button>
+        </div>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-gutter">
+        {/* Sales Card 1 */}
+        <div className="bg-white rounded-xl border border-slate-100 overflow-hidden hover:shadow-lg transition-all group">
+          <div className="h-48 relative overflow-hidden">
+            <img
+              className="w-full h-full object-cover group-hover:scale-110 transition-all duration-500"
+              alt="Mercedes-Benz E 450"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9VJKkrszsODLJv8pMG3YK55Bju-_Kf92JVNvtXd8qlOnTiT8mFagOujVv5KfxYJ2Px6cCjInNGON7VkzdSqWJ9hd3iHOvVw4ERcQxcko3Kpc9f-Dd9Twrgk6zo0maC4TdjSPk9WrkKlGrG7IvMAPgysGCq4t1Azw1NEbb14KAk0Cw9_fMnv-LTx5hNr6vOyhsYHEMDCLHiKg6cXi2HCbxNMmu8Bn-Nxi4hnzVMbTirbJY_SBylQymtEQV2VwcdXMirJSkVSOhn4Ei"
+            />
           </div>
-        ) : cars.length > 0 ? (
-          <motion.div 
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={containerVariants}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          >
-            {cars.map((car) => (
-              <CarCard 
-                key={car.id}
-                car={car} 
-                mode="sale" 
-              />
-            ))}
-          </motion.div>
-        ) : (
-          <div className="w-full py-24 flex justify-center items-center border border-dashed border-accent/10 rounded-xl">
-            <p className="text-sm font-mono text-body/40 uppercase tracking-widest">{t.sales.noCars}</p>
+          <div className="p-stack-md">
+            <h4 className="font-h3 text-[18px]">Mercedes-Benz E 450</h4>
+            <p className="text-on-surface-variant text-body-sm mb-stack-md">12,400 miles • 2023</p>
+            <div className="flex justify-between items-center">
+              <span className="text-h3 font-display">$68,500</span>
+              <button className="bg-surface-container text-primary p-2 rounded-lg hover:bg-primary hover:text-on-primary transition-all">
+                <span className="material-symbols-outlined">shopping_cart</span>
+              </button>
+            </div>
           </div>
-        )}
+        </div>
+        {/* Sales Card 2 */}
+        <div className="bg-white rounded-xl border border-slate-100 overflow-hidden hover:shadow-lg transition-all group">
+          <div className="h-48 relative overflow-hidden">
+            <img
+              className="w-full h-full object-cover group-hover:scale-110 transition-all duration-500"
+              alt="Tesla Model S Plaid"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBr8OfExu_extERu8y03_lVjU6zcH-QNFIp6oudvSIKxbfvf0Isak-TKlbzlf35N-281In9v3Hae8iQ4tBzFUwlF7LzOBMtiidxtNrfmK897tHqZrLb309VJ7sdrVojnNi86QaRUN70L_yGN7Hmb6HdOm9YxAdBIYTJXVA9fEpVIoy5D9sqYeSXyPADGHATxLSFKUfLaElUc1aNV3TVLrfpo9aVrYx9ygUoi8BQqTcUZzH2AMmoEp9-hv479DSIPOI0zmf0lEWBd1L"
+            />
+          </div>
+          <div className="p-stack-md">
+            <h4 className="font-h3 text-[18px]">Tesla Model S Plaid</h4>
+            <p className="text-on-surface-variant text-body-sm mb-stack-md">8,200 miles • 2022</p>
+            <div className="flex justify-between items-center">
+              <span className="text-h3 font-display">$84,900</span>
+              <button className="bg-surface-container text-primary p-2 rounded-lg hover:bg-primary hover:text-on-primary transition-all">
+                <span className="material-symbols-outlined">shopping_cart</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        {/* Sales Card 3 */}
+        <div className="bg-white rounded-xl border border-slate-100 overflow-hidden hover:shadow-lg transition-all group">
+          <div className="h-48 relative overflow-hidden">
+            <img
+              className="w-full h-full object-cover group-hover:scale-110 transition-all duration-500"
+              alt="Audi Q8 Premium"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSvbNIxuicFNfzhvCIM07tKBGvAXIIb0wNTenB1ixXqVX2CvzbkibgKCqiYGSbPiwnIO3X0w4zIUTgzrHAauNM2dXDDq3hyWD9Ai1ofZ6YGwDuNtt8_rb7OS1-lA0ESeU6-svhcYBKACv_aE_cFbOT4CUeXecZjgzjWZ7IQz-iCx4YiEtopSw909w5HEU4-hhWMFbcH5kbNr7j8c-XmxD9SH6hlsvVA3u8kN0lENQKzKZ89C2bx4UOjjytpKJ2t5TEA35gGFMaPtJn"
+            />
+          </div>
+          <div className="p-stack-md">
+            <h4 className="font-h3 text-[18px]">Audi Q8 Premium</h4>
+            <p className="text-on-surface-variant text-body-sm mb-stack-md">15,000 miles • 2023</p>
+            <div className="flex justify-between items-center">
+              <span className="text-h3 font-display">$72,300</span>
+              <button className="bg-surface-container text-primary p-2 rounded-lg hover:bg-primary hover:text-on-primary transition-all">
+                <span className="material-symbols-outlined">shopping_cart</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        {/* Sales Card 4 */}
+        <div className="bg-white rounded-xl border border-slate-100 overflow-hidden hover:shadow-lg transition-all group">
+          <div className="h-48 relative overflow-hidden">
+            <img
+              className="w-full h-full object-cover group-hover:scale-110 transition-all duration-500"
+              alt="Lexus LS 500h"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsTcse7oBg4VCQmzQKLKYFzvyNCV69jeMY-sAKv5zPrbhNQSS_zQbgIXLDDBMsebit1E0uFAH9kPazOqD6WqDo4i91Gb642A8orqo9cagk_9QLev4nm3s0zZa55Xkymu6geL_CP-SiO9a3HbQLcA__SsTmuCTNsN_jHa1JcbebyTNqiqKNS9267p99mA4KEGMyxVwbUbMj9VYpkJMwtBQGnmTZwW9sRtpPEkFQNU2NzWb9cY17pTzuovePI2rhxj6pCebJiSYx_x_2"
+            />
+          </div>
+          <div className="p-stack-md">
+            <h4 className="font-h3 text-[18px]">Lexus LS 500h</h4>
+            <p className="text-on-surface-variant text-body-sm mb-stack-md">5,400 miles • 2024</p>
+            <div className="flex justify-between items-center">
+              <span className="text-h3 font-display">$91,000</span>
+              <button className="bg-surface-container text-primary p-2 rounded-lg hover:bg-primary hover:text-on-primary transition-all">
+                <span className="material-symbols-outlined">shopping_cart</span>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
-};
-
-export default SalesSection;
+}

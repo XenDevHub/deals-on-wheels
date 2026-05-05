@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sales Inventory | DealsOnWheels</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#4d5d73",
+                        "surface-tint": "#005ac2",
+                        "surface-container-high": "#e6e8ea",
+                        "on-secondary-fixed-variant": "#3c475a",
+                        "on-primary-fixed-variant": "#004395",
+                        "secondary": "#545f73",
+                        "primary": "#0058be",
+                        "on-background": "#191c1e",
+                        "outline": "#727785",
+                        "surface-container": "#eceef0",
+                        "tertiary-fixed": "#d3e4fe",
+                        "on-tertiary-fixed-variant": "#38485d",
+                        "on-secondary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed": "#0b1c30",
+                        "inverse-on-surface": "#eff1f3",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-container": "#66768d",
+                        "secondary-fixed": "#d8e3fb",
+                        "outline-variant": "#c2c6d6",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#adc6ff",
+                        "on-secondary-fixed": "#111c2d",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed": "#001a42",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-error": "#ffffff",
+                        "primary-fixed": "#d8e2ff",
+                        "on-tertiary-container": "#fdfcff",
+                        "secondary-container": "#d5e0f8",
+                        "primary-container": "#2170e4",
+                        "on-surface-variant": "#424754",
+                        "error-container": "#ffdad6",
+                        "on-secondary-container": "#586377",
+                        "surface-variant": "#e0e3e5",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed-dim": "#b7c8e1",
+                        "on-surface": "#191c1e",
+                        "inverse-primary": "#adc6ff",
+                        "surface-dim": "#d8dadc",
+                        "surface-bright": "#f7f9fb",
+                        "secondary-fixed-dim": "#bcc7de",
+                        "background": "#f7f9fb",
+                        "inverse-surface": "#2d3133",
+                        "on-primary-container": "#fefcff",
+                        "surface": "#f7f9fb",
+                        "surface-container-low": "#f2f4f6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "48px",
+                        "section-gap": "80px",
+                        "stack-lg": "24px",
+                        "gutter": "24px",
+                        "stack-sm": "4px",
+                        "base": "8px",
+                        "stack-md": "12px",
+                        "margin-mobile": "16px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "h1": ["Space Grotesk"],
+                        "body-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "button": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display": ["Space Grotesk"],
+                        "label-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "h3": ["Space Grotesk"],
+                        "h2": ["Space Grotesk"]
+                    },
+                    "fontSize": {
+                        "h1": ["36px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "button": ["16px", {"lineHeight": "1", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "display": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-lg": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "label-md": ["12px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                        "h3": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "h2": ["30px", {"lineHeight": "1.3", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body-md text-on-surface">
+<!-- TopAppBar -->
+<header class="bg-white dark:bg-slate-950 docked full-width top-0 sticky z-50 border-b border-slate-100 dark:border-slate-800 shadow-[0px_4px_20px_rgba(30,41,59,0.05)]">
+<div class="flex justify-between items-center w-full px-8 py-4 max-w-7xl mx-auto">
+<div class="text-2xl font-black text-slate-900 dark:text-white tracking-tighter font-['Space_Grotesk']">DealsOnWheels</div>
+<nav class="hidden md:flex gap-8 items-center font-['Space_Grotesk'] font-medium">
+<a class="text-slate-600 dark:text-slate-400 hover:text-blue-500 transition-colors" href="#">Rent</a>
+<a class="text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 font-bold pb-1" href="#">Buy</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-blue-500 transition-colors" href="#">How it Works</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-blue-500 transition-colors" href="#">About</a>
+</nav>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-lg font-button hover:opacity-80 transition-opacity active:scale-95 transition-transform duration-200">
+                Book Now
+            </button>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-8 py-12">
+<!-- Search & Filter Bar -->
+<section class="mb-section-gap">
+<div class="flex flex-col gap-stack-lg bg-surface-container rounded-xl p-8 shadow-[0px_4px_20px_rgba(30,41,59,0.05)]">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+<h1 class="font-h1 text-h1 text-on-surface">Find Your Next Ride</h1>
+<div class="flex items-center gap-2 text-primary font-semibold">
+<span class="material-symbols-outlined" data-icon="filter_list">filter_list</span>
+<span class="font-label-lg text-label-lg">Advanced Search</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Brand</label>
+<select class="h-[48px] rounded-lg border border-outline-variant bg-white px-4 focus:ring-2 focus:ring-primary outline-none appearance-none">
+<option>All Brands</option>
+<option>Tesla</option>
+<option>Porsche</option>
+<option>BMW</option>
+<option>Mercedes-Benz</option>
+</select>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Year Range</label>
+<div class="flex items-center gap-2">
+<input class="w-full h-[48px] rounded-lg border border-outline-variant bg-white px-4 focus:ring-2 focus:ring-primary outline-none" placeholder="From" type="number"/>
+<input class="w-full h-[48px] rounded-lg border border-outline-variant bg-white px-4 focus:ring-2 focus:ring-primary outline-none" placeholder="To" type="number"/>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Price Limit</label>
+<input class="accent-primary h-12 w-full" type="range"/>
+<div class="flex justify-between text-label-md font-medium text-tertiary">
+<span>$10k</span>
+<span>$250k+</span>
+</div>
+</div>
+<div class="flex items-end">
+<button class="w-full h-[48px] bg-primary text-on-primary rounded-lg font-button flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+                            Apply Filters
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Marketplace Grid -->
+<section class="mb-section-gap">
+<div class="flex justify-between items-center mb-stack-lg">
+<h2 class="font-h2 text-h2 text-on-surface">Available Inventory <span class="text-primary font-normal">(124)</span></h2>
+<div class="flex gap-2">
+<button class="bg-white border border-outline-variant p-2 rounded-lg text-tertiary hover:border-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="grid_view" style="font-variation-settings: 'FILL' 1;">grid_view</span>
+</button>
+<button class="bg-white border border-outline-variant p-2 rounded-lg text-tertiary hover:border-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="view_list">view_list</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Vehicle Card 1 -->
+<div class="group bg-white rounded-xl overflow-hidden shadow-[0px_4px_20px_rgba(30,41,59,0.05)] hover:shadow-[0px_10px_30px_rgba(30,41,59,0.12)] transition-shadow duration-300">
+<div class="relative aspect-[16/9] overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A professional automotive studio photograph of a sleek silver Porsche 911 parked under soft, cinematic overhead lighting. The setting is a clean, dark industrial garage with polished concrete floors reflecting the car's body. The composition is high-contrast and professional, highlighting the aerodynamic curves and premium engineering of the vehicle. The overall mood is sophisticated, powerful, and luxurious." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOlTQD_vWIVSCGqhwQCLi4CsgKtqxQd53iL68bG0Bx8A8DxYk55IH5vuYztGHhO_BHYOhex2M5HwVPTMBnQbL5ZdcRbWegMlmC6QkCiL-PutNPqe5YuOHNUmJaWwW4hCQy5wra5moIIWwL2bbyDzay4BycN8y7bw8EQpFquu4ZTYX6gxsK21dGHx0V2wB1-N-UzAb7_SSWniGgYAgpcjESjCvj2VKrZUD1KOo0iD1VsFc5ou2zMA62tpKx_CVZG7xo4jsnx_rRs4dO"/>
+<div class="absolute top-4 left-4 bg-primary text-on-primary px-3 py-1 rounded-full text-label-md font-bold uppercase tracking-widest">Certified Pre-Owned</div>
+</div>
+<div class="p-stack-lg flex flex-col gap-stack-md">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-h3 text-h3 text-on-surface">Porsche 911 Carrera</h3>
+<p class="font-body-sm text-tertiary">2023 • Midnight Silver Metallic</p>
+</div>
+<div class="text-right">
+<p class="text-h3 font-h3 text-primary">$124,900</p>
+<p class="font-label-md text-tertiary">Est. $2,140/mo</p>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-2 py-4 border-y border-slate-100">
+<div class="flex flex-col items-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-[20px]" data-icon="speed">speed</span>
+<span class="text-label-md">4,200 mi</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-[20px]" data-icon="settings">settings</span>
+<span class="text-label-md">Automatic</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-[20px]" data-icon="ev_station">ev_station</span>
+<span class="text-label-md">Gasoline</span>
+</div>
+</div>
+<button class="w-full py-4 border-2 border-primary text-primary rounded-lg font-button hover:bg-primary hover:text-on-primary transition-all duration-200">
+                            View Details
+                        </button>
+</div>
+</div>
+<!-- Vehicle Card 2 -->
+<div class="group bg-white rounded-xl overflow-hidden shadow-[0px_4px_20px_rgba(30,41,59,0.05)] hover:shadow-[0px_10px_30px_rgba(30,41,59,0.12)] transition-shadow duration-300">
+<div class="relative aspect-[16/9] overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A high-end commercial shot of a white Tesla Model S Plaid charging at a modern Supercharger station during sunset. The sky is filled with warm golden and orange hues, contrasting with the clean, minimalist white design of the vehicle. The lighting is soft and directional, emphasizing the car's sleek lines and eco-friendly technology. The environment is clean, suburban, and aspirational." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjIPWJOmAOGV1KYW0HodASGN0Ix7PAzBeB6tLWu0GShM2EQR4CbIZNqDhPXBogAEOV5oy_ucRXtbPKwqujnbfAsjeEom248p9K-v49ay6g5M6c5-kLSVb_CQVOzsP-vfJ8YOjuikpNtonpCBqSLc42iY-sEXKwSJ1i-oBbg-J-0SaF8YymfIIFrgPTGElPvtZ3_DxIxwlIPaFm8q_m8kGJYMeUTWqe5_v1YCIDpHlekHvJflUC_F-3e6n_iKlmm5A0tP18G4aetJNW"/>
+<div class="absolute top-4 left-4 bg-tertiary text-on-tertiary px-3 py-1 rounded-full text-label-md font-bold uppercase tracking-widest">New Arrival</div>
+</div>
+<div class="p-stack-lg flex flex-col gap-stack-md">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-h3 text-h3 text-on-surface">Tesla Model S Plaid</h3>
+<p class="font-body-sm text-tertiary">2024 • Pearl White Multi-Coat</p>
+</div>
+<div class="text-right">
+<p class="text-h3 font-h3 text-primary">$89,990</p>
+<p class="font-label-md text-tertiary">Est. $1,450/mo</p>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-2 py-4 border-y border-slate-100">
+<div class="flex flex-col items-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-[20px]" data-icon="bolt">bolt</span>
+<span class="text-label-md">120 mi</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-[20px]" data-icon="settings">settings</span>
+<span class="text-label-md">Direct Drive</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-[20px]" data-icon="electric_car">electric_car</span>
+<span class="text-label-md">Electric</span>
+</div>
+</div>
+<button class="w-full py-4 border-2 border-primary text-primary rounded-lg font-button hover:bg-primary hover:text-on-primary transition-all duration-200">
+                            View Details
+                        </button>
+</div>
+</div>
+<!-- Vehicle Card 3 -->
+<div class="group bg-white rounded-xl overflow-hidden shadow-[0px_4px_20px_rgba(30,41,59,0.05)] hover:shadow-[0px_10px_30px_rgba(30,41,59,0.12)] transition-shadow duration-300">
+<div class="relative aspect-[16/9] overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A dynamic, low-angle photograph of a deep navy blue BMW M4 Competition driving along a coastal highway during the blue hour. The headlights are on, casting a sharp blue-white glow on the road surface. The blurred background of the ocean and rocky cliffs suggests high speed and performance. The visual style is premium and high-velocity, using a cool color palette and crisp detailing." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOkpk3WYj75Cc9aJSzBD7Pg_SqDWKSFHlIqWa9AYQvEML6N9_cGAjC9rZWnh-Jp-UDng-AokGOi1LjyRjrIETFo9pKA87o5i3wKc03m-T3bfUQILSt5EWawGpavXgEbeKSNw7fo-VKsXdgbuH5gR0MlhGP1H3NTSNlOZJLWWJ3lz1iz-10A7mxXdiOLo-20UosODo2SW6QZUQsP_Srxh-sOjtevy6SsRhl7M_cSqLWEJ7ciI8L8gzegp_JeYClpnpb_W-3B2fgwyF1"/>
+<div class="absolute top-4 left-4 bg-error text-on-error px-3 py-1 rounded-full text-label-md font-bold uppercase tracking-widest">Limited Offer</div>
+</div>
+<div class="p-stack-lg flex flex-col gap-stack-md">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-h3 text-h3 text-on-surface">BMW M4 Competition</h3>
+<p class="font-body-sm text-tertiary">2022 • Tanzanite Blue II</p>
+</div>
+<div class="text-right">
+<p class="text-h3 font-h3 text-primary">$72,400</p>
+<p class="font-label-md text-tertiary">Est. $1,210/mo</p>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-2 py-4 border-y border-slate-100">
+<div class="flex flex-col items-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-[20px]" data-icon="speed">speed</span>
+<span class="text-label-md">18,500 mi</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-[20px]" data-icon="settings">settings</span>
+<span class="text-label-md">Automatic</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-[20px]" data-icon="ev_station">ev_station</span>
+<span class="text-label-md">Gasoline</span>
+</div>
+</div>
+<button class="w-full py-4 border-2 border-primary text-primary rounded-lg font-button hover:bg-primary hover:text-on-primary transition-all duration-200">
+                            View Details
+                        </button>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="mt-12 flex justify-center gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant hover:border-primary text-tertiary">1</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-on-primary font-bold">2</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant hover:border-primary text-tertiary">3</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant hover:border-primary text-tertiary">...</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant hover:border-primary text-tertiary">12</button>
+</div>
+</section>
+<!-- Trade-in Calculator CTA -->
+<section class="relative overflow-hidden rounded-2xl bg-slate-900 p-12 text-white">
+<div class="absolute inset-0 opacity-20">
+<img class="w-full h-full object-cover" data-alt="A sophisticated macro shot of a person's hand using a sleek, modern tablet to calculate vehicle appraisal values. The interface on the tablet shows professional graphs and market data. The lighting is moody and high-end, focusing on the tactile interaction of technology in a premium lounge setting. The atmosphere is one of financial confidence and efficient professional service." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEWVy5s2o9Vc33mJRLBcc1aCu0bDNrjbC66PwAdeAEeMHaoeL-TejiLLJNuE3xbtEB-nWhf-0-P3PummO4Cg4RF8mff1fUP4SL2xFM4D-jydh6hr9su45HBrE15piW_rPdt59DLtVSRWSX3FDesrbWilEn-MIzTXlu3I6BR9xXsJ5VJotlx4JeyC7YeXNhSyjPWDEiLOLoIGIGCzeUZ7_viH-vyyluCouDdf7gxjRQ-aNVTgmd6aoEkY0zrVYGDIinD3j08OUqBLpc"/>
+</div>
+<div class="relative z-10 grid grid-cols-1 md:grid-cols-2 items-center gap-12">
+<div class="flex flex-col gap-6">
+<h2 class="font-display text-display leading-tight">Ready for an Upgrade? <br/>Trade in with confidence.</h2>
+<p class="font-body-lg text-slate-300">Get an instant, market-accurate valuation for your current vehicle in under 60 seconds. Our data-driven algorithm ensures you get the highest possible value toward your next purchase.</p>
+<div class="flex gap-4">
+<button class="bg-primary text-on-primary px-8 py-4 rounded-xl font-button text-body-lg hover:opacity-90 active:scale-95 transition-all">Calculate Your Trade-In</button>
+<button class="bg-white/10 backdrop-blur-sm border border-white/20 px-8 py-4 rounded-xl font-button text-body-lg hover:bg-white/20 transition-all">Learn More</button>
+</div>
+</div>
+<div class="hidden md:flex justify-end">
+<div class="glass-card p-8 rounded-2xl border border-white/10 flex flex-col gap-6 max-w-sm">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-white" data-icon="verified">verified</span>
+</div>
+<div>
+<h4 class="font-bold text-white">Official Appraisal</h4>
+<p class="text-sm text-slate-300">Market-backed data</p>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-sm">
+<span class="text-slate-300">Average Trade-In Bonus</span>
+<span class="text-primary-fixed-dim font-bold">+$1,500</span>
+</div>
+<div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-3/4"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-50 dark:bg-slate-900 full-width py-12 px-8 border-t border-slate-200 dark:border-slate-800 font-['Space_Grotesk'] text-sm">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-7xl mx-auto">
+<div class="flex flex-col gap-4">
+<div class="text-xl font-bold text-slate-900 dark:text-white">DealsOnWheels</div>
+<p class="text-slate-500 dark:text-slate-400">Premium Automotive Solutions for the modern driver. Renting and buying made effortless.</p>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-bold text-slate-900 dark:text-white uppercase tracking-wider">Inventory</h4>
+<ul class="flex flex-col gap-2">
+<li><a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:underline decoration-blue-600 decoration-2 underline-offset-4 transition-colors" href="#">Fleet</a></li>
+<li><a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:underline decoration-blue-600 decoration-2 underline-offset-4 transition-colors" href="#">Sales</a></li>
+<li><a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:underline decoration-blue-600 decoration-2 underline-offset-4 transition-colors" href="#">Certified Pre-Owned</a></li>
+</ul>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-bold text-slate-900 dark:text-white uppercase tracking-wider">Support</h4>
+<ul class="flex flex-col gap-2">
+<li><a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:underline decoration-blue-600 decoration-2 underline-offset-4 transition-colors" href="#">Contact Us</a></li>
+<li><a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:underline decoration-blue-600 decoration-2 underline-offset-4 transition-colors" href="#">FAQ</a></li>
+<li><a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:underline decoration-blue-600 decoration-2 underline-offset-4 transition-colors" href="#">Terms of Service</a></li>
+</ul>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-bold text-slate-900 dark:text-white uppercase tracking-wider">Join Our Newsletter</h4>
+<div class="flex gap-2">
+<input class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-4 py-2 rounded-lg flex-grow outline-none focus:ring-2 focus:ring-blue-500" placeholder="Email address" type="email"/>
+<button class="bg-primary text-white p-2 rounded-lg hover:opacity-80">
+<span class="material-symbols-outlined" data-icon="send">send</span>
+</button>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-slate-200 dark:border-slate-800 text-center text-slate-500">
+            © 2024 DealsOnWheels. Premium Automotive Solutions.
+        </div>
+</footer>
+</body></html>

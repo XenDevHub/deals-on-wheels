@@ -1,12 +1,11 @@
-// src/app/layout.jsx
-import { Bebas_Neue, Inter } from "next/font/google";
+import { Space_Grotesk, Inter } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/lib/LanguageContext";
 
-const bebasNeue = Bebas_Neue({
-  weight: "400",
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  variable: "--font-bebas",
+  variable: "--font-space-grotesk",
+  weight: ["300", "400", "500", "600", "700"]
 });
 
 const inter = Inter({
@@ -22,7 +21,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${bebasNeue.variable} ${inter.variable} antialiased selection:bg-blue-500/30`}>
+      <head>
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+      </head>
+      <body className={`${spaceGrotesk.variable} ${inter.variable} antialiased selection:bg-primary/30`}>
         <LanguageProvider>
           {children}
         </LanguageProvider>

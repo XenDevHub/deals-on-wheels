@@ -1,169 +1,22 @@
-// src/components/Navbar.jsx
-"use client";
-
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
-import { useLanguage } from "@/lib/LanguageContext";
 import Link from "next/link";
 
-const Navbar = () => {
-  const { t } = useLanguage();
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [hidden, setHidden] = useState(false);
-  const { scrollY } = useScroll();
-
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    const previous = scrollY.getPrevious();
-    if (latest > previous && latest > 150) {
-      setHidden(true);
-    } else {
-      setHidden(false);
-    }
-    setIsScrolled(latest > 50);
-  });
-
-  const scrollTo = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      const offset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      });
-    }
-    setIsMenuOpen(false);
-  };
-
-  const navLinks = [
-    { name: t.nav.home, id: "hero" },
-    { name: t.nav.rentals, id: "rentals" },
-    { name: t.nav.sales, id: "sales" },
-  ];
-
+export default function Navbar() {
   return (
-    <motion.nav
-      variants={{
-        visible: { y: 0 },
-        hidden: { y: "-100%" },
-      }}
-      animate={hidden ? "hidden" : "visible"}
-      transition={{ duration: 0.35, ease: "easeInOut" }}
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled ? "nav-blur py-4 shadow-xl" : "bg-transparent py-8"
-        }`}
-    >
-      <div className="container mx-auto px-6 flex justify-between items-center">
-        {/* Logo */}
-        <div
-          className="text-2xl md:text-3xl font-bebas text-heading cursor-pointer tracking-[0.1em] hover:text-accent transition-colors"
-          onClick={() => scrollTo("hero")}
-        >
-          DEALS ON WHEELS
-        </div>
-
-        {/* Desktop Links */}
-        <div className="hidden md:flex items-center space-x-10">
-          {navLinks.map((link) => (
-            <button
-              key={link.id + link.name}
-              onClick={() => scrollTo(link.id)}
-              className="text-xs uppercase tracking-[0.15em] font-medium text-body hover:text-accent transition-colors cursor-pointer relative group"
-            >
-              {link.name}
-              <span className="absolute -bottom-2 left-1/2 w-0 h-[1px] bg-accent transition-all group-hover:w-full group-hover:left-0"></span>
-            </button>
-          ))}
-
-          <button
-            onClick={() => scrollTo("rentals")}
-            className="text-xs uppercase tracking-[0.15em] font-bold text-accent hover:text-accent-hover transition-colors cursor-pointer px-4 py-2 border border-accent/20 rounded-sm hover:bg-accent/5"
-          >
-            {t.nav.bookNow}
-          </button>
-
-          <Link
-            href="/admin"
-            className="text-[10px] uppercase tracking-[0.15em] font-medium text-body/50 hover:text-body transition-colors cursor-pointer"
-          >
-            Admin
+    <header className="bg-white dark:bg-slate-950 docked full-width top-0 sticky z-50 border-b border-slate-100 dark:border-slate-800 shadow-[0px_4px_20px_rgba(30,41,59,0.05)]">
+      <div className="flex justify-between items-center w-full px-8 py-4 max-w-7xl mx-auto">
+        <Link href="/" className="text-2xl font-black text-slate-900 dark:text-white tracking-tighter font-display">DealsOnWheels</Link>
+        <nav className="hidden md:flex items-center gap-8">
+          <Link className="font-display font-medium text-slate-600 dark:text-slate-400 hover:text-primary transition-colors" href="/fleet">Rent</Link>
+          <Link className="font-display font-medium text-slate-600 dark:text-slate-400 hover:text-primary transition-colors" href="/sales">Buy</Link>
+          <Link className="font-display font-medium text-slate-600 dark:text-slate-400 hover:text-primary transition-colors" href="/how-it-works">How it Works</Link>
+          <Link className="font-display font-medium text-slate-600 dark:text-slate-400 hover:text-primary transition-colors" href="/about">About</Link>
+        </nav>
+        <div className="flex items-center gap-4">
+          <Link href="/fleet" className="bg-primary text-on-primary px-6 py-2.5 rounded-lg font-button hover:opacity-80 transition-opacity active:scale-95 duration-200">
+            Book Now
           </Link>
         </div>
-
-        {/* Mobile Toggle */}
-        <div className="md:hidden flex items-center space-x-4">
-          <button
-            className="z-[60] p-2 relative w-8 h-8 flex items-center justify-center"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            <div className="w-6 h-4 relative flex flex-col justify-between">
-              <motion.span
-                animate={isMenuOpen ? { rotate: 45, y: 7, backgroundColor: "#E8EDF5" } : { rotate: 0, y: 0, backgroundColor: "#E8EDF5" }}
-                className="w-full h-[1.5px] block origin-center transition-transform"
-              />
-              <motion.span
-                animate={isMenuOpen ? { opacity: 0 } : { opacity: 1, backgroundColor: "#E8EDF5" }}
-                className="w-full h-[1.5px] block transition-opacity"
-              />
-              <motion.span
-                animate={isMenuOpen ? { rotate: -45, y: -7, backgroundColor: "#E8EDF5" } : { rotate: 0, y: 0, backgroundColor: "#E8EDF5" }}
-                className="w-full h-[1.5px] block origin-center transition-transform"
-              />
-            </div>
-          </button>
-        </div>
       </div>
-
-      {/* Fullscreen Minimal Menu */}
-      <AnimatePresence>
-        {isMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, clipPath: "circle(0% at 100% 0)" }}
-            animate={{ opacity: 1, clipPath: "circle(150% at 100% 0)" }}
-            exit={{ opacity: 0, clipPath: "circle(0% at 100% 0)" }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 bg-background z-50 flex flex-col items-center justify-center space-y-12 md:hidden"
-          >
-            {navLinks.map((link, i) => (
-              <motion.button
-                key={link.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 + i * 0.1 }}
-                onClick={() => scrollTo(link.id)}
-                className="text-5xl font-bebas text-heading hover:text-accent transition-colors tracking-widest"
-              >
-                {link.name}
-              </motion.button>
-            ))}
-            <motion.button
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-              onClick={() => scrollTo("rentals")}
-              className="text-5xl font-bebas text-accent hover:text-accent-hover transition-colors tracking-widest"
-            >
-              {t.nav.bookNow}
-            </motion.button>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-            >
-              <Link
-                href="/admin"
-                onClick={() => setIsMenuOpen(false)}
-                className="text-2xl font-bebas text-body/40 hover:text-body transition-colors tracking-widest mt-8 block"
-              >
-                ADMIN LOGIN
-              </Link>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.nav>
+    </header>
   );
-};
-
-export default Navbar;
+}

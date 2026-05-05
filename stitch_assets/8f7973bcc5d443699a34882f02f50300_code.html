@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary": "#4d5d73",
+                    "surface-tint": "#005ac2",
+                    "surface-container-high": "#e6e8ea",
+                    "on-secondary-fixed-variant": "#3c475a",
+                    "on-primary-fixed-variant": "#004395",
+                    "secondary": "#545f73",
+                    "primary": "#0058be",
+                    "on-background": "#191c1e",
+                    "outline": "#727785",
+                    "surface-container": "#eceef0",
+                    "tertiary-fixed": "#d3e4fe",
+                    "on-tertiary-fixed-variant": "#38485d",
+                    "on-secondary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-fixed": "#0b1c30",
+                    "inverse-on-surface": "#eff1f3",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-container": "#66768d",
+                    "secondary-fixed": "#d8e3fb",
+                    "outline-variant": "#c2c6d6",
+                    "error": "#ba1a1a",
+                    "primary-fixed-dim": "#adc6ff",
+                    "on-secondary-fixed": "#111c2d",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed": "#001a42",
+                    "surface-container-highest": "#e0e3e5",
+                    "on-error": "#ffffff",
+                    "primary-fixed": "#d8e2ff",
+                    "on-tertiary-container": "#fdfcff",
+                    "secondary-container": "#d5e0f8",
+                    "primary-container": "#2170e4",
+                    "on-surface-variant": "#424754",
+                    "error-container": "#ffdad6",
+                    "on-secondary-container": "#586377",
+                    "surface-variant": "#e0e3e5",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed-dim": "#b7c8e1",
+                    "on-surface": "#191c1e",
+                    "inverse-primary": "#adc6ff",
+                    "surface-dim": "#d8dadc",
+                    "surface-bright": "#f7f9fb",
+                    "secondary-fixed-dim": "#bcc7de",
+                    "background": "#f7f9fb",
+                    "inverse-surface": "#2d3133",
+                    "on-primary-container": "#fefcff",
+                    "surface": "#f7f9fb",
+                    "surface-container-low": "#f2f4f6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "48px",
+                    "section-gap": "80px",
+                    "stack-lg": "24px",
+                    "gutter": "24px",
+                    "stack-sm": "4px",
+                    "base": "8px",
+                    "stack-md": "12px",
+                    "margin-mobile": "16px",
+                    "container-max": "1280px"
+            },
+            "fontFamily": {
+                    "h1": ["Space Grotesk"],
+                    "body-sm": ["Inter"],
+                    "body-md": ["Inter"],
+                    "button": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "display": ["Space Grotesk"],
+                    "label-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "h3": ["Space Grotesk"],
+                    "h2": ["Space Grotesk"]
+            },
+            "fontSize": {
+                    "h1": ["36px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "button": ["16px", {"lineHeight": "1", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "display": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-lg": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "label-md": ["12px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                    "h3": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "h2": ["30px", {"lineHeight": "1.3", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md">
+<!-- TopAppBar -->
+<header class="bg-white dark:bg-slate-950 docked full-width top-0 sticky z-50 border-b border-slate-100 dark:border-slate-800 shadow-[0px_4px_20px_rgba(30,41,59,0.05)]">
+<div class="flex justify-between items-center w-full px-8 py-4 max-w-7xl mx-auto">
+<div class="text-2xl font-black text-slate-900 dark:text-white tracking-tighter font-['Space_Grotesk']">DealsOnWheels</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="font-['Space_Grotesk'] font-medium text-slate-600 dark:text-slate-400 hover:text-blue-500 transition-colors" href="#">Rent</a>
+<a class="font-['Space_Grotesk'] font-medium text-slate-600 dark:text-slate-400 hover:text-blue-500 transition-colors" href="#">Buy</a>
+<a class="font-['Space_Grotesk'] font-medium text-slate-600 dark:text-slate-400 hover:text-blue-500 transition-colors" href="#">How it Works</a>
+<a class="font-['Space_Grotesk'] font-medium text-slate-600 dark:text-slate-400 hover:text-blue-500 transition-colors" href="#">About</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="bg-primary text-on-primary px-6 py-2.5 rounded-lg font-button hover:opacity-80 transition-opacity active:scale-95 duration-200">
+                    Book Now
+                </button>
+</div>
+</div>
+</header>
+<main>
+<!-- Hero Section -->
+<section class="relative min-h-[870px] flex items-center justify-center pt-20 pb-20 overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover" data-alt="A side view of a sleek, silver Porsche 911 driving through a minimalist, high-contrast urban environment at sunset. The lighting is dramatic and warm, highlighting the vehicle's aerodynamic curves against a backdrop of glass skyscrapers. The overall aesthetic is clean, premium, and corporate modern, with a color palette dominated by cool silvers, deep shadows, and vibrant electric blue light reflections." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-rhocpXpsc1EpZvNtCAOVLdlyOpMTZFcZ_apOdgkZM1_272ssggGOB66X5EYmb9snW39w0hIEdJcO-pxW_2QEOm-eE5c1TKzh0Pp6xSqFdb5-vQJqmbbXsvukr8FLQZ3BxebKaSaoAw2jzXVnJEoa7R6mbmTAn5TWP7rbk8gOKZ3HIN-1POVfzOQMkT7K7cUIci8DiZDXzv3LHtVIhcUy_GmVfqHM06YP8s0B2VE1QlLzwZXywsQi3XrL3R3ItCyYJJNCoK4Gy74S"/>
+<div class="absolute inset-0 bg-gradient-to-r from-slate-900/80 to-transparent"></div>
+</div>
+<div class="relative z-10 max-w-7xl mx-auto px-8 w-full">
+<div class="max-w-2xl text-white mb-stack-lg">
+<h1 class="font-display text-display mb-stack-md leading-tight">Drive Your Ambition.</h1>
+<p class="font-body-lg text-white/90 mb-stack-lg">Experience the pinnacle of automotive engineering with our curated fleet of premium rentals and certified sales inventory.</p>
+</div>
+<!-- Search/Toggle Component -->
+<div class="glass-panel p-gutter rounded-xl shadow-lg max-w-5xl">
+<div class="flex gap-4 mb-stack-lg p-1 bg-surface-container rounded-lg w-fit">
+<button class="px-8 py-2.5 rounded-md bg-primary text-on-primary font-button shadow-sm">Rent a Car</button>
+<button class="px-8 py-2.5 rounded-md text-on-surface-variant font-button hover:bg-surface-variant transition-colors">Buy a Car</button>
+</div>
+<!-- Rental Form (Active by Default) -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter items-end">
+<div class="space-y-stack-sm">
+<label class="block text-label-lg text-on-surface-variant ml-1">Pickup Location</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">location_on</span>
+<input class="w-full h-12 pl-10 pr-4 rounded-lg border border-outline-variant focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="City or Airport" type="text"/>
+</div>
+</div>
+<div class="space-y-stack-sm">
+<label class="block text-label-lg text-on-surface-variant ml-1">Pickup Date</label>
+<input class="w-full h-12 px-4 rounded-lg border border-outline-variant focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" type="date"/>
+</div>
+<div class="space-y-stack-sm">
+<label class="block text-label-lg text-on-surface-variant ml-1">Return Date</label>
+<input class="w-full h-12 px-4 rounded-lg border border-outline-variant focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" type="date"/>
+</div>
+<button class="h-12 bg-primary text-on-primary rounded-lg font-button hover:opacity-90 active:scale-95 transition-all">Search Fleet</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Featured Rental Fleet -->
+<section class="py-section-gap max-w-7xl mx-auto px-8">
+<div class="flex justify-between items-end mb-stack-lg">
+<div class="space-y-stack-sm">
+<span class="text-primary font-label-lg uppercase tracking-widest">Premium Fleet</span>
+<h2 class="font-h2 text-h2">Curated Rental Experience</h2>
+</div>
+<a class="text-primary font-button flex items-center gap-2 hover:underline" href="#">
+                    View All Fleet <span class="material-symbols-outlined">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Card 1 -->
+<div class="bg-white rounded-xl shadow-[0px_4px_20px_rgba(30,41,59,0.05)] overflow-hidden group hover:shadow-xl transition-all duration-300">
+<div class="h-64 overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A clean, front-three-quarter shot of a high-end BMW 5 Series in Alpine White, parked against a minimalist architectural background with large glass windows. The lighting is crisp morning daylight, emphasizing the car's premium surface quality and detailed LED headlights. The mood is sophisticated and professional, reflecting a high-contrast corporate aesthetic with cool blue and neutral gray tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtgjJdClPdCIQVW-GPt6HyfYjev-F6IVH5to1H7dpIpxRP3d9lC1OL-zlf_DDqdJlBjGe7l88MUr2cn2G88upYxQmaU7Jg-QuLT4LYI9RS8pV8TLWyyojTNO6wKzra6L_RxfCC0q753cfc9w5Wvh8v-XKHXTihdEvGnjCUn57uvwqtSuOl8pyz8vsQvuG9TUzNqSNyTciA4jLOisiLp9zsGlXPMX-vPNCZyHvszUAu-12zPi-UurOumjUU95X84gS-iuHaGaMUTWpU"/>
+<div class="absolute top-4 left-4 bg-primary text-on-primary px-3 py-1 rounded text-label-md">NEW ARRIVAL</div>
+</div>
+<div class="p-stack-lg">
+<div class="flex justify-between items-start mb-stack-md">
+<div>
+<h3 class="font-h3 text-h3">BMW 5 Series</h3>
+<p class="text-on-surface-variant text-body-sm">Executive Sedan • 2024</p>
+</div>
+<div class="text-right">
+<span class="text-primary font-h3">$120</span>
+<p class="text-label-md text-on-surface-variant uppercase">/ Day</p>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-2 py-stack-md border-y border-outline-variant/30 mb-stack-md">
+<div class="flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-outline">airline_seat_recline_normal</span>
+<span class="text-label-md">5 Seats</span>
+</div>
+<div class="flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-outline">settings</span>
+<span class="text-label-md">Auto</span>
+</div>
+<div class="flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-outline">local_gas_station</span>
+<span class="text-label-md">Hybrid</span>
+</div>
+</div>
+<button class="w-full py-3 border-2 border-primary text-primary rounded-lg font-button hover:bg-primary hover:text-on-primary transition-all">Rent Now</button>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-white rounded-xl shadow-[0px_4px_20px_rgba(30,41,59,0.05)] overflow-hidden group hover:shadow-xl transition-all duration-300">
+<div class="h-64 overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A dynamic shot of a matte black Range Rover Sport cruising through a foggy mountain road during the blue hour. The headlights are on, casting a powerful beam that illuminates the damp pavement. The atmosphere is moody, luxurious, and intense, using a palette of deep slates, blacks, and sharp electric blue accents from the daytime running lights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcc9qJd5cwDRoVgLUZZR3RtO53_0W3haaZJ9GIRE6xib5ztQ-wzMKWskogUkCYtr30C-0JE8Z0fLF5x0j_hbezeJ4JVkyxd8tHYnsXiz0Nd0man4qOiParhixuW2_HsKCthicg5tfhK_x44ImjHVARXVix9hDcAHBbIZTe8polGhcpaP94Z_kXtX3kjS7hZVO17qDDZte1NZHwRINZfhz2zG5qtTB7pAgTt2PP9apl7GSDdui79VmW8C2uGgj7UuGQmVTdj4zaEwip"/>
+</div>
+<div class="p-stack-lg">
+<div class="flex justify-between items-start mb-stack-md">
+<div>
+<h3 class="font-h3 text-h3">Range Rover Sport</h3>
+<p class="text-on-surface-variant text-body-sm">Luxury SUV • 2023</p>
+</div>
+<div class="text-right">
+<span class="text-primary font-h3">$185</span>
+<p class="text-label-md text-on-surface-variant uppercase">/ Day</p>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-2 py-stack-md border-y border-outline-variant/30 mb-stack-md">
+<div class="flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-outline">airline_seat_recline_normal</span>
+<span class="text-label-md">7 Seats</span>
+</div>
+<div class="flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-outline">settings</span>
+<span class="text-label-md">4x4</span>
+</div>
+<div class="flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-outline">local_gas_station</span>
+<span class="text-label-md">Diesel</span>
+</div>
+</div>
+<button class="w-full py-3 border-2 border-primary text-primary rounded-lg font-button hover:bg-primary hover:text-on-primary transition-all">Rent Now</button>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-white rounded-xl shadow-[0px_4px_20px_rgba(30,41,59,0.05)] overflow-hidden group hover:shadow-xl transition-all duration-300">
+<div class="h-64 overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A close-up studio shot of a red Ferrari 488, focusing on the aggressive aerodynamic details and the iconic logo. The lighting is high-key with soft reflections that glide across the polished red paintwork, creating a sense of motion even while stationary. The scene is set in a pristine, white-walled automotive showroom with a high-contrast corporate aesthetic and professional lighting setup." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOC1OHQHs3hVmxQ5xfUbHJVkNJulEeinH0M5jnNzIvLsZ1cQNS1z-nfTTMrDY7trX9wL9rpEc-v-N7LqLIEnUFxUiffMMeQVqle6gXFGu_mMJT6WmUq7YRy4Lr1mIkC1AEZanzAToJp6qsaRj2Z7kmNEv5ZZW2DsY_LhNBcKiqZXe588TwxHuucxZgg51lw9rYjgfSErJ3ZpsOr7665HNUHIhXvDHCIV6k9u2EcipGFnT9dNrideJlfsSYMCxdr-ka0h_iHXSxw-1_"/>
+</div>
+<div class="p-stack-lg">
+<div class="flex justify-between items-start mb-stack-md">
+<div>
+<h3 class="font-h3 text-h3">Ferrari 488 GTB</h3>
+<p class="text-on-surface-variant text-body-sm">Supercar • 2022</p>
+</div>
+<div class="text-right">
+<span class="text-primary font-h3">$450</span>
+<p class="text-label-md text-on-surface-variant uppercase">/ Day</p>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-2 py-stack-md border-y border-outline-variant/30 mb-stack-md">
+<div class="flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-outline">airline_seat_recline_normal</span>
+<span class="text-label-md">2 Seats</span>
+</div>
+<div class="flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-outline">speed</span>
+<span class="text-label-md">F1-Shift</span>
+</div>
+<div class="flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-outline">local_gas_station</span>
+<span class="text-label-md">Petrol</span>
+</div>
+</div>
+<button class="w-full py-3 border-2 border-primary text-primary rounded-lg font-button hover:bg-primary hover:text-on-primary transition-all">Rent Now</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Why Choose Us -->
+<section class="bg-surface-container py-section-gap">
+<div class="max-w-7xl mx-auto px-8">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div class="space-y-stack-lg">
+<span class="text-primary font-label-lg uppercase tracking-widest">Why Choose Us</span>
+<h2 class="font-display text-display leading-tight">Elevating the Standard of Automotive Luxury.</h2>
+<div class="space-y-gutter">
+<div class="flex gap-stack-lg">
+<div class="bg-primary-container p-3 rounded-lg h-fit text-on-primary-container">
+<span class="material-symbols-outlined">verified_user</span>
+</div>
+<div>
+<h4 class="font-h3 text-h3 mb-2">Unwavering Trust</h4>
+<p class="text-on-surface-variant">Every vehicle undergoes a rigorous 200-point inspection and sanitization process before delivery.</p>
+</div>
+</div>
+<div class="flex gap-stack-lg">
+<div class="bg-primary-container p-3 rounded-lg h-fit text-on-primary-container">
+<span class="material-symbols-outlined">electric_bolt</span>
+</div>
+<div>
+<h4 class="font-h3 text-h3 mb-2">High-Velocity Efficiency</h4>
+<p class="text-on-surface-variant">Our digital-first booking system allows you to secure your dream car in under 60 seconds.</p>
+</div>
+</div>
+<div class="flex gap-stack-lg">
+<div class="bg-primary-container p-3 rounded-lg h-fit text-on-primary-container">
+<span class="material-symbols-outlined">support_agent</span>
+</div>
+<div>
+<h4 class="font-h3 text-h3 mb-2">24/7 Concierge</h4>
+<p class="text-on-surface-variant">Dedicated support specialists are available around the clock to assist with any request.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="relative">
+<div class="aspect-square rounded-2xl overflow-hidden shadow-2xl">
+<img class="w-full h-full object-cover" data-alt="A professional-looking automotive concierge in a tailored navy suit handing over a modern smart key to a client in a bright, futuristic glass showroom. The background is a clean white space with minimalist furniture and a fleet of high-end vehicles visible in soft focus. The lighting is bright and airy, creating a professional, trustworthy, and high-energy atmosphere consistent with a premium corporate service." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhTyPpskRU3MpfqOaIdIbeOurkVoMMuXEOuN1qZ35viqVl466yyRY78Gx_AEV0poj5RUpmwymZL1MZ6xTtRuRcp8Z40398Dp3QDELVTDZ2bQPrXivbswXt13j19vmqaw4xzLP3cisdv0NjfEswoqktfNPrPIiha7mnt3UOWCrVYvPDCNK953CdD5bgZgZoIAPjD9BnX5vbmu5jk_84GtUfXpTyuYKshote29A6GMkCoSN08lnHimLQsgvSOlhuLtxxPqGazBvBPWhH"/>
+</div>
+<div class="absolute -bottom-8 -left-8 bg-white p-gutter rounded-xl shadow-xl max-w-xs border border-slate-100">
+<p class="text-h3 font-display mb-1 text-primary">5000+</p>
+<p class="text-label-lg text-on-surface-variant uppercase tracking-wider">Premium Deliveries This Year</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Featured Sales Inventory -->
+<section class="py-section-gap max-w-7xl mx-auto px-8">
+<div class="flex justify-between items-end mb-stack-lg">
+<div class="space-y-stack-sm">
+<span class="text-primary font-label-lg uppercase tracking-widest">Certified Sales</span>
+<h2 class="font-h2 text-h2">Find Your Permanent Drive</h2>
+</div>
+<div class="flex gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-full border border-outline-variant text-outline hover:border-primary hover:text-primary transition-all">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full border border-outline-variant text-outline hover:border-primary hover:text-primary transition-all">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<!-- Sales Card 1 -->
+<div class="bg-white rounded-xl border border-slate-100 overflow-hidden hover:shadow-lg transition-all group">
+<div class="h-48 relative overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-all duration-500" data-alt="A detailed shot of a dark gray Mercedes-Benz E-Class parked in a brightly lit modern garage with white tiled floors. The car's polished finish reflects the clean architectural lines of the space. The mood is pristine and professional, with high-key lighting that emphasizes the vehicle's design and engineering quality, aligning with a premium corporate sales environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9VJKkrszsODLJv8pMG3YK55Bju-_Kf92JVNvtXd8qlOnTiT8mFagOujVv5KfxYJ2Px6cCjInNGON7VkzdSqWJ9hd3iHOvVw4ERcQxcko3Kpc9f-Dd9Twrgk6zo0maC4TdjSPk9WrkKlGrG7IvMAPgysGCq4t1Azw1NEbb14KAk0Cw9_fMnv-LTx5hNr6vOyhsYHEMDCLHiKg6cXi2HCbxNMmu8Bn-Nxi4hnzVMbTirbJY_SBylQymtEQV2VwcdXMirJSkVSOhn4Ei"/>
+</div>
+<div class="p-stack-md">
+<h4 class="font-h3 text-[18px]">Mercedes-Benz E 450</h4>
+<p class="text-on-surface-variant text-body-sm mb-stack-md">12,400 miles • 2023</p>
+<div class="flex justify-between items-center">
+<span class="text-h3 font-display">$68,500</span>
+<button class="bg-surface-container text-primary p-2 rounded-lg hover:bg-primary hover:text-on-primary transition-all">
+<span class="material-symbols-outlined">shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Sales Card 2 -->
+<div class="bg-white rounded-xl border border-slate-100 overflow-hidden hover:shadow-lg transition-all group">
+<div class="h-48 relative overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-all duration-500" data-alt="A front view of a midnight blue Tesla Model S Plaid charging at a modern, high-tech station. The car's smooth, grille-less front is highlighted by soft, cool-toned lighting. The atmosphere is forward-looking and efficient, using a palette of electric blues and deep blacks to represent modern electric vehicle technology in a high-contrast corporate style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBr8OfExu_extERu8y03_lVjU6zcH-QNFIp6oudvSIKxbfvf0Isak-TKlbzlf35N-281In9v3Hae8iQ4tBzFUwlF7LzOBMtiidxtNrfmK897tHqZrLb309VJ7sdrVojnNi86QaRUN70L_yGN7Hmb6HdOm9YxAdBIYTJXVA9fEpVIoy5D9sqYeSXyPADGHATxLSFKUfLaElUc1aNV3TVLrfpo9aVrYx9ygUoi8BQqTcUZzH2AMmoEp9-hv479DSIPOI0zmf0lEWBd1L"/>
+</div>
+<div class="p-stack-md">
+<h4 class="font-h3 text-[18px]">Tesla Model S Plaid</h4>
+<p class="text-on-surface-variant text-body-sm mb-stack-md">8,200 miles • 2022</p>
+<div class="flex justify-between items-center">
+<span class="text-h3 font-display">$84,900</span>
+<button class="bg-surface-container text-primary p-2 rounded-lg hover:bg-primary hover:text-on-primary transition-all">
+<span class="material-symbols-outlined">shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Sales Card 3 -->
+<div class="bg-white rounded-xl border border-slate-100 overflow-hidden hover:shadow-lg transition-all group">
+<div class="h-48 relative overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-all duration-500" data-alt="An eye-level shot of a clean, white Audi Q8 SUV parked on a quiet urban street during the golden hour. The sunlight casts long, soft shadows and gives a warm glow to the car's bodywork. The setting is upscale and serene, highlighting the vehicle as a family-friendly yet luxurious choice in a high-contrast, modern light-mode palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSvbNIxuicFNfzhvCIM07tKBGvAXIIb0wNTenB1ixXqVX2CvzbkibgKCqiYGSbPiwnIO3X0w4zIUTgzrHAauNM2dXDDq3hyWD9Ai1ofZ6YGwDuNtt8_rb7OS1-lA0ESeU6-svhcYBKACv_aE_cFbOT4CUeXecZjgzjWZ7IQz-iCx4YiEtopSw909w5HEU4-hhWMFbcH5kbNr7j8c-XmxD9SH6hlsvVA3u8kN0lENQKzKZ89C2bx4UOjjytpKJ2t5TEA35gGFMaPtJn"/>
+</div>
+<div class="p-stack-md">
+<h4 class="font-h3 text-[18px]">Audi Q8 Premium</h4>
+<p class="text-on-surface-variant text-body-sm mb-stack-md">15,000 miles • 2023</p>
+<div class="flex justify-between items-center">
+<span class="text-h3 font-display">$72,300</span>
+<button class="bg-surface-container text-primary p-2 rounded-lg hover:bg-primary hover:text-on-primary transition-all">
+<span class="material-symbols-outlined">shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Sales Card 4 -->
+<div class="bg-white rounded-xl border border-slate-100 overflow-hidden hover:shadow-lg transition-all group">
+<div class="h-48 relative overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-all duration-500" data-alt="A sleek profile shot of a silver Lexus LS in a minimalist driveway with architectural concrete walls. The lighting is diffused and modern, emphasizing the luxury sedan's elegant lines and refined presence. The mood is one of understated excellence and professional reliability, utilizing a cool and neutral color palette that reflects premium automotive quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsTcse7oBg4VCQmzQKLKYFzvyNCV69jeMY-sAKv5zPrbhNQSS_zQbgIXLDDBMsebit1E0uFAH9kPazOqD6WqDo4i91Gb642A8orqo9cagk_9QLev4nm3s0zZa55Xkymu6geL_CP-SiO9a3HbQLcA__SsTmuCTNsN_jHa1JcbebyTNqiqKNS9267p99mA4KEGMyxVwbUbMj9VYpkJMwtBQGnmTZwW9sRtpPEkFQNU2NzWb9cY17pTzuovePI2rhxj6pCebJiSYx_x_2"/>
+</div>
+<div class="p-stack-md">
+<h4 class="font-h3 text-[18px]">Lexus LS 500h</h4>
+<p class="text-on-surface-variant text-body-sm mb-stack-md">5,400 miles • 2024</p>
+<div class="flex justify-between items-center">
+<span class="text-h3 font-display">$91,000</span>
+<button class="bg-surface-container text-primary p-2 rounded-lg hover:bg-primary hover:text-on-primary transition-all">
+<span class="material-symbols-outlined">shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Testimonials -->
+<section class="py-section-gap bg-slate-950 text-white">
+<div class="max-w-7xl mx-auto px-8">
+<div class="text-center mb-16 max-w-2xl mx-auto">
+<span class="text-primary font-label-lg uppercase tracking-widest">Client Testimonials</span>
+<h2 class="font-display text-display mt-4">Voices of Excellence</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Testimonial 1 -->
+<div class="bg-slate-900 p-8 rounded-xl border border-slate-800">
+<div class="flex gap-1 text-primary mb-stack-lg">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="font-body-lg mb-8 italic">"The rental experience was seamless. From the digital booking to the vehicle handover, DealsOnWheels sets a new benchmark for automotive services."</p>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a middle-aged male executive with a confident smile, wearing a tailored gray suit and white shirt. The background is a blurred office interior with soft natural lighting. The overall aesthetic is clean, sharp, and corporate, conveying a sense of success and trust." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkyVbCOfKGZ23NpaLIfPrat-hF5OoBMK-dDQFYOpeUehOzSrxtlxv8H7NvIsf68KwHhjJxQ2MmOp94ttZIEW4JEaipO7xFnFqhUwqSlJAXq9GR8h7g9sR68pRnJxYsbGbe5fH_HulUGn2xp4Zw1ECoJklQzyLZTyRPUryiysaGZ0Ywg03vtPTphPF2bcwiJMSUmVJUFT-ievab1TrQV775J9pnwMiU7krXyos0iyxxnbMNx0VDz6XSq9_GVW-Myd9tPUX5Q-0wP-HY"/>
+</div>
+<div>
+<p class="font-button">James Kensington</p>
+<p class="text-label-md text-slate-400">Tech Entrepreneur</p>
+</div>
+</div>
+</div>
+<!-- Testimonial 2 -->
+<div class="bg-slate-900 p-8 rounded-xl border border-slate-800">
+<div class="flex gap-1 text-primary mb-stack-lg">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="font-body-lg mb-8 italic">"I purchased my certified pre-owned BMW through them. The transparency and level of inspection gave me total peace of mind. Highly recommended."</p>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a woman in her late 30s with a welcoming and authoritative expression, wearing a sleek black blazer and minimalist jewelry. The setting is a bright, modern architectural space with clean lines. The lighting is soft and flattering, creating a premium and professional mood that suggests high-level corporate success and reliability." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAianXJISiFOWsQSR9MMGSfJczHIQ4ly98mpYg8vjiiiDYzK242sj0sRItuRT1G5brJ-EPtR3wFarpnf_p1tnAsajV_CcDI0-39gBNRkAxwe9os3-QW-rg3jXiUbJQ3yyn4qZQ_L0560vO2docYcpSYGHabHKXIw4RPBoVzcdi_yqwRqSPkW2Ik6BNsKdpIEf0rf8iu0BUCyqaeJnWRvfpX4_Qp0FVFHh8xckAdgqctR-SSrrVjBO1eCyuMRqnbI_IULV4jIQTefX42"/>
+</div>
+<div>
+<p class="font-button">Sarah Chen</p>
+<p class="text-label-md text-slate-400">Investment Banker</p>
+</div>
+</div>
+</div>
+<!-- Testimonial 3 -->
+<div class="bg-slate-900 p-8 rounded-xl border border-slate-800">
+<div class="flex gap-1 text-primary mb-stack-lg">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="font-body-lg mb-8 italic">"Their fleet variety is unmatched. Whether I need a rugged SUV for a weekend trip or a sleek sedan for business meetings, they always deliver."</p>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a young male creative professional with a friendly smile, wearing a dark polo shirt. The background is a clean, neutral-toned studio setting with professional key lighting. The aesthetic is modern and approachable, yet maintains a high level of quality and professionalism that aligns with a high-energy corporate design system." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsSYTLu_XtwrM7iZViWLGtIU2M1wlqqb2NofS-iHD1fcdow3_xNj4yIGVzzLffUUNLt4J9uc8TuxRdrDFGKb2y7QLWvX_tdgVE0iKRjy5cmEuB01xBdnr2ubW6OCJ6bQEVppHw0QdtDM_6yP31mx_Jzm5fKT09CQ5RajIFWyUGVEfHNvykQnE4nhmgwBIvWD1m4vnNDLmVqvmtOr3Wl8p7qg6sT0SLF2-4licYkZxXi__-uemYpypDyQeUxUEBp0eyspLBTCxejyIv"/>
+</div>
+<div>
+<p class="font-button">Michael Russo</p>
+<p class="text-label-md text-slate-400">Creative Director</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-50 dark:bg-slate-900 full-width py-12 px-8 border-t border-slate-200 dark:border-slate-800">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-7xl mx-auto">
+<div class="space-y-4">
+<div class="text-xl font-bold text-slate-900 dark:text-white font-['Space_Grotesk']">DealsOnWheels</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-['Space_Grotesk']">Premium Automotive Solutions for the modern driver. Rent or buy with absolute confidence.</p>
+</div>
+<div class="flex flex-col gap-3">
+<span class="font-semibold text-slate-900 dark:text-white text-sm uppercase tracking-wider mb-2">Services</span>
+<a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors text-sm hover:underline decoration-blue-600 decoration-2 underline-offset-4" href="#">Fleet</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors text-sm hover:underline decoration-blue-600 decoration-2 underline-offset-4" href="#">Sales</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors text-sm hover:underline decoration-blue-600 decoration-2 underline-offset-4" href="#">Concierge</a>
+</div>
+<div class="flex flex-col gap-3">
+<span class="font-semibold text-slate-900 dark:text-white text-sm uppercase tracking-wider mb-2">Company</span>
+<a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors text-sm hover:underline decoration-blue-600 decoration-2 underline-offset-4" href="#">About</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors text-sm hover:underline decoration-blue-600 decoration-2 underline-offset-4" href="#">FAQ</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors text-sm hover:underline decoration-blue-600 decoration-2 underline-offset-4" href="#">Contact Us</a>
+</div>
+<div class="flex flex-col gap-3">
+<span class="font-semibold text-slate-900 dark:text-white text-sm uppercase tracking-wider mb-2">Legal</span>
+<a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors text-sm hover:underline decoration-blue-600 decoration-2 underline-offset-4" href="#">Privacy Policy</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors text-sm hover:underline decoration-blue-600 decoration-2 underline-offset-4" href="#">Terms of Service</a>
+</div>
+</div>
+<div class="max-w-7xl mx-auto pt-12 mt-12 border-t border-slate-200 dark:border-slate-800 text-center">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-['Space_Grotesk']">© 2024 DealsOnWheels. Premium Automotive Solutions.</p>
+</div>
+</footer>
+</body></html>

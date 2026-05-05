@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>How it Works - DealsOnWheels</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary": "#4d5d73",
+                      "surface-tint": "#005ac2",
+                      "surface-container-high": "#e6e8ea",
+                      "on-secondary-fixed-variant": "#3c475a",
+                      "on-primary-fixed-variant": "#004395",
+                      "secondary": "#545f73",
+                      "primary": "#0058be",
+                      "on-background": "#191c1e",
+                      "outline": "#727785",
+                      "surface-container": "#eceef0",
+                      "tertiary-fixed": "#d3e4fe",
+                      "on-tertiary-fixed-variant": "#38485d",
+                      "on-secondary": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "on-tertiary-fixed": "#0b1c30",
+                      "inverse-on-surface": "#eff1f3",
+                      "surface-container-lowest": "#ffffff",
+                      "tertiary-container": "#66768d",
+                      "secondary-fixed": "#d8e3fb",
+                      "outline-variant": "#c2c6d6",
+                      "error": "#ba1a1a",
+                      "primary-fixed-dim": "#adc6ff",
+                      "on-secondary-fixed": "#111c2d",
+                      "on-tertiary": "#ffffff",
+                      "on-primary-fixed": "#001a42",
+                      "surface-container-highest": "#e0e3e5",
+                      "on-error": "#ffffff",
+                      "primary-fixed": "#d8e2ff",
+                      "on-tertiary-container": "#fdfcff",
+                      "secondary-container": "#d5e0f8",
+                      "primary-container": "#2170e4",
+                      "on-surface-variant": "#424754",
+                      "error-container": "#ffdad6",
+                      "on-secondary-container": "#586377",
+                      "surface-variant": "#e0e3e5",
+                      "on-error-container": "#93000a",
+                      "tertiary-fixed-dim": "#b7c8e1",
+                      "on-surface": "#191c1e",
+                      "inverse-primary": "#adc6ff",
+                      "surface-dim": "#d8dadc",
+                      "surface-bright": "#f7f9fb",
+                      "secondary-fixed-dim": "#bcc7de",
+                      "background": "#f7f9fb",
+                      "inverse-surface": "#2d3133",
+                      "on-primary-container": "#fefcff",
+                      "surface": "#f7f9fb",
+                      "surface-container-low": "#f2f4f6"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-desktop": "48px",
+                      "section-gap": "80px",
+                      "stack-lg": "24px",
+                      "gutter": "24px",
+                      "stack-sm": "4px",
+                      "base": "8px",
+                      "stack-md": "12px",
+                      "margin-mobile": "16px",
+                      "container-max": "1280px"
+              },
+              "fontFamily": {
+                      "h1": ["Space Grotesk"],
+                      "body-sm": ["Inter"],
+                      "body-md": ["Inter"],
+                      "button": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "display": ["Space Grotesk"],
+                      "label-lg": ["Inter"],
+                      "label-md": ["Inter"],
+                      "h3": ["Space Grotesk"],
+                      "h2": ["Space Grotesk"]
+              },
+              "fontSize": {
+                      "h1": ["36px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                      "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "button": ["16px", {"lineHeight": "1", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "display": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "label-lg": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "label-md": ["12px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                      "h3": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                      "h2": ["30px", {"lineHeight": "1.3", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+      </script>
+</head>
+<body class="bg-surface font-body-md text-on-surface">
+<!-- TopAppBar Component -->
+<header class="bg-white dark:bg-slate-950 docked full-width top-0 sticky z-50 border-b border-slate-100 dark:border-slate-800 shadow-[0px_4px_20px_rgba(30,41,59,0.05)]">
+<nav class="flex justify-between items-center w-full px-8 py-4 max-w-7xl mx-auto">
+<div class="text-2xl font-black text-slate-900 dark:text-white tracking-tighter">DealsOnWheels</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="font-['Space_Grotesk'] font-medium text-slate-600 dark:text-slate-400 hover:text-blue-500 transition-colors" href="#">Rent</a>
+<a class="font-['Space_Grotesk'] font-medium text-slate-600 dark:text-slate-400 hover:text-blue-500 transition-colors" href="#">Buy</a>
+<a class="font-['Space_Grotesk'] font-medium text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 font-bold pb-1" href="#">How it Works</a>
+<a class="font-['Space_Grotesk'] font-medium text-slate-600 dark:text-slate-400 hover:text-blue-500 transition-colors" href="#">About</a>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2.5 rounded-lg font-button active:scale-95 transition-transform duration-200 hover:opacity-80">Book Now</button>
+</nav>
+</header>
+<main>
+<!-- Hero Section -->
+<section class="py-20 bg-surface-container-low overflow-hidden">
+<div class="max-w-7xl mx-auto px-8 grid lg:grid-cols-2 gap-16 items-center">
+<div>
+<h1 class="font-display text-display text-on-surface mb-6">Seamlessly Moving You Forward.</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mb-10">Whether you're looking for a weekend escape or a permanent upgrade, our streamlined processes for renting and buying ensure you're on the road faster with total confidence.</p>
+<div class="flex gap-4">
+<a class="bg-primary text-on-primary px-8 py-4 rounded-xl font-button shadow-md hover:opacity-90 transition-opacity" href="#renting">Explore Rentals</a>
+<a class="bg-white border border-outline-variant text-on-surface px-8 py-4 rounded-xl font-button hover:bg-slate-50 transition-colors" href="#buying">View Sales Inventory</a>
+</div>
+</div>
+<div class="relative">
+<div class="bg-primary-container rounded-[2rem] w-full aspect-square overflow-hidden shadow-2xl rotate-3">
+<img class="w-full h-full object-cover" data-alt="A side-profile shot of a high-end luxury vehicle parked in a minimalist, sun-drenched architectural garage. The lighting is bright and high-contrast, casting sharp but clean shadows that emphasize the car's sleek metallic lines. The overall aesthetic is professional and premium, utilizing a clean white and slate gray color palette that aligns with a modern corporate identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcSyWxFnVJuZwixDfb_lucvD6tr5NefHMWNxsgVFieuMsg7Os8oUIcagXbfHELgkTxBg_WBb0XM2MWcOEiDpb0t1aQrStmSX9ikOlKr6ZiYIpWDAvPq8LbM5cpujG43_WE3bOPE1dsfptCvV9DYHCb7mUmcARSSGM0DUNaZGQWcKvEMiW0R1ic0h9Y05rAph3D2vgx6177ltC8K0uRqxJ0SF31osihQF1Ib-Bq-prqUjBS7tQ_PoHRP3GHssluf8C7d-HW2hQDBkF_"/>
+</div>
+<div class="absolute -bottom-8 -left-8 bg-white p-6 rounded-2xl shadow-xl flex items-center gap-4 -rotate-3">
+<div class="w-12 h-12 bg-primary-fixed flex items-center justify-center rounded-full">
+<span class="material-symbols-outlined text-primary">verified</span>
+</div>
+<div>
+<p class="font-h3 text-h3 leading-none">100%</p>
+<p class="font-label-md text-label-md text-on-surface-variant">Quality Guaranteed</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Process Section: Split View -->
+<section class="py-section-gap">
+<div class="max-w-7xl mx-auto px-8">
+<!-- Renting Process -->
+<div class="mb-24" id="renting">
+<div class="flex items-center gap-4 mb-12">
+<span class="px-4 py-1 bg-secondary-container text-on-secondary-container rounded-full font-label-lg uppercase tracking-widest text-xs">For Short-Term</span>
+<div class="h-px flex-1 bg-outline-variant"></div>
+</div>
+<div class="grid md:grid-cols-3 gap-12">
+<div class="space-y-6">
+<h2 class="font-h2 text-h2">Renting a Vehicle</h2>
+<p class="text-on-surface-variant font-body-md">Our rental process is designed for high-velocity efficiency. No paperwork friction, just premium vehicles ready when you are.</p>
+</div>
+<div class="md:col-span-2 grid md:grid-cols-3 gap-8">
+<!-- Step 1 -->
+<div class="bg-white p-8 rounded-2xl shadow-[0px_4px_20px_rgba(30,41,59,0.05)] border border-slate-50">
+<div class="w-14 h-14 bg-surface-container flex items-center justify-center rounded-xl mb-6">
+<span class="material-symbols-outlined text-primary text-3xl">search</span>
+</div>
+<h3 class="font-h3 text-h3 mb-2">1. Choose</h3>
+<p class="text-on-surface-variant text-body-sm">Browse our curated fleet of premium sedans and SUVs tailored to your style.</p>
+</div>
+<!-- Step 2 -->
+<div class="bg-white p-8 rounded-2xl shadow-[0px_4px_20px_rgba(30,41,59,0.05)] border border-slate-50">
+<div class="w-14 h-14 bg-surface-container flex items-center justify-center rounded-xl mb-6">
+<span class="material-symbols-outlined text-primary text-3xl">event_available</span>
+</div>
+<h3 class="font-h3 text-h3 mb-2">2. Book</h3>
+<p class="text-on-surface-variant text-body-sm">Select your dates and complete our 2-minute digital verification process.</p>
+</div>
+<!-- Step 3 -->
+<div class="bg-white p-8 rounded-2xl shadow-[0px_4px_20px_rgba(30,41,59,0.05)] border border-slate-50">
+<div class="w-14 h-14 bg-surface-container flex items-center justify-center rounded-xl mb-6">
+<span class="material-symbols-outlined text-primary text-3xl">directions_car</span>
+</div>
+<h3 class="font-h3 text-h3 mb-2">3. Drive</h3>
+<p class="text-on-surface-variant text-body-sm">Pick up your car or have it delivered directly to your doorstep. Enjoy.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Buying Process -->
+<div class="mb-24" id="buying">
+<div class="flex items-center gap-4 mb-12">
+<div class="h-px flex-1 bg-outline-variant"></div>
+<span class="px-4 py-1 bg-primary-container text-on-primary-container rounded-full font-label-lg uppercase tracking-widest text-xs">For Long-Term</span>
+</div>
+<div class="grid md:grid-cols-3 gap-12">
+<div class="md:col-span-2 grid md:grid-cols-3 gap-8 order-2 md:order-1">
+<!-- Step 1 -->
+<div class="bg-white p-8 rounded-2xl shadow-[0px_4px_20px_rgba(30,41,59,0.05)] border border-slate-50">
+<div class="w-14 h-14 bg-surface-container flex items-center justify-center rounded-xl mb-6">
+<span class="material-symbols-outlined text-primary text-3xl" data-weight="fill" style="font-variation-settings: 'FILL' 1;">directions_car</span>
+</div>
+<h3 class="font-h3 text-h3 mb-2">1. Inspect</h3>
+<p class="text-on-surface-variant text-body-sm">View detailed 150-point inspection reports and high-res imagery online.</p>
+</div>
+<!-- Step 2 -->
+<div class="bg-white p-8 rounded-2xl shadow-[0px_4px_20px_rgba(30,41,59,0.05)] border border-slate-50">
+<div class="w-14 h-14 bg-surface-container flex items-center justify-center rounded-xl mb-6">
+<span class="material-symbols-outlined text-primary text-3xl">payments</span>
+</div>
+<h3 class="font-h3 text-h3 mb-2">2. Finance</h3>
+<p class="text-on-surface-variant text-body-sm">Get instant credit approval and choose from flexible payment plans.</p>
+</div>
+<!-- Step 3 -->
+<div class="bg-white p-8 rounded-2xl shadow-[0px_4px_20px_rgba(30,41,59,0.05)] border border-slate-50">
+<div class="w-14 h-14 bg-surface-container flex items-center justify-center rounded-xl mb-6">
+<span class="material-symbols-outlined text-primary text-3xl">assignment_turned_in</span>
+</div>
+<h3 class="font-h3 text-h3 mb-2">3. Own</h3>
+<p class="text-on-surface-variant text-body-sm">Sign documents digitally and take ownership. Registration is on us.</p>
+</div>
+</div>
+<div class="space-y-6 order-1 md:order-2 text-right">
+<h2 class="font-h2 text-h2">Buying a Vehicle</h2>
+<p class="text-on-surface-variant font-body-md">Owning your dream car has never been simpler. We handle the bureaucracy so you can enjoy the purchase.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- FAQ Section -->
+<section class="py-section-gap bg-surface-container">
+<div class="max-w-5xl mx-auto px-8">
+<div class="text-center mb-16">
+<h2 class="font-h2 text-h1 mb-4">Frequently Asked Questions</h2>
+<p class="text-on-surface-variant font-body-md">Everything you need to know about the DealsOnWheels experience.</p>
+</div>
+<div class="space-y-4">
+<!-- FAQ 1 -->
+<div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+<button class="flex items-center justify-between w-full text-left">
+<span class="font-h3 text-body-lg font-bold">What insurance coverage is included in rentals?</span>
+<span class="material-symbols-outlined text-primary">expand_more</span>
+</button>
+<div class="mt-4 text-on-surface-variant border-t pt-4">
+                            All rentals include standard third-party liability coverage. You can upgrade to our Premium Protection plan for zero deductible and complete peace of mind.
+                        </div>
+</div>
+<!-- FAQ 2 -->
+<div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+<button class="flex items-center justify-between w-full text-left">
+<span class="font-h3 text-body-lg font-bold">Can I test drive a car before buying?</span>
+<span class="material-symbols-outlined text-primary">expand_more</span>
+</button>
+</div>
+<!-- FAQ 3 -->
+<div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+<button class="flex items-center justify-between w-full text-left">
+<span class="font-h3 text-body-lg font-bold">How long does the finance approval take?</span>
+<span class="material-symbols-outlined text-primary">expand_more</span>
+</button>
+</div>
+<!-- FAQ 4 -->
+<div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+<button class="flex items-center justify-between w-full text-left">
+<span class="font-h3 text-body-lg font-bold">Is delivery available for all locations?</span>
+<span class="material-symbols-outlined text-primary">expand_more</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="py-section-gap">
+<div class="max-w-7xl mx-auto px-8">
+<div class="bg-slate-900 rounded-[3rem] p-16 text-center text-white relative overflow-hidden">
+<!-- Background Accent -->
+<div class="absolute top-0 right-0 w-96 h-96 bg-primary opacity-20 blur-[100px] -mr-48 -mt-48"></div>
+<h2 class="font-display text-display mb-8 relative z-10">Ready to Get Started?</h2>
+<p class="font-body-lg text-slate-400 mb-12 max-w-2xl mx-auto relative z-10">Join thousands of drivers who have simplified their automotive journey with our modern platform.</p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
+<button class="bg-primary text-on-primary px-10 py-5 rounded-xl font-button text-lg hover:scale-105 transition-transform">Start Your Rental</button>
+<button class="bg-white/10 backdrop-blur-md text-white border border-white/20 px-10 py-5 rounded-xl font-button text-lg hover:bg-white/20 transition-colors">Contact Sales Team</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Component -->
+<footer class="bg-slate-50 dark:bg-slate-900 full-width py-12 px-8 border-t border-slate-200 dark:border-slate-800">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-7xl mx-auto">
+<div class="space-y-4">
+<div class="text-xl font-bold text-slate-900 dark:text-white">DealsOnWheels</div>
+<p class="font-['Space_Grotesk'] text-sm text-slate-500 dark:text-slate-400">© 2024 DealsOnWheels. Premium Automotive Solutions.</p>
+</div>
+<div class="flex flex-col gap-3">
+<span class="font-semibold text-slate-900 dark:text-white mb-2">Company</span>
+<a class="font-['Space_Grotesk'] text-sm text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors hover:underline decoration-blue-600 decoration-2 underline-offset-4" href="#">About Us</a>
+<a class="font-['Space_Grotesk'] text-sm text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors hover:underline decoration-blue-600 decoration-2 underline-offset-4" href="#">Contact Us</a>
+<a class="font-['Space_Grotesk'] text-sm text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors hover:underline decoration-blue-600 decoration-2 underline-offset-4" href="#">FAQ</a>
+</div>
+<div class="flex flex-col gap-3">
+<span class="font-semibold text-slate-900 dark:text-white mb-2">Services</span>
+<a class="font-['Space_Grotesk'] text-sm text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors hover:underline decoration-blue-600 decoration-2 underline-offset-4" href="#">Fleet</a>
+<a class="font-['Space_Grotesk'] text-sm text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors hover:underline decoration-blue-600 decoration-2 underline-offset-4" href="#">Sales</a>
+<a class="font-['Space_Grotesk'] text-sm text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors hover:underline decoration-blue-600 decoration-2 underline-offset-4" href="#">Terms of Service</a>
+</div>
+<div class="flex flex-col gap-3">
+<span class="font-semibold text-slate-900 dark:text-white mb-2">Legal</span>
+<a class="font-['Space_Grotesk'] text-sm text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors hover:underline decoration-blue-600 decoration-2 underline-offset-4" href="#">Privacy Policy</a>
+<a class="font-['Space_Grotesk'] text-sm text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors hover:underline decoration-blue-600 decoration-2 underline-offset-4" href="#">Cookie Policy</a>
+</div>
+</div>
+</footer>
+</body></html>
