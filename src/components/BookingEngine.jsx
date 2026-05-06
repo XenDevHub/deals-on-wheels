@@ -3,40 +3,44 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { DayPicker } from "react-day-picker";
-import { format } from "date-fns";
-import { enUS } from "date-fns/locale";
-import "react-day-picker/dist/style.css";
 import Image from "next/image";
 import { supabase } from "@/lib/supabase";
 import { openWhatsApp } from "@/lib/whatsapp";
-import { useLanguage } from "@/lib/LanguageContext";
 
 const BookingEngine = ({ car, isOpen, onClose }) => {
-  const { t } = useLanguage();
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [selectedTime, setSelectedTime] = useState("");
-  const [formData, setFormData] = useState({ name: "", phone: "" });
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    pickupDate: "",
+    returnDate: "",
+    pickupLocation: "",
+    notes: "",
+  });
   const [hasAgreed, setHasAgreed] = useState(false);
   const [showTermsPopup, setShowTermsPopup] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const timeSlots = ["09:00 AM", "11:00 AM", "01:00 PM", "03:00 PM", "05:00 PM"];
   const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "8801XXXXXXXXX";
 
-  const bookedDates = car?.bookedDates?.map(date => new Date(date)) || [];
-  
-  const disabledDays = [
-    { before: new Date() },
-    ...bookedDates
-  ];
+  const calculateDays = () => {
+    if (!formData.pickupDate || !formData.returnDate) return 0;
+    const start = new Date(formData.pickupDate);
+    const end = new Date(formData.returnDate);
+    const diff = Math.ceil((end - start) / (1000 * 60 * 60 * 24));
+    return diff > 0 ? diff : 0;
+  };
+
+  const totalDays = calculateDays();
+  const totalCost = totalDays * (car?.rentalDaily || 0);
+
+  const isFormValid = formData.name && formData.phone && formData.pickupDate && formData.returnDate && totalDays > 0;
 
   const handleSave = async () => {
-    if (!selectedDate || !selectedTime || !formData.name || !formData.phone) {
-      alert(t.booking.validationAlert);
+    if (!isFormValid) {
+      alert("Please fill all required fields and ensure return date is after pickup.");
       return;
     }
-
     if (!hasAgreed) {
       alert("Please read and agree to the Terms & Conditions.");
       return;
@@ -44,52 +48,48 @@ const BookingEngine = ({ car, isOpen, onClose }) => {
 
     setIsSubmitting(true);
     try {
-      const dateStr = format(selectedDate, "yyyy-MM-dd");
-      
-      const { error: bookingError } = await supabase.from("bookings").insert({
-        ...formData,
+      const { error } = await supabase.from("bookings").insert({
+        name: formData.name,
+        phone: formData.phone,
+        email: formData.email,
         carId: car.id,
         carName: car.name,
-        date: dateStr,
-        timeSlot: selectedTime,
+        date: formData.pickupDate,
+        returnDate: formData.returnDate,
+        pickupLocation: formData.pickupLocation,
+        notes: formData.notes,
+        totalDays,
+        totalCost,
         type: "rental",
         status: "pending",
-        createdAt: new Date().toISOString()
+        createdAt: new Date().toISOString(),
       });
-      if (bookingError) throw bookingError;
-
-      const newBookedDates = [...(car.bookedDates || []), dateStr];
-      const { error: carError } = await supabase.from("cars").update({
-        bookedDates: newBookedDates
-      }).eq('id', car.id);
-      if (carError) throw carError;
-
-      alert(t.booking.successAlert);
+      if (error) throw error;
+      alert("Booking submitted successfully! We will contact you shortly.");
       onClose();
     } catch (error) {
       console.error("Booking error:", error);
-      alert(t.booking.errorAlert);
+      alert("Sorry, there was an error. Please try WhatsApp booking instead.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
   const handleWhatsApp = () => {
-    if (!selectedDate || !selectedTime || !formData.name || !formData.phone) {
-      alert(t.booking.validationAlert);
+    if (!isFormValid) {
+      alert("Please fill all required fields.");
       return;
     }
-
     if (!hasAgreed) {
       alert("Please read and agree to the Terms & Conditions.");
       return;
     }
 
-    const dateStr = format(selectedDate, "dd MMMM yyyy", { locale: enUS });
-    const message = `Hello Deals on Wheels! I would like to book a rental.\n\nName: ${formData.name}\nContact: ${formData.phone}\nCar: ${car.name}\nDate: ${dateStr}\nTime: ${selectedTime}\n\nI have read and agreed to the Terms & Conditions.`;
-    
+    const message = `Hello Deals on Wheels! I would like to book a rental.\n\nName: ${formData.name}\nContact: ${formData.phone}\nEmail: ${formData.email || "N/A"}\nCar: ${car.name}\nPickup: ${formData.pickupDate}\nReturn: ${formData.returnDate}\nDays: ${totalDays}\nLocation: ${formData.pickupLocation || "N/A"}\nEstimated Cost: ৳${totalCost.toLocaleString()}\nNotes: ${formData.notes || "None"}\n\nI have agreed to the Terms & Conditions.`;
     openWhatsApp(whatsappNumber, message);
   };
+
+  if (!car) return null;
 
   return (
     <AnimatePresence>
@@ -100,18 +100,18 @@ const BookingEngine = ({ car, isOpen, onClose }) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="absolute inset-0 bg-background-darkest/95 backdrop-blur-sm"
+            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
           />
-          
+
           <motion.div
             initial={{ scale: 0.9, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.9, opacity: 0, y: 20 }}
-            className="relative w-full max-w-5xl glass-card rounded-2xl overflow-hidden shadow-2xl flex flex-col md:flex-row h-full max-h-[90vh] gpu"
+            className="relative w-full max-w-4xl bg-white rounded-2xl overflow-hidden shadow-2xl flex flex-col md:flex-row max-h-[90vh]"
           >
-            {/* Left Side: Car Info & User Details */}
-            <div className="w-full md:w-1/3 bg-background-secondary/50 p-6 border-b md:border-b-0 md:border-r border-accent/10 overflow-y-auto no-scrollbar">
-              <div className="relative h-40 w-full rounded-xl overflow-hidden mb-4 bg-background">
+            {/* Left: Car Info */}
+            <div className="w-full md:w-2/5 bg-slate-50 p-6 border-b md:border-b-0 md:border-r border-slate-200 overflow-y-auto">
+              <div className="relative h-40 w-full rounded-xl overflow-hidden mb-4 bg-slate-200">
                 <Image
                   src={car.images?.[0] || "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=75"}
                   alt={car.name}
@@ -120,120 +120,103 @@ const BookingEngine = ({ car, isOpen, onClose }) => {
                   className="object-cover"
                 />
               </div>
-              <h2 className="text-3xl font-bebas mb-2 text-heading">{car.name}</h2>
-              <p className="text-sm text-body mb-8">{car.brand} · {car.model} · {car.year}</p>
-              
-              <div className="space-y-6">
-                <div>
-                  <label className="text-[10px] text-body uppercase tracking-widest block mb-2">{t.booking.nameLabel}</label>
-                  <input
-                    type="text"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full bg-background/50 border border-accent/10 rounded-lg px-4 py-3 text-sm text-heading focus:border-accent outline-none transition-colors"
-                    placeholder={t.booking.namePlaceholder}
-                  />
+              <h2 className="text-2xl font-bold text-slate-900 mb-1">{car.name}</h2>
+              <p className="text-sm text-slate-500 mb-4">{car.brand} · {car.year} · {car.transmission}</p>
+
+              {car.insuranceIncluded && (
+                <div className="flex items-center gap-2 bg-green-50 border border-green-200 rounded-lg px-3 py-2 mb-4">
+                  <span className="material-symbols-outlined text-green-600 text-[18px]">verified_user</span>
+                  <span className="text-sm font-medium text-green-700">Insurance Included</span>
                 </div>
-                <div>
-                  <label className="text-[10px] text-body uppercase tracking-widest block mb-2">{t.booking.phoneLabel}</label>
-                  <input
-                    type="tel"
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full bg-background/50 border border-accent/10 rounded-lg px-4 py-3 text-sm text-heading focus:border-accent outline-none transition-colors"
-                    placeholder={t.booking.phonePlaceholder}
-                  />
+              )}
+
+              <div className="bg-white rounded-lg p-4 border border-slate-200 space-y-2">
+                <div className="flex justify-between text-sm">
+                  <span className="text-slate-500">Daily Rate</span>
+                  <span className="font-bold text-primary">৳{car.rentalDaily?.toLocaleString()}</span>
                 </div>
+                {car.rentalWeekly > 0 && (
+                  <div className="flex justify-between text-sm">
+                    <span className="text-slate-500">Weekly Rate</span>
+                    <span className="font-bold text-slate-700">৳{car.rentalWeekly?.toLocaleString()}</span>
+                  </div>
+                )}
+                {totalDays > 0 && (
+                  <div className="flex justify-between text-sm pt-2 border-t border-slate-100">
+                    <span className="text-slate-900 font-medium">{totalDays} Day{totalDays > 1 ? "s" : ""} Total</span>
+                    <span className="font-bold text-primary text-lg">৳{totalCost.toLocaleString()}</span>
+                  </div>
+                )}
               </div>
             </div>
 
-            {/* Right Side: Date, Time & Agreement */}
-            <div className="w-full md:w-2/3 p-8 overflow-y-auto no-scrollbar">
-              <button 
-                onClick={onClose}
-                className="absolute top-6 right-6 text-body hover:text-heading transition-colors"
-              >
+            {/* Right: Form */}
+            <div className="w-full md:w-3/5 p-6 overflow-y-auto">
+              <button onClick={onClose} className="absolute top-4 right-4 text-slate-400 hover:text-slate-700 transition-colors z-10">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
               </button>
 
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                <div>
-                  <h3 className="text-xl font-bebas mb-6 text-heading tracking-widest uppercase">{t.booking.dateTitle}</h3>
-                  <div className="p-2 text-heading bg-background-secondary/30 rounded-2xl border border-accent/5">
-                    <DayPicker
-                      mode="single"
-                      selected={selectedDate}
-                      onSelect={setSelectedDate}
-                      disabled={disabledDays}
-                      locale={enUS}
-                    />
+              <h3 className="text-xl font-bold text-slate-900 mb-6">Book This Car</h3>
+
+              <div className="space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="text-xs text-slate-500 uppercase tracking-wider block mb-1.5">Full Name *</label>
+                    <input type="text" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none" placeholder="Your name" required />
+                  </div>
+                  <div>
+                    <label className="text-xs text-slate-500 uppercase tracking-wider block mb-1.5">Phone *</label>
+                    <input type="tel" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} className="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none" placeholder="017XXXXXXXX" required />
                   </div>
                 </div>
 
-                <div className="flex flex-col h-full">
-                  <h3 className="text-xl font-bebas mb-6 text-heading tracking-widest uppercase">{t.booking.timeTitle}</h3>
-                  <div className="grid grid-cols-2 gap-3 mb-8">
-                    {timeSlots.map((slot) => (
-                      <button
-                        key={slot}
-                        onClick={() => setSelectedTime(slot)}
-                        className={`py-3.5 px-4 rounded-xl text-[10px] font-bold transition-all border uppercase tracking-widest ${
-                          selectedTime === slot 
-                          ? "bg-accent border-accent text-white shadow-lg shadow-accent/20" 
-                          : "bg-background/50 border-accent/10 text-body/70 hover:bg-accent/10 hover:border-accent/30"
-                        }`}
-                      >
-                        {slot}
+                <div>
+                  <label className="text-xs text-slate-500 uppercase tracking-wider block mb-1.5">Email (Optional)</label>
+                  <input type="email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none" placeholder="your@email.com" />
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="text-xs text-slate-500 uppercase tracking-wider block mb-1.5">Pickup Date *</label>
+                    <input type="date" value={formData.pickupDate} min={new Date().toISOString().split("T")[0]} onChange={(e) => setFormData({ ...formData, pickupDate: e.target.value })} className="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none" required />
+                  </div>
+                  <div>
+                    <label className="text-xs text-slate-500 uppercase tracking-wider block mb-1.5">Return Date *</label>
+                    <input type="date" value={formData.returnDate} min={formData.pickupDate || new Date().toISOString().split("T")[0]} onChange={(e) => setFormData({ ...formData, returnDate: e.target.value })} className="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none" required />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="text-xs text-slate-500 uppercase tracking-wider block mb-1.5">Pickup Location</label>
+                  <input type="text" value={formData.pickupLocation} onChange={(e) => setFormData({ ...formData, pickupLocation: e.target.value })} className="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none" placeholder="Address or area" />
+                </div>
+
+                <div>
+                  <label className="text-xs text-slate-500 uppercase tracking-wider block mb-1.5">Special Notes</label>
+                  <textarea value={formData.notes} onChange={(e) => setFormData({ ...formData, notes: e.target.value })} className="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none resize-none h-20" placeholder="Any special requirements..." />
+                </div>
+
+                {/* Terms */}
+                <div className="pt-2 border-t border-slate-100">
+                  <div className="flex items-center gap-3">
+                    <input id="terms-checkbox" type="checkbox" checked={hasAgreed} onChange={(e) => setHasAgreed(e.target.checked)} className="w-5 h-5 rounded border-slate-300 text-primary focus:ring-primary accent-blue-600 cursor-pointer" />
+                    <label htmlFor="terms-checkbox" className="text-sm text-slate-600 cursor-pointer">
+                      I agree to the{" "}
+                      <button type="button" onClick={() => setShowTermsPopup(true)} className="text-primary hover:underline font-medium">
+                        Terms & Conditions
                       </button>
-                    ))}
+                    </label>
                   </div>
+                </div>
 
-                  {/* Terms Agreement Section - Moved below slots */}
-                  <div className="pt-6 border-t border-accent/5 mb-8">
-                    <div className="flex items-center gap-3">
-                      <input 
-                        id="terms-checkbox"
-                        type="checkbox" 
-                        checked={hasAgreed}
-                        onChange={(e) => setHasAgreed(e.target.checked)}
-                        className="w-5 h-5 rounded border-accent/20 bg-background/50 checked:bg-accent focus:ring-accent transition-all cursor-pointer accent-blue-500"
-                      />
-                      <label htmlFor="terms-checkbox" className="text-[11px] text-body leading-tight cursor-pointer">
-                        I agree to the <button 
-                          type="button"
-                          onClick={() => setShowTermsPopup(true)}
-                          className="text-accent hover:underline font-bold cursor-pointer"
-                        >
-                          Terms & Conditions
-                        </button>
-                      </label>
-                    </div>
-                  </div>
-
-                  <div className="space-y-4 mt-auto">
-                    <button
-                      onClick={handleWhatsApp}
-                      disabled={!hasAgreed}
-                      className={`w-full btn-primary py-4 transition-all ${!hasAgreed ? "opacity-30 grayscale cursor-not-allowed" : "hover:scale-[1.02]"}`}
-                    >
-                      <span className="flex items-center justify-center gap-2">
-                        {t.booking.whatsappBtn}
-                      </span>
-                    </button>
-                    <button
-                      onClick={handleSave}
-                      disabled={isSubmitting || !hasAgreed}
-                      className={`w-full btn-secondary py-4 transition-all ${!hasAgreed ? "opacity-30 grayscale cursor-not-allowed" : "hover:scale-[1.02]"}`}
-                    >
-                      <span>{t.booking.saveBtn}</span>
-                    </button>
-                  </div>
-                  
-                  {!hasAgreed && (
-                    <p className="text-[9px] text-red-500/70 mt-4 text-center uppercase tracking-widest italic font-bold">
-                      * Please check Terms & Conditions first
-                    </p>
-                  )}
+                {/* Buttons */}
+                <div className="space-y-3 pt-2">
+                  <button onClick={handleWhatsApp} disabled={!hasAgreed || !isFormValid} className={`w-full py-3.5 bg-green-600 text-white rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all ${!hasAgreed || !isFormValid ? "opacity-40 cursor-not-allowed" : "hover:bg-green-700 active:scale-[0.98]"}`}>
+                    💬 Book via WhatsApp
+                  </button>
+                  <button onClick={handleSave} disabled={isSubmitting || !hasAgreed || !isFormValid} className={`w-full py-3.5 bg-primary text-white rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all ${!hasAgreed || !isFormValid ? "opacity-40 cursor-not-allowed" : "hover:opacity-90 active:scale-[0.98]"}`}>
+                    {isSubmitting ? "Submitting..." : "📋 Save Booking"}
+                  </button>
                 </div>
               </div>
             </div>
@@ -241,38 +224,21 @@ const BookingEngine = ({ car, isOpen, onClose }) => {
         </div>
       )}
 
-      {/* Terms & Conditions Popup */}
+      {/* Terms Popup */}
       <AnimatePresence>
         {showTermsPopup && (
           <div className="fixed inset-0 z-[100] flex items-center justify-center p-6">
-            <motion.div 
-              initial={{ opacity: 0 }} 
-              animate={{ opacity: 1 }} 
-              exit={{ opacity: 0 }} 
-              onClick={() => setShowTermsPopup(false)} 
-              className="absolute inset-0 bg-background-darkest/98 backdrop-blur-xl" 
-            />
-            <motion.div 
-              initial={{ scale: 0.9, opacity: 0 }} 
-              animate={{ scale: 1, opacity: 1 }} 
-              exit={{ scale: 0.9, opacity: 0 }}
-              className="relative w-full max-w-xl glass-card p-10 overflow-y-auto max-h-[80vh] no-scrollbar z-[101] rounded-3xl border border-accent/20 shadow-2xl"
-            >
-              <h3 className="text-4xl font-bebas tracking-widest text-heading mb-8 uppercase text-center">Rental Terms</h3>
-              <div className="space-y-6 text-sm text-body leading-relaxed tracking-wide whitespace-pre-line border-t border-accent/10 pt-8">
-                {car.terms || `01. Minimum Age: Driver must be at least ${car.minAge || 25} years old.
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setShowTermsPopup(false)} className="absolute inset-0 bg-black/80 backdrop-blur-xl" />
+            <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }} className="relative w-full max-w-xl bg-white p-8 overflow-y-auto max-h-[80vh] z-[101] rounded-2xl shadow-2xl">
+              <h3 className="text-2xl font-bold text-slate-900 mb-6">Rental Terms & Conditions</h3>
+              <div className="space-y-4 text-sm text-slate-600 leading-relaxed whitespace-pre-line border-t border-slate-200 pt-6">
+                {car?.terms || `01. Minimum Age: Driver must be at least ${car?.minAge || 25} years old.
 02. Identification: Valid Driving License and Passport/NID required.
 03. Security Deposit: A refundable deposit of ৳20,000 required.
 04. Fuel Policy: Vehicle must be returned with same fuel level.
 05. Damage Policy: Client is responsible for any minor damages or traffic violations during rental.`}
               </div>
-              <button 
-                onClick={() => {
-                  setShowTermsPopup(false);
-                  setHasAgreed(true);
-                }} 
-                className="w-full mt-10 btn-primary py-4 rounded-xl shadow-gold/10 cursor-pointer"
-              >
+              <button onClick={() => { setShowTermsPopup(false); setHasAgreed(true); }} className="w-full mt-8 bg-primary text-white py-3.5 rounded-xl font-bold text-sm hover:opacity-90 transition-opacity">
                 I AGREE & UNDERSTAND
               </button>
             </motion.div>

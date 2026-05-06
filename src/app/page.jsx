@@ -12,6 +12,7 @@ const RentalSection = lazy(() => import("@/components/RentalSection"));
 const WhyChooseUs = lazy(() => import("@/components/WhyChooseUs"));
 const SalesSection = lazy(() => import("@/components/SalesSection"));
 const Testimonials = lazy(() => import("@/components/Testimonials"));
+const ContactSection = lazy(() => import("@/components/ContactSection"));
 const Footer = lazy(() => import("@/components/Footer"));
 
 const SectionLoader = () => (
@@ -48,6 +49,10 @@ export default function Home() {
 
         <Suspense fallback={<SectionLoader />}>
           <Testimonials />
+        </Suspense>
+
+        <Suspense fallback={<SectionLoader />}>
+          <ContactSection />
         </Suspense>
       </div>
       <WhyChooseHybridSection />

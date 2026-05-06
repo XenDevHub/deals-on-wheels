@@ -37,7 +37,6 @@ export default function AdminPage() {
     name: "", brand: "", model: "", year: new Date().getFullYear(),
     type: "rental", price: 0, rentalDaily: 0, rentalWeekly: 0,
     description: "", available: true, images: [],
-    // New fields
     premium: false,
     seats: 5,
     suitcases: 2,
@@ -45,6 +44,10 @@ export default function AdminPage() {
     transmission: "Automatic",
     doors: 4,
     gps: true,
+    insuranceIncluded: false,
+    fuelType: "Petrol",
+    mileage: "",
+    color: "",
     minAge: 25,
     terms: "01. Minimum Age: Driver must be at least 25 years old with a valid driving license.\n02. Identification: Passport or National ID required for security verification.\n03. Security Deposit: A refundable security deposit of ৳20,000 is required upon delivery.\n04. Usage: Vehicle must be driven within national boundaries only.\n05. Fuel Policy: Vehicle will be delivered with a full tank and must be returned with a full tank."
   });
@@ -113,7 +116,7 @@ export default function AdminPage() {
         name: "", brand: "", model: "", year: new Date().getFullYear(),
         type: "rental", price: 0, rentalDaily: 0, rentalWeekly: 0,
         description: "", available: true, images: [],
-        premium: false, seats: 5, suitcases: 2, bags: 2, transmission: "Automatic", doors: 4, gps: true, minAge: 25,
+        premium: false, seats: 5, suitcases: 2, bags: 2, transmission: "Automatic", doors: 4, gps: true, insuranceIncluded: false, fuelType: "Petrol", mileage: "", color: "", minAge: 25,
         terms: "01. Minimum Age: Driver must be at least 25 years old with a valid driving license.\n02. Identification: Passport or National ID required for security verification.\n03. Security Deposit: A refundable security deposit of ৳20,000 is required upon delivery.\n04. Usage: Vehicle must be driven within national boundaries only.\n05. Fuel Policy: Vehicle will be delivered with a full tank and must be returned with a full tank."
       });
       fetchData();
@@ -341,7 +344,7 @@ export default function AdminPage() {
                     name: "", brand: "", model: "", year: new Date().getFullYear(), 
                     type: "rental", price: 0, rentalDaily: 0, rentalWeekly: 0, 
                     description: "", available: true, images: [],
-                    premium: false, seats: 5, suitcases: 2, bags: 2, transmission: "Automatic", doors: 4, gps: true, minAge: 25,
+                    premium: false, seats: 5, suitcases: 2, bags: 2, transmission: "Automatic", doors: 4, gps: true, insuranceIncluded: false, fuelType: "Petrol", mileage: "", color: "", minAge: 25,
                     terms: "01. Minimum Age: Driver must be at least 25 years old with a valid driving license.\n02. Identification: Passport or National ID required for security verification.\n03. Security Deposit: A refundable security deposit of ৳20,000 is required upon delivery.\n04. Usage: Vehicle must be driven within national boundaries only.\n05. Fuel Policy: Vehicle will be delivered with a full tank and must be returned with a full tank."
                   });
                   setIsCarModalOpen(true);
@@ -488,6 +491,36 @@ export default function AdminPage() {
                         </label>
                       </div>
 
+                      <div className="grid grid-cols-2 gap-6">
+                        <label className="flex items-center gap-3 cursor-pointer p-4 border border-white/5 bg-[#050505] hover:border-white/20 transition-colors">
+                          <div className={`w-4 h-4 border flex items-center justify-center transition-colors ${carFormData.insuranceIncluded ? 'bg-green-500 border-green-500' : 'border-white/20'}`}>
+                            {carFormData.insuranceIncluded && <span className="text-white text-[10px]">✓</span>}
+                          </div>
+                          <input type="checkbox" checked={carFormData.insuranceIncluded} onChange={(e) => setCarFormData({...carFormData, insuranceIncluded: e.target.checked})} className="hidden" />
+                          <span className="text-[10px] tracking-widest uppercase text-white/70">Insurance Included</span>
+                        </label>
+                        <div>
+                          <label className="text-[10px] text-white/40 uppercase tracking-[0.15em] mb-2 block">Fuel Type</label>
+                          <select value={carFormData.fuelType} onChange={(e) => setCarFormData({...carFormData, fuelType: e.target.value})} className="w-full bg-[#050505] border border-white/10 p-4 text-sm text-white outline-none focus:border-primary transition-colors appearance-none">
+                            <option value="Petrol">Petrol</option>
+                            <option value="Diesel">Diesel</option>
+                            <option value="Electric">Electric</option>
+                            <option value="Hybrid">Hybrid</option>
+                            <option value="CNG">CNG</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-6">
+                        <div>
+                          <label className="text-[10px] text-white/40 uppercase tracking-[0.15em] mb-2 block">Mileage (km)</label>
+                          <input type="text" value={carFormData.mileage} onChange={(e) => setCarFormData({...carFormData, mileage: e.target.value})} className="w-full bg-[#050505] border border-white/10 p-4 text-sm text-white outline-none focus:border-primary transition-colors" placeholder="e.g. 12,000" />
+                        </div>
+                        <div>
+                          <label className="text-[10px] text-white/40 uppercase tracking-[0.15em] mb-2 block">Color</label>
+                          <input type="text" value={carFormData.color} onChange={(e) => setCarFormData({...carFormData, color: e.target.value})} className="w-full bg-[#050505] border border-white/10 p-4 text-sm text-white outline-none focus:border-primary transition-colors" placeholder="e.g. Midnight Black" />
+                        </div>
+                      </div>
                       <div className="grid grid-cols-2 gap-6">
                         <div>
                           <label className="text-[10px] text-white/40 uppercase tracking-[0.15em] mb-2 block">Seats</label>

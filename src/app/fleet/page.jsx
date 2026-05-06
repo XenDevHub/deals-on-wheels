@@ -1,26 +1,123 @@
 "use client";
 
+import { useState, useEffect, useMemo } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import BookingEngine from "@/components/BookingEngine";
+import { supabase } from "@/lib/supabase";
+import Image from "next/image";
 
 export default function FleetPage() {
+  const [cars, setCars] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedCar, setSelectedCar] = useState(null);
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
+
+  // Filter state
+  const [brandFilter, setBrandFilter] = useState("all");
+  const [transmissionFilter, setTransmissionFilter] = useState("all");
+  const [fuelFilter, setFuelFilter] = useState("all");
+  const [searchQuery, setSearchQuery] = useState("");
+  
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const ITEMS_PER_PAGE = 4;
+
+  const uniqueBrands = useMemo(() => {
+    return [...new Set(cars.map((c) => c.brand).filter(Boolean))].sort();
+  }, [cars]);
+
+  useEffect(() => {
+    fetchCars();
+  }, []);
+
+  const fetchCars = async () => {
+    setLoading(true);
+    const { data, error } = await supabase
+      .from("cars")
+      .select("*")
+      .in("type", ["rental", "both"])
+      .eq("available", true)
+      .order("createdAt", { ascending: false });
+
+    if (!error) setCars(data || []);
+    setLoading(false);
+  };
+
+  const filteredCars = useMemo(() => {
+    return cars.filter((car) => {
+      if (brandFilter !== "all" && car.brand !== brandFilter) return false;
+      if (transmissionFilter !== "all" && car.transmission !== transmissionFilter) return false;
+      if (fuelFilter !== "all" && car.fuelType !== fuelFilter) return false;
+      if (searchQuery) {
+        const q = searchQuery.toLowerCase();
+        if (!car.name?.toLowerCase().includes(q) && !car.brand?.toLowerCase().includes(q) && !car.model?.toLowerCase().includes(q)) return false;
+      }
+      return true;
+    });
+  }, [cars, brandFilter, transmissionFilter, fuelFilter, searchQuery]);
+
+  const resetFilters = () => {
+    setBrandFilter("all");
+    setTransmissionFilter("all");
+    setFuelFilter("all");
+    setSearchQuery("");
+    setCurrentPage(1);
+  };
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [brandFilter, transmissionFilter, fuelFilter, searchQuery]);
+
+  const totalPages = Math.ceil(filteredCars.length / ITEMS_PER_PAGE);
+  
+  const paginatedCars = useMemo(() => {
+    const start = (currentPage - 1) * ITEMS_PER_PAGE;
+    return filteredCars.slice(start, start + ITEMS_PER_PAGE);
+  }, [filteredCars, currentPage]);
+
+  const handleBook = (car) => {
+    setSelectedCar(car);
+    setIsBookingOpen(true);
+  };
+
   return (
     <div className="bg-surface font-body-md text-on-surface min-h-screen flex flex-col">
       <Navbar />
-      <main className="max-w-7xl mx-auto px-8 py-10 flex-grow">
-        {/* Page Header & Toggle */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
-          <div>
-            <h1 className="font-h1 text-h1 text-on-surface mb-2">Our Rental Fleet</h1>
-            <p className="font-body-md text-body-md text-on-surface-variant max-w-2xl">High-performance vehicles for every journey. Filter by type, transmission, or fuel to find your perfect match.</p>
+      
+      {/* Premium Header Section */}
+      <section className="relative py-20 bg-slate-900 overflow-hidden">
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_-20%,#3b82f6,transparent_70%)]" />
+        </div>
+        <div className="max-w-7xl mx-auto px-8 relative z-10 text-center">
+          <span className="text-primary font-bold uppercase tracking-[0.3em] text-sm block mb-6 animate-in fade-in slide-in-from-bottom-4 duration-700">Premium Fleet</span>
+          <h1 className="font-display text-5xl lg:text-7xl font-black text-white leading-tight mb-8 animate-in fade-in slide-in-from-bottom-6 duration-1000">
+            Our Rental <span className="text-primary italic">Fleet</span>
+          </h1>
+          <p className="text-lg lg:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed animate-in fade-in slide-in-from-bottom-8 duration-1000">
+            High-performance vehicles for every journey. Discover the perfect match for your lifestyle and driving needs.
+          </p>
+        </div>
+      </section>
+
+      <main className="max-w-7xl mx-auto px-8 py-16 flex-grow">
+        <div className="flex flex-col md:flex-row md:items-center justify-between mb-12 gap-6">
+          <div className="flex items-center gap-2">
+            <span className="w-12 h-0.5 bg-primary" />
+            <span className="font-display font-bold text-slate-900 tracking-wider uppercase text-sm">Refine your search</span>
           </div>
-          <div className="flex items-center bg-surface-container-high p-1 rounded-xl w-fit">
-            <button className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white shadow-sm font-button text-button text-primary">
-              <span className="material-symbols-outlined text-[20px]">grid_view</span> Grid
-            </button>
-            <button className="flex items-center gap-2 px-4 py-2 rounded-lg font-button text-button text-on-surface-variant hover:text-on-surface">
-              <span className="material-symbols-outlined text-[20px]">map</span> Map View
-            </button>
+          <div className="flex items-center gap-3">
+            <div className="relative">
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 material-symbols-outlined text-xl">search</span>
+              <input
+                type="text"
+                placeholder="Search models..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="h-[52px] rounded-xl border border-slate-200 bg-white pl-12 pr-4 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none text-sm w-full md:w-64 transition-all"
+              />
+            </div>
           </div>
         </div>
 
@@ -29,275 +126,192 @@ export default function FleetPage() {
           <aside className="w-full lg:w-72 flex-shrink-0 space-y-8">
             <div className="bg-white p-6 rounded-xl shadow-[0px_4px_20px_rgba(30,41,59,0.05)] border border-slate-100">
               <h3 className="font-h3 text-h3 mb-6">Filters</h3>
-              
-              {/* Filter Group: Car Type */}
+
+              {/* Brand */}
               <div className="mb-8">
-                <p className="font-label-lg text-label-lg text-tertiary uppercase tracking-wider mb-4">Car Type</p>
-                <div className="space-y-3">
-                  <label className="flex items-center gap-3 cursor-pointer group">
-                    <input className="w-5 h-5 rounded border-outline text-primary focus:ring-primary" type="checkbox" />
-                    <span className="font-body-md text-body-md text-on-surface-variant group-hover:text-on-surface transition-colors">SUV</span>
-                  </label>
-                  <label className="flex items-center gap-3 cursor-pointer group">
-                    <input className="w-5 h-5 rounded border-outline text-primary focus:ring-primary" type="checkbox" />
-                    <span className="font-body-md text-body-md text-on-surface-variant group-hover:text-on-surface transition-colors">Sedan</span>
-                  </label>
-                  <label className="flex items-center gap-3 cursor-pointer group">
-                    <input className="w-5 h-5 rounded border-outline text-primary focus:ring-primary" type="checkbox" />
-                    <span className="font-body-md text-body-md text-on-surface-variant group-hover:text-on-surface transition-colors">Hatchback</span>
-                  </label>
+                <p className="font-label-lg text-label-lg text-tertiary uppercase tracking-wider mb-4">Brand</p>
+                <div className="flex flex-wrap gap-2">
+                  {["all", ...uniqueBrands].map((b) => (
+                    <button
+                      key={b}
+                      onClick={() => setBrandFilter(b)}
+                      className={`px-4 py-2 rounded-full border font-label-md text-label-md transition-colors ${
+                        brandFilter === b
+                          ? "border-primary bg-primary/10 text-primary font-bold"
+                          : "border-outline-variant hover:border-primary text-on-surface-variant"
+                      }`}
+                    >
+                      {b === "all" ? "All" : b}
+                    </button>
+                  ))}
                 </div>
               </div>
-              
-              {/* Filter Group: Transmission */}
+
+              {/* Transmission */}
               <div className="mb-8">
                 <p className="font-label-lg text-label-lg text-tertiary uppercase tracking-wider mb-4">Transmission</p>
                 <div className="flex flex-wrap gap-2">
-                  <button className="px-4 py-2 rounded-full border border-primary bg-primary-fixed text-on-primary-fixed font-label-md text-label-md">Auto</button>
-                  <button className="px-4 py-2 rounded-full border border-outline-variant hover:border-primary transition-colors font-label-md text-label-md text-on-surface-variant">Manual</button>
+                  {["all", "Automatic", "Manual"].map((t) => (
+                    <button
+                      key={t}
+                      onClick={() => setTransmissionFilter(t)}
+                      className={`px-4 py-2 rounded-full border font-label-md text-label-md transition-colors ${
+                        transmissionFilter === t
+                          ? "border-primary bg-primary/10 text-primary font-bold"
+                          : "border-outline-variant hover:border-primary text-on-surface-variant"
+                      }`}
+                    >
+                      {t === "all" ? "All" : t}
+                    </button>
+                  ))}
                 </div>
               </div>
 
-              {/* Filter Group: Fuel Type */}
+              {/* Fuel Type */}
               <div className="mb-8">
                 <p className="font-label-lg text-label-lg text-tertiary uppercase tracking-wider mb-4">Fuel Type</p>
-                <div className="space-y-3">
-                  <label className="flex items-center gap-3 cursor-pointer group">
-                    <input className="w-5 h-5 border-outline text-primary focus:ring-primary" name="fuel" type="radio" />
-                    <span className="font-body-md text-body-md text-on-surface-variant group-hover:text-on-surface transition-colors">Electric</span>
-                  </label>
-                  <label className="flex items-center gap-3 cursor-pointer group">
-                    <input className="w-5 h-5 border-outline text-primary focus:ring-primary" name="fuel" type="radio" />
-                    <span className="font-body-md text-body-md text-on-surface-variant group-hover:text-on-surface transition-colors">Hybrid</span>
-                  </label>
-                  <label className="flex items-center gap-3 cursor-pointer group">
-                    <input className="w-5 h-5 border-outline text-primary focus:ring-primary" name="fuel" type="radio" />
-                    <span className="font-body-md text-body-md text-on-surface-variant group-hover:text-on-surface transition-colors">Petrol</span>
-                  </label>
+                <div className="flex flex-wrap gap-2">
+                  {["all", "Petrol", "Diesel", "Electric", "Hybrid", "CNG"].map((f) => (
+                    <button
+                      key={f}
+                      onClick={() => setFuelFilter(f)}
+                      className={`px-4 py-2 rounded-full border font-label-md text-label-md transition-colors ${
+                        fuelFilter === f
+                          ? "border-primary bg-primary/10 text-primary font-bold"
+                          : "border-outline-variant hover:border-primary text-on-surface-variant"
+                      }`}
+                    >
+                      {f === "all" ? "All" : f}
+                    </button>
+                  ))}
                 </div>
               </div>
-              
-              <button className="w-full py-3 bg-secondary-container text-on-secondary-container rounded-lg font-button text-button hover:opacity-90 transition-opacity">
+
+              <button
+                onClick={resetFilters}
+                className="w-full py-3 bg-secondary-container text-on-secondary-container rounded-lg font-button text-button hover:opacity-90 transition-opacity"
+              >
                 Reset Filters
               </button>
-            </div>
-
-            {/* Promo Card */}
-            <div className="relative overflow-hidden rounded-xl bg-primary-container p-6 text-on-primary-container">
-              <h4 className="font-h3 text-h3 mb-2">Weekend Special</h4>
-              <p className="font-body-sm text-body-sm mb-4 opacity-90">Get 20% off on all SUV rentals for 3+ days.</p>
-              <button className="font-label-lg text-label-lg underline underline-offset-4 decoration-2">Claim Offer</button>
-              <div className="absolute -right-4 -bottom-4 opacity-20 transform -rotate-12">
-                <span className="material-symbols-outlined text-[100px]" style={{ fontVariationSettings: "'FILL' 1" }}>electric_car</span>
-              </div>
             </div>
           </aside>
 
           {/* Main Fleet Grid */}
           <div className="flex-1">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Car Card 1 */}
-              <div className="group bg-white rounded-xl overflow-hidden shadow-[0px_4px_20px_rgba(30,41,59,0.05)] border border-slate-100 transition-all hover:shadow-xl hover:-translate-y-1">
-                <div className="relative h-48 overflow-hidden">
-                  <img
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    alt="Tesla Model Y"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwFeWMZX-_cUdw8Vh-hSZaQHDIpSgYsvHIBi0Jap4bmOypcMxWMR43dwff6iC6QOdPnUNW5ZuDB5QhLNEjbaE97EqfhYxBCK1pZ-gJrRHlQvEQojwSOmyAjrikyokVZL7xEFP868tSve7ScjkF09BnS3AJ-JC4z8PuHvOgg-VmALM40IDna11SbAToVjntVGNN8wqcmfxdtnHi9upZML3tATJ-6pyXwl9wJin3AbJFbNrzXf-rhvpB9f0lwAIcDoXvXDuA75oizqaw"
-                  />
-                  <div className="absolute top-4 left-4">
-                    <span className="bg-white/90 backdrop-blur-md text-primary font-label-md text-label-md px-3 py-1 rounded-full shadow-sm">Premium</span>
-                  </div>
-                </div>
-                <div className="p-6">
-                  <div className="flex justify-between items-start mb-4">
-                    <div>
-                      <h3 className="font-h3 text-h3 mb-1">Tesla Model Y</h3>
-                      <p className="font-body-sm text-body-sm text-on-surface-variant">Electric • Long Range</p>
-                    </div>
-                    <div className="text-right">
-                      <span className="font-h3 text-h3 text-primary">$120</span>
-                      <span className="font-body-sm text-body-sm text-on-surface-variant">/day</span>
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-2 gap-y-3 gap-x-4 mb-6">
-                    <div className="flex items-center gap-2 text-on-surface-variant">
-                      <span className="material-symbols-outlined text-[20px]">airline_seat_recline_extra</span>
-                      <span className="font-body-sm text-body-sm">5 Seats</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-on-surface-variant">
-                      <span className="material-symbols-outlined text-[20px]">settings</span>
-                      <span className="font-body-sm text-body-sm">Automatic</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-on-surface-variant">
-                      <span className="material-symbols-outlined text-[20px]">bolt</span>
-                      <span className="font-body-sm text-body-sm">Full EV</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-on-surface-variant">
-                      <span className="material-symbols-outlined text-[20px]">luggage</span>
-                      <span className="font-body-sm text-body-sm">3 Large Bags</span>
-                    </div>
-                  </div>
-                  <button className="w-full py-4 bg-primary text-on-primary rounded-xl font-button text-button hover:opacity-90 active:scale-[0.98] transition-all">
-                    Book Now
-                  </button>
-                </div>
+            {loading ? (
+              <div className="flex items-center justify-center py-20">
+                <div className="w-10 h-10 border-4 border-primary/20 border-t-primary rounded-full animate-spin" />
               </div>
-
-              {/* Car Card 2 */}
-              <div className="group bg-white rounded-xl overflow-hidden shadow-[0px_4px_20px_rgba(30,41,59,0.05)] border border-slate-100 transition-all hover:shadow-xl hover:-translate-y-1">
-                <div className="relative h-48 overflow-hidden">
-                  <img
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    alt="Audi A6"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzG3mzGVkmmn_eCUpuO2EQTWknjOndHojDB4M1SXUPbEhy1mL_PjJ4OdMdXTI2S9UogE88TmyHMeCge9ITAR8gBxhcG-9XzKKsSV9UnEYab7T953f3MuRlWZVy2ptcqoOusGs-2V4PF0w56zUE-R_yfXnK4a_emop_FHGERbGkaFhvzD3sQZC2LOfdRFBYtiXQuE0Z7ya--1oyDM5WwZ5v1HrYfzf6QEbsu1kg6iv_3fZbpW061nvGeMir7ZQMYZJy7Fn9usOI32VX"
-                  />
-                  <div className="absolute top-4 left-4">
-                    <span className="bg-white/90 backdrop-blur-md text-primary font-label-md text-label-md px-3 py-1 rounded-full shadow-sm">Business</span>
-                  </div>
-                </div>
-                <div className="p-6">
-                  <div className="flex justify-between items-start mb-4">
-                    <div>
-                      <h3 className="font-h3 text-h3 mb-1">Audi A6</h3>
-                      <p className="font-body-sm text-body-sm text-on-surface-variant">Hybrid • Quattro</p>
-                    </div>
-                    <div className="text-right">
-                      <span className="font-h3 text-h3 text-primary">$95</span>
-                      <span className="font-body-sm text-body-sm text-on-surface-variant">/day</span>
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-2 gap-y-3 gap-x-4 mb-6">
-                    <div className="flex items-center gap-2 text-on-surface-variant">
-                      <span className="material-symbols-outlined text-[20px]">airline_seat_recline_extra</span>
-                      <span className="font-body-sm text-body-sm">5 Seats</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-on-surface-variant">
-                      <span className="material-symbols-outlined text-[20px]">settings</span>
-                      <span className="font-body-sm text-body-sm">Automatic</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-on-surface-variant">
-                      <span className="material-symbols-outlined text-[20px]">ev_station</span>
-                      <span className="font-body-sm text-body-sm">Plug-in Hybrid</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-on-surface-variant">
-                      <span className="material-symbols-outlined text-[20px]">luggage</span>
-                      <span className="font-body-sm text-body-sm">2 Large Bags</span>
-                    </div>
-                  </div>
-                  <button className="w-full py-4 bg-primary text-on-primary rounded-xl font-button text-button hover:opacity-90 active:scale-[0.98] transition-all">
-                    Book Now
-                  </button>
-                </div>
+            ) : filteredCars.length === 0 ? (
+              <div className="text-center py-20 text-on-surface-variant">
+                <span className="material-symbols-outlined text-[48px] mb-4 block opacity-40">directions_car</span>
+                <p className="font-h3 text-h3 mb-2">No cars found</p>
+                <p className="text-sm">Try adjusting your filters or check back later.</p>
               </div>
-
-              {/* Car Card 3 */}
-              <div className="group bg-white rounded-xl overflow-hidden shadow-[0px_4px_20px_rgba(30,41,59,0.05)] border border-slate-100 transition-all hover:shadow-xl hover:-translate-y-1">
-                <div className="relative h-48 overflow-hidden">
-                  <img
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    alt="VW Golf GTI"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHJw8TYqJnl7WtC9dRqyq0fzaDgaHG-cg-1Usx560ed1pn7DEeehS76ILoKXgwt70VjRQ13XiJn0TRQmaxKigyfP9_BnSw5wMN_EtQnXnqNxT0ban2x9LCAt3ilsUjI4x1EsS0r-pDHpHx2w9M3zztbXLJIkEfc3SkR_67qNVVWGoNO-L08E8AI9k26yfFlbl1PWqZfRivzh_fuXKY-Ehz2pCXmCdYV7SZwq4BFoa-5SlF_CZwWZkc1NkAV5KHTsY5hllQ7WuJUODQ"
-                  />
-                </div>
-                <div className="p-6">
-                  <div className="flex justify-between items-start mb-4">
-                    <div>
-                      <h3 className="font-h3 text-h3 mb-1">VW Golf GTI</h3>
-                      <p className="font-body-sm text-body-sm text-on-surface-variant">Petrol • Performance</p>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {paginatedCars.map((car) => (
+                  <div key={car.id} className="group bg-white rounded-xl overflow-hidden shadow-[0px_4px_20px_rgba(30,41,59,0.05)] border border-slate-100 transition-all hover:shadow-xl hover:-translate-y-1">
+                    <div className="relative h-48 overflow-hidden bg-slate-100">
+                      {car.images?.[0] ? (
+                        <Image src={car.images[0]} alt={car.name} fill className="object-cover transition-transform duration-500 group-hover:scale-110" sizes="(max-width: 768px) 100vw, 50vw" />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center text-slate-300">
+                          <span className="material-symbols-outlined text-[48px]">directions_car</span>
+                        </div>
+                      )}
+                      {car.premium && (
+                        <div className="absolute top-4 left-4">
+                          <span className="bg-white/90 backdrop-blur-md text-primary font-label-md text-label-md px-3 py-1 rounded-full shadow-sm">Premium</span>
+                        </div>
+                      )}
+                      {car.insuranceIncluded && (
+                        <div className="absolute top-4 right-4">
+                          <span className="bg-green-500/90 backdrop-blur-md text-white font-label-md text-label-md px-3 py-1 rounded-full shadow-sm flex items-center gap-1">
+                            <span className="material-symbols-outlined text-[14px]">verified_user</span> Insured
+                          </span>
+                        </div>
+                      )}
                     </div>
-                    <div className="text-right">
-                      <span className="font-h3 text-h3 text-primary">$65</span>
-                      <span className="font-body-sm text-body-sm text-on-surface-variant">/day</span>
+                    <div className="p-6">
+                      <div className="flex justify-between items-start mb-4">
+                        <div>
+                          <h3 className="font-h3 text-h3 mb-1">{car.name}</h3>
+                          <p className="font-body-sm text-body-sm text-on-surface-variant">{car.brand} • {car.year}</p>
+                        </div>
+                        <div className="text-right">
+                          <span className="font-h3 text-h3 text-primary">৳{car.rentalDaily?.toLocaleString()}</span>
+                          <span className="font-body-sm text-body-sm text-on-surface-variant">/day</span>
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-3 gap-y-3 gap-x-4 mb-6">
+                        <div className="flex items-center gap-2 text-on-surface-variant">
+                          <span className="material-symbols-outlined text-[20px]">airline_seat_recline_extra</span>
+                          <span className="font-body-sm text-body-sm">{car.seats || 5} Seats</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-on-surface-variant">
+                          <span className="material-symbols-outlined text-[20px]">settings</span>
+                          <span className="font-body-sm text-body-sm">{car.transmission || "Auto"}</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-on-surface-variant">
+                          <span className="material-symbols-outlined text-[20px]">local_gas_station</span>
+                          <span className="font-body-sm text-body-sm">{car.fuelType || "Petrol"}</span>
+                        </div>
+                      </div>
+                      <button
+                        onClick={() => handleBook(car)}
+                        className="w-full py-4 bg-primary text-on-primary rounded-xl font-button text-button hover:opacity-90 active:scale-[0.98] transition-all"
+                      >
+                        Book Now
+                      </button>
                     </div>
                   </div>
-                  <div className="grid grid-cols-2 gap-y-3 gap-x-4 mb-6">
-                    <div className="flex items-center gap-2 text-on-surface-variant">
-                      <span className="material-symbols-outlined text-[20px]">airline_seat_recline_extra</span>
-                      <span className="font-body-sm text-body-sm">5 Seats</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-on-surface-variant">
-                      <span className="material-symbols-outlined text-[20px]">settings</span>
-                      <span className="font-body-sm text-body-sm">Manual</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-on-surface-variant">
-                      <span className="material-symbols-outlined text-[20px]">local_gas_station</span>
-                      <span className="font-body-sm text-body-sm">Petrol</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-on-surface-variant">
-                      <span className="material-symbols-outlined text-[20px]">luggage</span>
-                      <span className="font-body-sm text-body-sm">2 Medium Bags</span>
-                    </div>
-                  </div>
-                  <button className="w-full py-4 bg-primary text-on-primary rounded-xl font-button text-button hover:opacity-90 active:scale-[0.98] transition-all">
-                    Book Now
-                  </button>
-                </div>
+                ))}
               </div>
+            )}
 
-              {/* Car Card 4 */}
-              <div className="group bg-white rounded-xl overflow-hidden shadow-[0px_4px_20px_rgba(30,41,59,0.05)] border border-slate-100 transition-all hover:shadow-xl hover:-translate-y-1">
-                <div className="relative h-48 overflow-hidden">
-                  <img
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    alt="Land Rover Defender"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIjei4bG5tajUvIih_m5vfBHg4kSAko7cKP3HEV-x_Ookkk9rVCfQCwer82aZkd_ynqD_b3LYKF2Ui-p6W5Veqnq9HKQnZjPjp7tVwstvEM8F52Ezcoduzwe3YMWQDUr-HFsusSKcA1j5RjDgZsU7KWYMjCFNrCABeW8z58faUVRIAWhBENcxHrTLYJe4YGZotVFdz09WXCyaCIxf7D5LoNMoagGad-laa0I-4jtqMUV7LacPvYWr-CCvrUJY-6aR6eJbF-wsgJf5W"
-                  />
-                  <div className="absolute top-4 left-4">
-                    <span className="bg-white/90 backdrop-blur-md text-primary font-label-md text-label-md px-3 py-1 rounded-full shadow-sm">Popular</span>
-                  </div>
+            {/* Pagination Controls */}
+            {totalPages > 1 && !loading && filteredCars.length > 0 && (
+              <div className="flex justify-center items-center gap-4 mt-12">
+                <button
+                  onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                  disabled={currentPage === 1}
+                  className="w-10 h-10 rounded-full flex items-center justify-center border border-outline-variant text-on-surface-variant hover:bg-surface-container disabled:opacity-50 disabled:hover:bg-transparent transition-colors"
+                >
+                  <span className="material-symbols-outlined text-[20px]">chevron_left</span>
+                </button>
+                <div className="flex gap-2">
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                    <button
+                      key={page}
+                      onClick={() => setCurrentPage(page)}
+                      className={`w-10 h-10 rounded-full font-label-md text-label-md transition-colors ${
+                        currentPage === page
+                          ? "bg-primary text-on-primary"
+                          : "text-on-surface-variant hover:bg-surface-container"
+                      }`}
+                    >
+                      {page}
+                    </button>
+                  ))}
                 </div>
-                <div className="p-6">
-                  <div className="flex justify-between items-start mb-4">
-                    <div>
-                      <h3 className="font-h3 text-h3 mb-1">Land Rover Defender</h3>
-                      <p className="font-body-sm text-body-sm text-on-surface-variant">Diesel • 4x4 Off-road</p>
-                    </div>
-                    <div className="text-right">
-                      <span className="font-h3 text-h3 text-primary">$150</span>
-                      <span className="font-body-sm text-body-sm text-on-surface-variant">/day</span>
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-2 gap-y-3 gap-x-4 mb-6">
-                    <div className="flex items-center gap-2 text-on-surface-variant">
-                      <span className="material-symbols-outlined text-[20px]">airline_seat_recline_extra</span>
-                      <span className="font-body-sm text-body-sm">7 Seats</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-on-surface-variant">
-                      <span className="material-symbols-outlined text-[20px]">settings</span>
-                      <span className="font-body-sm text-body-sm">Automatic</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-on-surface-variant">
-                      <span className="material-symbols-outlined text-[20px]">local_gas_station</span>
-                      <span className="font-body-sm text-body-sm">Diesel</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-on-surface-variant">
-                      <span className="material-symbols-outlined text-[20px]">luggage</span>
-                      <span className="font-body-sm text-body-sm">4 Large Bags</span>
-                    </div>
-                  </div>
-                  <button className="w-full py-4 bg-primary text-on-primary rounded-xl font-button text-button hover:opacity-90 active:scale-[0.98] transition-all">
-                    Book Now
-                  </button>
-                </div>
+                <button
+                  onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                  disabled={currentPage === totalPages}
+                  className="w-10 h-10 rounded-full flex items-center justify-center border border-outline-variant text-on-surface-variant hover:bg-surface-container disabled:opacity-50 disabled:hover:bg-transparent transition-colors"
+                >
+                  <span className="material-symbols-outlined text-[20px]">chevron_right</span>
+                </button>
               </div>
-            </div>
-
-            {/* Pagination */}
-            <div className="mt-12 flex justify-center items-center gap-4">
-              <button className="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface-variant hover:border-primary transition-colors">
-                <span className="material-symbols-outlined">chevron_left</span>
-              </button>
-              <button className="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-on-primary font-label-lg">1</button>
-              <button className="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface-variant hover:border-primary transition-colors font-label-lg">2</button>
-              <button className="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface-variant hover:border-primary transition-colors font-label-lg">3</button>
-              <button className="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface-variant hover:border-primary transition-colors">
-                <span className="material-symbols-outlined">chevron_right</span>
-              </button>
-            </div>
+            )}
           </div>
         </div>
       </main>
       <Footer />
+
+      {selectedCar && (
+        <BookingEngine car={selectedCar} isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
+      )}
     </div>
   );
 }

@@ -49,6 +49,37 @@ export default function AboutPage() {
             </div>
           </div>
         </div>
+
+        {/* Contact Information Section */}
+        <div className="pt-24 border-t border-slate-200">
+          <div className="text-center mb-16">
+            <h2 className="font-display text-4xl font-bold text-slate-900 mb-4">Connect With Us</h2>
+            <p className="text-slate-500 max-w-xl mx-auto">Have questions or ready to book your premium experience? Reach out to our team today.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-white p-10 rounded-[2rem] shadow-xl shadow-slate-200/50 border border-slate-100 flex flex-col items-center text-center group hover:-translate-y-2 transition-all duration-300">
+              <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
+                <span className="material-symbols-outlined text-3xl">phone_iphone</span>
+              </div>
+              <h3 className="text-sm font-bold uppercase tracking-widest text-slate-400 mb-2">Call Us</h3>
+              <a href="tel:+61433178890" className="text-xl font-display font-bold text-slate-900">+61 433 178 890</a>
+            </div>
+            <div className="bg-white p-10 rounded-[2rem] shadow-xl shadow-slate-200/50 border border-slate-100 flex flex-col items-center text-center group hover:-translate-y-2 transition-all duration-300">
+              <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
+                <span className="material-symbols-outlined text-3xl">mail</span>
+              </div>
+              <h3 className="text-sm font-bold uppercase tracking-widest text-slate-400 mb-2">Our Email</h3>
+              <a href="mailto:dealsonwheelsonthego@gmail.com" className="text-sm font-bold text-slate-900 break-all">dealsonwheelsonthego@gmail.com</a>
+            </div>
+            <div className="bg-white p-10 rounded-[2rem] shadow-xl shadow-slate-200/50 border border-slate-100 flex flex-col items-center text-center group hover:-translate-y-2 transition-all duration-300">
+              <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
+                <span className="material-symbols-outlined text-3xl">location_on</span>
+              </div>
+              <h3 className="text-sm font-bold uppercase tracking-widest text-slate-400 mb-2">Visit Us</h3>
+              <p className="text-lg font-display font-bold text-slate-900 uppercase">Melbourne, Victoria</p>
+            </div>
+          </div>
+        </div>
       </main>
       <Footer />
     </div>
