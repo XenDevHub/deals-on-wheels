@@ -23,7 +23,7 @@ export default function SalesSection() {
     fetchSaleCars();
   }, []);
 
-  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "8801XXXXXXXXX";
+  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "61433178890";
 
   const handleBuy = (car) => {
     const message = `Hi Deals on Wheels! I'm interested in buying the ${car.name} (${car.year}). Price: $${car.price?.toLocaleString()}. Please contact me.`;
@@ -81,7 +81,7 @@ export default function SalesSection() {
                 </div>
                 <div className="flex items-center gap-1.5">
                   <span className="material-symbols-outlined text-primary text-[16px] font-bold">local_gas_station</span>
-                  <span className="text-[10px] font-black text-slate-700">{car.fuelType?.substring(0,3) || "PET"}</span>
+                  <span className="text-[10px] font-black text-slate-700">{car.fuelType?.substring(0, 3) || "PET"}</span>
                 </div>
               </div>
               <div className="flex justify-between items-center pt-4 border-t border-slate-50">

@@ -192,14 +192,14 @@ export default function AdminPage() {
   };
 
   if (loading) return (
-    <div className="min-h-screen bg-[#050505] flex items-center justify-center">
-      <div className="w-16 h-16 border-4 border-white/10 border-t-primary rounded-full animate-spin" />
+    <div className="min-h-screen bg-white flex items-center justify-center">
+      <div className="w-16 h-16 border-4 border-slate-100 border-t-primary rounded-full animate-spin" />
     </div>
   );
 
   if (!user) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#050505] p-6 relative overflow-hidden">
+      <div className="min-h-screen flex items-center justify-center bg-slate-50 p-6 relative overflow-hidden">
         {/* Subtle background glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
         
@@ -207,7 +207,7 @@ export default function AdminPage() {
           initial={{ scale: 0.9, opacity: 0, y: 20 }} 
           animate={{ scale: 1, opacity: 1, y: 0 }} 
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="relative z-10 w-full max-w-md bg-[#0a0a0a] border border-white/10 p-10 shadow-2xl"
+          className="relative z-10 w-full max-w-md bg-white border border-slate-200 p-10 shadow-2xl rounded-2xl"
         >
           <div className="text-center mb-10 flex flex-col items-center">
             <div className="relative h-16 w-16 mb-4">
@@ -215,38 +215,38 @@ export default function AdminPage() {
                 src="/logo.png"
                 alt="Logo"
                 fill
-                className="object-contain brightness-0 invert"
+                className="object-contain"
               />
             </div>
-            <h1 className="text-4xl font-black italic font-display text-white tracking-tighter mb-2">
+            <h1 className="text-4xl font-black italic font-display text-slate-900 tracking-tighter mb-2">
               Deals<span className="text-primary">On</span>Wheels
             </h1>
-            <p className="text-[10px] text-white/40 uppercase tracking-[0.2em]">Authorized Personnel Only</p>
+            <p className="text-[10px] text-slate-400 uppercase tracking-[0.2em]">Authorized Personnel Only</p>
           </div>
 
           <form onSubmit={handleLogin} className="space-y-6">
             <div>
-              <label className="text-[10px] text-white/40 uppercase tracking-[0.15em] mb-2 block">Email Address</label>
+              <label className="text-[10px] text-slate-400 uppercase tracking-[0.15em] mb-2 block">Email Address</label>
               <input 
                 type="email" 
                 value={loginEmail} 
                 onChange={(e) => setLoginEmail(e.target.value)} 
-                className="w-full bg-[#050505] border border-white/10 p-4 text-sm text-white outline-none focus:border-primary transition-colors" 
+                className="w-full bg-slate-50 border border-slate-200 p-4 text-sm text-slate-900 outline-none focus:border-primary transition-colors rounded-xl" 
                 required 
               />
             </div>
             <div>
-              <label className="text-[10px] text-white/40 uppercase tracking-[0.15em] mb-2 block">Password</label>
+              <label className="text-[10px] text-slate-400 uppercase tracking-[0.15em] mb-2 block">Password</label>
               <input 
                 type="password" 
                 value={loginPassword} 
                 onChange={(e) => setLoginPassword(e.target.value)} 
-                className="w-full bg-[#050505] border border-white/10 p-4 text-sm text-white outline-none focus:border-primary transition-colors" 
+                className="w-full bg-slate-50 border border-slate-200 p-4 text-sm text-slate-900 outline-none focus:border-primary transition-colors rounded-xl" 
                 required 
               />
             </div>
             {loginError && <p className="text-red-500 text-xs tracking-wide">{loginError}</p>}
-            <button type="submit" className="w-full py-4 mt-4 bg-white text-black font-bold text-xs uppercase tracking-widest transition-all hover:bg-white/90 active:scale-[0.98]">
+            <button type="submit" className="w-full py-4 mt-4 bg-slate-900 text-white font-bold text-xs uppercase tracking-widest transition-all hover:bg-slate-800 active:scale-[0.98] rounded-xl">
               LOGIN TO DASHBOARD
             </button>
           </form>
@@ -256,9 +256,9 @@ export default function AdminPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#050505] text-white selection:bg-primary/30 selection:text-white">
+    <div className="min-h-screen bg-white text-slate-900 selection:bg-primary/10 selection:text-primary">
       {/* Header */}
-      <div className="border-b border-white/5 bg-[#0a0a0a] sticky top-0 z-40">
+      <div className="border-b border-slate-100 bg-white sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-8 py-4 flex justify-between items-center">
           <div className="flex items-center gap-6">
             <Link href="/" className="flex items-center gap-3 group">
@@ -267,22 +267,22 @@ export default function AdminPage() {
                   src="/logo.png"
                   alt="Logo"
                   fill
-                  className="object-contain brightness-0 invert"
+                  className="object-contain"
                 />
               </div>
-              <span className="text-2xl font-black italic font-display text-white tracking-tighter">
+              <span className="text-2xl font-black italic font-display text-slate-900 tracking-tighter">
                 Deals<span className="text-primary">On</span>Wheels
               </span>
             </Link>
-            <div className="h-6 w-px bg-white/10 hidden md:block" />
-            <span className="text-[10px] tracking-[0.3em] uppercase text-white/40 hidden md:block">Inventory Dashboard</span>
+            <div className="h-6 w-px bg-slate-200 hidden md:block" />
+            <span className="text-[10px] tracking-[0.3em] uppercase text-slate-400 hidden md:block">Inventory Dashboard</span>
           </div>
           <div className="flex items-center gap-6">
-            <Link href="/" className="text-[10px] font-bold text-white/60 hover:text-white border border-white/10 px-4 py-2 uppercase tracking-widest transition-colors hidden md:block">
+            <Link href="/" className="text-[10px] font-bold text-slate-500 hover:text-slate-900 border border-slate-200 px-4 py-2 uppercase tracking-widest transition-colors hidden md:block rounded-lg">
               BACK TO SITE
             </Link>
-            <span className="text-xs text-white/40 tracking-widest uppercase hidden md:block">{user.email}</span>
-            <button onClick={handleLogout} className="text-[10px] font-bold text-white/60 hover:text-white border border-white/10 px-4 py-2 uppercase tracking-widest transition-colors">
+            <span className="text-xs text-slate-400 tracking-widest uppercase hidden md:block">{user.email}</span>
+            <button onClick={handleLogout} className="text-[10px] font-bold text-slate-500 hover:text-slate-900 border border-slate-200 px-4 py-2 uppercase tracking-widest transition-colors rounded-lg">
               LOGOUT
             </button>
           </div>
@@ -291,13 +291,13 @@ export default function AdminPage() {
 
       <main className="container mx-auto px-6 py-12">
         {/* Tabs */}
-        <div className="flex gap-2 mb-12 border-b border-white/5 pb-px">
+        <div className="flex gap-2 mb-12 border-b border-slate-100 pb-px">
           {["bookings", "cars"].map(tab => (
             <button 
               key={tab} 
               onClick={() => setActiveTab(tab)}
               className={`px-8 py-4 text-xs font-bold tracking-widest uppercase transition-all relative ${
-                activeTab === tab ? "text-white" : "text-white/40 hover:text-white/80"
+                activeTab === tab ? "text-slate-900" : "text-slate-400 hover:text-slate-600"
               }`}
             >
               {tab}
@@ -315,10 +315,10 @@ export default function AdminPage() {
                 <button 
                   key={filter} 
                   onClick={() => setBookingFilter(filter)} 
-                  className={`px-6 py-2 border text-[10px] font-bold uppercase tracking-widest transition-all ${
+                  className={`px-6 py-2 border text-[10px] font-bold uppercase tracking-widest transition-all rounded-lg ${
                     bookingFilter === filter 
                       ? "border-primary text-primary bg-primary/5" 
-                      : "border-white/10 text-white/40 hover:border-white/30"
+                      : "border-slate-200 text-slate-400 hover:border-slate-300"
                   }`}
                 >
                   {filter}
@@ -328,32 +328,32 @@ export default function AdminPage() {
 
             <div className="space-y-4">
               {bookings.filter(b => bookingFilter === "all" || b.status === bookingFilter).map(b => (
-                <div key={b.id} className="bg-[#0a0a0a] p-6 border border-white/5 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 transition-colors hover:border-white/10">
+                <div key={b.id} className="bg-slate-50 p-6 border border-slate-100 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 transition-colors hover:border-slate-200 rounded-2xl">
                   <div>
                     <div className="flex items-center gap-3 mb-2">
-                      <h3 className="text-lg font-bold text-white">{b.name}</h3>
-                      <span className="text-[10px] text-white/40 font-mono bg-white/5 px-2 py-1">{b.phone}</span>
+                      <h3 className="text-lg font-bold text-slate-900">{b.name}</h3>
+                      <span className="text-[10px] text-slate-400 font-mono bg-slate-200/50 px-2 py-1 rounded">{b.phone}</span>
                     </div>
-                    <p className="text-xs text-white/60 tracking-wide mb-3">
+                    <p className="text-xs text-slate-500 tracking-wide mb-3">
                       <span className="text-primary font-bold">{b.carName}</span> · {b.date} · {b.timeSlot}
                     </p>
-                    <div className={`inline-block px-3 py-1 text-[9px] font-bold uppercase tracking-widest border ${
-                      b.status === 'confirmed' ? 'border-green-500/30 text-green-400 bg-green-500/10' :
-                      b.status === 'rejected' ? 'border-red-500/30 text-red-400 bg-red-500/10' :
-                      'border-yellow-500/30 text-yellow-400 bg-yellow-500/10'
+                    <div className={`inline-block px-3 py-1 text-[9px] font-bold uppercase tracking-widest border rounded-full ${
+                      b.status === 'confirmed' ? 'border-green-200 text-green-600 bg-green-50' :
+                      b.status === 'rejected' ? 'border-red-200 text-red-600 bg-red-50' :
+                      'border-yellow-200 text-yellow-700 bg-yellow-50'
                     }`}>
                       {b.status}
                     </div>
                   </div>
                   <div className="flex gap-2 w-full md:w-auto">
-                    <button onClick={() => updateBookingStatus(b.id, "confirmed")} className="flex-1 md:flex-none px-4 py-2 bg-green-500/10 text-green-400 text-xs font-bold border border-green-500/20 hover:bg-green-500/20 transition-colors">APPROVE</button>
-                    <button onClick={() => updateBookingStatus(b.id, "rejected")} className="flex-1 md:flex-none px-4 py-2 bg-yellow-500/10 text-yellow-400 text-xs font-bold border border-yellow-500/20 hover:bg-yellow-500/20 transition-colors">REJECT</button>
-                    <button onClick={() => deleteBooking(b.id)} className="px-4 py-2 bg-red-500/10 text-red-400 text-xs font-bold border border-red-500/20 hover:bg-red-500/20 transition-colors">✕</button>
+                    <button onClick={() => updateBookingStatus(b.id, "confirmed")} className="flex-1 md:flex-none px-4 py-2 bg-green-50 text-green-600 text-xs font-bold border border-green-200 hover:bg-green-100 transition-colors rounded-lg">APPROVE</button>
+                    <button onClick={() => updateBookingStatus(b.id, "rejected")} className="flex-1 md:flex-none px-4 py-2 bg-yellow-50 text-yellow-700 text-xs font-bold border border-yellow-200 hover:bg-yellow-100 transition-colors rounded-lg">REJECT</button>
+                    <button onClick={() => deleteBooking(b.id)} className="px-4 py-2 bg-red-50 text-red-600 text-xs font-bold border border-red-200 hover:bg-red-100 transition-colors rounded-lg">✕</button>
                   </div>
                 </div>
               ))}
               {bookings.length === 0 && (
-                <div className="py-20 text-center border border-dashed border-white/10 text-white/40 text-xs tracking-widest uppercase">
+                <div className="py-20 text-center border border-dashed border-slate-200 text-slate-400 text-xs tracking-widest uppercase rounded-2xl">
                   No bookings found
                 </div>
               )}
@@ -362,7 +362,7 @@ export default function AdminPage() {
         ) : (
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
             <div className="flex justify-between items-end mb-8">
-              <h2 className="text-3xl font-bebas text-white tracking-widest">INVENTORY</h2>
+              <h2 className="text-3xl font-bebas text-slate-900 tracking-widest">INVENTORY</h2>
               <button 
                 onClick={() => {
                   setEditingCar(null);
@@ -375,7 +375,7 @@ export default function AdminPage() {
                   });
                   setIsCarModalOpen(true);
                 }}
-                className="px-6 py-3 bg-white text-black text-xs font-bold uppercase tracking-widest hover:bg-white/90 transition-colors"
+                className="px-6 py-3 bg-slate-900 text-white text-xs font-bold uppercase tracking-widest hover:bg-slate-800 transition-colors rounded-xl shadow-lg"
               >
                 + ADD VEHICLE
               </button>
@@ -383,32 +383,32 @@ export default function AdminPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {cars.map(car => (
-                <div key={car.id} className="bg-[#0a0a0a] border border-white/5 flex flex-col hover:border-white/20 transition-colors group">
-                  <div className="relative h-56 w-full overflow-hidden bg-[#050505]">
+                <div key={car.id} className="bg-white border border-slate-100 flex flex-col hover:border-slate-200 transition-all hover:shadow-xl rounded-2xl overflow-hidden group">
+                  <div className="relative h-56 w-full overflow-hidden bg-slate-50">
                     {car.images?.[0] && (
-                      <Image src={car.images[0]} alt={car.name} fill className="object-cover opacity-80 group-hover:scale-105 transition-transform duration-700" />
+                      <Image src={car.images[0]} alt={car.name} fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
                     )}
-                    <div className="absolute top-4 right-4 px-2 py-1 bg-black/50 backdrop-blur-md border border-white/10 text-[9px] font-bold tracking-widest uppercase text-white">
+                    <div className="absolute top-4 right-4 px-2 py-1 bg-white/80 backdrop-blur-md border border-slate-200 text-[9px] font-bold tracking-widest uppercase text-slate-900 rounded">
                       {car.type}
                     </div>
                   </div>
                   <div className="p-6 flex-grow flex flex-col justify-between">
                     <div>
-                      <h3 className="text-2xl font-bebas tracking-wide mb-1 uppercase text-white">{car.name}</h3>
-                      <p className="text-[10px] text-white/40 uppercase tracking-[0.15em] mb-6">{car.brand} · {car.model} · {car.year}</p>
+                      <h3 className="text-2xl font-bebas tracking-wide mb-1 uppercase text-slate-900">{car.name}</h3>
+                      <p className="text-[10px] text-slate-400 uppercase tracking-[0.15em] mb-6">{car.brand} · {car.model} · {car.year}</p>
                     </div>
-                    <div className="flex gap-2 pt-4 border-t border-white/5">
+                    <div className="flex gap-2 pt-4 border-t border-slate-50">
                       <button 
                         onClick={() => {
                           setEditingCar(car);
                           setCarFormData(car);
                           setIsCarModalOpen(true);
                         }} 
-                        className="flex-1 py-3 text-[10px] font-bold uppercase tracking-widest text-white border border-white/10 hover:bg-white/5 transition-colors"
+                        className="flex-1 py-3 text-[10px] font-bold uppercase tracking-widest text-slate-900 border border-slate-200 hover:bg-slate-50 transition-colors rounded-lg"
                       >
                         EDIT
                       </button>
-                      <button onClick={() => deleteCar(car)} className="px-4 py-3 text-[10px] font-bold uppercase tracking-widest text-red-400 border border-red-500/20 hover:bg-red-500/10 transition-colors">
+                      <button onClick={() => deleteCar(car)} className="px-4 py-3 text-[10px] font-bold uppercase tracking-widest text-red-600 border border-red-100 hover:bg-red-50 transition-colors rounded-lg">
                         DELETE
                       </button>
                     </div>
@@ -424,18 +424,18 @@ export default function AdminPage() {
       <AnimatePresence>
         {isCarModalOpen && (
           <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6">
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setIsCarModalOpen(false)} className="absolute inset-0 bg-[#050505]/90 backdrop-blur-md" />
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setIsCarModalOpen(false)} className="absolute inset-0 bg-slate-900/40 backdrop-blur-md" />
             
             <motion.div 
               initial={{ scale: 0.95, opacity: 0, y: 20 }} 
               animate={{ scale: 1, opacity: 1, y: 0 }} 
               exit={{ scale: 0.95, opacity: 0, y: 20 }} 
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="relative w-full max-w-5xl bg-[#0a0a0a] border border-white/10 shadow-2xl overflow-hidden flex flex-col max-h-[90vh]"
+              className="relative w-full max-w-5xl bg-white border border-slate-200 shadow-2xl overflow-hidden flex flex-col max-h-[90vh] rounded-[2rem]"
             >
-              <div className="p-6 border-b border-white/5 flex justify-between items-center bg-[#050505]">
-                <h2 className="text-2xl font-bebas text-white tracking-widest">{editingCar ? "EDIT VEHICLE DETAILS" : "NEW VEHICLE ENTRY"}</h2>
-                <button onClick={() => setIsCarModalOpen(false)} className="text-white/40 hover:text-white transition-colors">✕</button>
+              <div className="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+                <h2 className="text-2xl font-bebas text-slate-900 tracking-widest">{editingCar ? "EDIT VEHICLE DETAILS" : "NEW VEHICLE ENTRY"}</h2>
+                <button onClick={() => setIsCarModalOpen(false)} className="text-slate-400 hover:text-slate-900 transition-colors">✕</button>
               </div>
 
               <div className="p-6 md:p-10 overflow-y-auto no-scrollbar">
@@ -444,29 +444,29 @@ export default function AdminPage() {
                   {/* Left Column: Details */}
                   <div className="space-y-6">
                     <div>
-                      <label className="text-[10px] text-white/40 uppercase tracking-[0.15em] mb-2 block">Vehicle Name</label>
-                      <input type="text" value={carFormData.name} onChange={(e) => setCarFormData({...carFormData, name: e.target.value})} className="w-full bg-[#050505] border border-white/10 p-4 text-sm text-white outline-none focus:border-primary transition-colors" required placeholder="e.g. Porsche 911 GT3 RS" />
+                      <label className="text-[10px] text-slate-400 uppercase tracking-[0.15em] mb-2 block font-bold">Vehicle Name</label>
+                      <input type="text" value={carFormData.name} onChange={(e) => setCarFormData({...carFormData, name: e.target.value})} className="w-full bg-slate-50 border border-slate-200 p-4 text-sm text-slate-900 outline-none focus:border-primary transition-colors rounded-xl" required placeholder="e.g. Porsche 911 GT3 RS" />
                     </div>
                     
                     <div className="grid grid-cols-2 gap-6">
                       <div>
-                        <label className="text-[10px] text-white/40 uppercase tracking-[0.15em] mb-2 block">Brand</label>
-                        <input type="text" value={carFormData.brand} onChange={(e) => setCarFormData({...carFormData, brand: e.target.value})} className="w-full bg-[#050505] border border-white/10 p-4 text-sm text-white outline-none focus:border-primary transition-colors" required placeholder="e.g. Porsche" />
+                        <label className="text-[10px] text-slate-400 uppercase tracking-[0.15em] mb-2 block font-bold">Brand</label>
+                        <input type="text" value={carFormData.brand} onChange={(e) => setCarFormData({...carFormData, brand: e.target.value})} className="w-full bg-slate-50 border border-slate-200 p-4 text-sm text-slate-900 outline-none focus:border-primary transition-colors rounded-xl" required placeholder="e.g. Porsche" />
                       </div>
                       <div>
-                        <label className="text-[10px] text-white/40 uppercase tracking-[0.15em] mb-2 block">Model</label>
-                        <input type="text" value={carFormData.model} onChange={(e) => setCarFormData({...carFormData, model: e.target.value})} className="w-full bg-[#050505] border border-white/10 p-4 text-sm text-white outline-none focus:border-primary transition-colors" required placeholder="e.g. 911" />
+                        <label className="text-[10px] text-slate-400 uppercase tracking-[0.15em] mb-2 block font-bold">Model</label>
+                        <input type="text" value={carFormData.model} onChange={(e) => setCarFormData({...carFormData, model: e.target.value})} className="w-full bg-slate-50 border border-slate-200 p-4 text-sm text-slate-900 outline-none focus:border-primary transition-colors rounded-xl" required placeholder="e.g. 911" />
                       </div>
                     </div>
 
                     <div className="grid grid-cols-2 gap-6">
                       <div>
-                        <label className="text-[10px] text-white/40 uppercase tracking-[0.15em] mb-2 block">Manufacture Year</label>
-                        <input type="number" value={carFormData.year} onChange={(e) => setCarFormData({...carFormData, year: e.target.value})} className="w-full bg-[#050505] border border-white/10 p-4 text-sm text-white outline-none focus:border-primary transition-colors" required />
+                        <label className="text-[10px] text-slate-400 uppercase tracking-[0.15em] mb-2 block font-bold">Manufacture Year</label>
+                        <input type="number" value={carFormData.year} onChange={(e) => setCarFormData({...carFormData, year: e.target.value})} className="w-full bg-slate-50 border border-slate-200 p-4 text-sm text-slate-900 outline-none focus:border-primary transition-colors rounded-xl" required />
                       </div>
                       <div>
-                        <label className="text-[10px] text-white/40 uppercase tracking-[0.15em] mb-2 block">Listing Type</label>
-                        <select value={carFormData.type} onChange={(e) => setCarFormData({...carFormData, type: e.target.value})} className="w-full bg-[#050505] border border-white/10 p-4 text-sm text-white outline-none focus:border-primary transition-colors appearance-none">
+                        <label className="text-[10px] text-slate-400 uppercase tracking-[0.15em] mb-2 block font-bold">Listing Type</label>
+                        <select value={carFormData.type} onChange={(e) => setCarFormData({...carFormData, type: e.target.value})} className="w-full bg-slate-50 border border-slate-200 p-4 text-sm text-slate-900 outline-none focus:border-primary transition-colors rounded-xl appearance-none cursor-pointer">
                           <option value="rental">Rental Only</option>
                           <option value="sale">Sale Only</option>
                           <option value="both">Both (Rental & Sale)</option>
@@ -474,56 +474,55 @@ export default function AdminPage() {
                       </div>
                     </div>
 
-                    <div className="border-t border-white/5 pt-6 mt-6 space-y-6">
-                      <h3 className="text-xs font-bold text-white uppercase tracking-widest mb-4">Pricing Configuration</h3>
+                    <div className="border-t border-slate-100 pt-6 mt-6 space-y-6">
+                      <h3 className="text-xs font-bold text-slate-900 uppercase tracking-widest mb-4">Pricing Configuration</h3>
                       
-                      {/* Explicit labels for pricing */}
                       <div>
-                        <label className="text-[10px] text-white/40 uppercase tracking-[0.15em] mb-2 block">Total Sale Price (AUD)</label>
-                        <input type="number" value={carFormData.price} onChange={(e) => setCarFormData({...carFormData, price: parseInt(e.target.value) || 0})} className="w-full bg-[#050505] border border-white/10 p-4 text-sm font-mono text-white outline-none focus:border-primary transition-colors" placeholder="e.g. 45000" />
-                        <p className="text-[9px] text-white/30 mt-1">Leave 0 if not for sale.</p>
+                        <label className="text-[10px] text-slate-400 uppercase tracking-[0.15em] mb-2 block font-bold">Total Sale Price (AUD)</label>
+                        <input type="number" value={carFormData.price} onChange={(e) => setCarFormData({...carFormData, price: parseInt(e.target.value) || 0})} className="w-full bg-slate-50 border border-slate-200 p-4 text-sm font-mono text-slate-900 outline-none focus:border-primary transition-colors rounded-xl" placeholder="e.g. 45000" />
+                        <p className="text-[9px] text-slate-400 mt-1">Leave 0 if not for sale.</p>
                       </div>
 
                       <div className="grid grid-cols-2 gap-6">
                         <div className="md:col-span-2">
-                          <label className="text-[10px] text-white/40 uppercase tracking-[0.15em] mb-2 block">Weekly Rental Rate (AUD) *</label>
-                          <input type="number" value={carFormData.rentalWeekly} onChange={(e) => setCarFormData({...carFormData, rentalWeekly: parseInt(e.target.value) || 0})} className="w-full bg-[#050505] border border-white/10 p-4 text-sm font-mono text-white outline-none focus:border-primary transition-colors" placeholder="e.g. 700" />
+                          <label className="text-[10px] text-slate-400 uppercase tracking-[0.15em] mb-2 block font-bold">Weekly Rental Rate (AUD) *</label>
+                          <input type="number" value={carFormData.rentalWeekly} onChange={(e) => setCarFormData({...carFormData, rentalWeekly: parseInt(e.target.value) || 0})} className="w-full bg-slate-50 border border-slate-200 p-4 text-sm font-mono text-slate-900 outline-none focus:border-primary transition-colors rounded-xl" placeholder="e.g. 700" />
                         </div>
                       </div>
                     </div>
 
-                    <div className="border-t border-white/5 pt-6 mt-6 space-y-6">
-                      <h3 className="text-xs font-bold text-white uppercase tracking-widest mb-4">Detailed Specifications</h3>
+                    <div className="border-t border-slate-100 pt-6 mt-6 space-y-6">
+                      <h3 className="text-xs font-bold text-slate-900 uppercase tracking-widest mb-4">Detailed Specifications</h3>
                       
                       <div className="grid grid-cols-2 gap-6">
-                        <label className="flex items-center gap-3 cursor-pointer p-4 border border-white/5 bg-[#050505] hover:border-white/20 transition-colors">
-                          <div className={`w-4 h-4 border flex items-center justify-center transition-colors ${carFormData.premium ? 'bg-primary border-primary' : 'border-white/20'}`}>
+                        <label className="flex items-center gap-3 cursor-pointer p-4 border border-slate-100 bg-slate-50 hover:border-slate-300 transition-colors rounded-xl">
+                          <div className={`w-4 h-4 border flex items-center justify-center transition-colors rounded ${carFormData.premium ? 'bg-primary border-primary' : 'border-slate-300 bg-white'}`}>
                             {carFormData.premium && <span className="text-white text-[10px]">✓</span>}
                           </div>
                           <input type="checkbox" checked={carFormData.premium} onChange={(e) => setCarFormData({...carFormData, premium: e.target.checked})} className="hidden" />
-                          <span className="text-[10px] tracking-widest uppercase text-white/70">Premium Brand</span>
+                          <span className="text-[10px] tracking-widest uppercase text-slate-600 font-bold">Premium Brand</span>
                         </label>
                         
-                        <label className="flex items-center gap-3 cursor-pointer p-4 border border-white/5 bg-[#050505] hover:border-white/20 transition-colors">
-                          <div className={`w-4 h-4 border flex items-center justify-center transition-colors ${carFormData.gps ? 'bg-primary border-primary' : 'border-white/20'}`}>
+                        <label className="flex items-center gap-3 cursor-pointer p-4 border border-slate-100 bg-slate-50 hover:border-slate-300 transition-colors rounded-xl">
+                          <div className={`w-4 h-4 border flex items-center justify-center transition-colors rounded ${carFormData.gps ? 'bg-primary border-primary' : 'border-slate-300 bg-white'}`}>
                             {carFormData.gps && <span className="text-white text-[10px]">✓</span>}
                           </div>
                           <input type="checkbox" checked={carFormData.gps} onChange={(e) => setCarFormData({...carFormData, gps: e.target.checked})} className="hidden" />
-                          <span className="text-[10px] tracking-widest uppercase text-white/70">GPS Included</span>
+                          <span className="text-[10px] tracking-widest uppercase text-slate-600 font-bold">GPS Included</span>
                         </label>
                       </div>
 
                       <div className="grid grid-cols-2 gap-6">
-                        <label className="flex items-center gap-3 cursor-pointer p-4 border border-white/5 bg-[#050505] hover:border-white/20 transition-colors">
-                          <div className={`w-4 h-4 border flex items-center justify-center transition-colors ${carFormData.insuranceIncluded ? 'bg-green-500 border-green-500' : 'border-white/20'}`}>
+                        <label className="flex items-center gap-3 cursor-pointer p-4 border border-slate-100 bg-slate-50 hover:border-slate-300 transition-colors rounded-xl">
+                          <div className={`w-4 h-4 border flex items-center justify-center transition-colors rounded ${carFormData.insuranceIncluded ? 'bg-green-500 border-green-500' : 'border-slate-300 bg-white'}`}>
                             {carFormData.insuranceIncluded && <span className="text-white text-[10px]">✓</span>}
                           </div>
                           <input type="checkbox" checked={carFormData.insuranceIncluded} onChange={(e) => setCarFormData({...carFormData, insuranceIncluded: e.target.checked})} className="hidden" />
-                          <span className="text-[10px] tracking-widest uppercase text-white/70">Insurance Included</span>
+                          <span className="text-[10px] tracking-widest uppercase text-slate-600 font-bold">Insurance Included</span>
                         </label>
                         <div>
-                          <label className="text-[10px] text-white/40 uppercase tracking-[0.15em] mb-2 block">Fuel Type</label>
-                          <select value={carFormData.fuelType} onChange={(e) => setCarFormData({...carFormData, fuelType: e.target.value})} className="w-full bg-[#050505] border border-white/10 p-4 text-sm text-white outline-none focus:border-primary transition-colors appearance-none">
+                          <label className="text-[10px] text-slate-400 uppercase tracking-[0.15em] mb-2 block font-bold">Fuel Type</label>
+                          <select value={carFormData.fuelType} onChange={(e) => setCarFormData({...carFormData, fuelType: e.target.value})} className="w-full bg-slate-50 border border-slate-200 p-4 text-sm text-slate-900 outline-none focus:border-primary transition-colors rounded-xl appearance-none cursor-pointer">
                             <option value="Petrol">Petrol</option>
                             <option value="Diesel">Diesel</option>
                             <option value="Electric">Electric</option>
@@ -535,22 +534,22 @@ export default function AdminPage() {
 
                       <div className="grid grid-cols-2 gap-6">
                         <div>
-                          <label className="text-[10px] text-white/40 uppercase tracking-[0.15em] mb-2 block">Mileage (km)</label>
-                          <input type="text" value={carFormData.mileage} onChange={(e) => setCarFormData({...carFormData, mileage: e.target.value})} className="w-full bg-[#050505] border border-white/10 p-4 text-sm text-white outline-none focus:border-primary transition-colors" placeholder="e.g. 12,000" />
+                          <label className="text-[10px] text-slate-400 uppercase tracking-[0.15em] mb-2 block font-bold">Mileage (km)</label>
+                          <input type="text" value={carFormData.mileage} onChange={(e) => setCarFormData({...carFormData, mileage: e.target.value})} className="w-full bg-slate-50 border border-slate-200 p-4 text-sm text-slate-900 outline-none focus:border-primary transition-colors rounded-xl" placeholder="e.g. 12,000" />
                         </div>
                         <div>
-                          <label className="text-[10px] text-white/40 uppercase tracking-[0.15em] mb-2 block">Color</label>
-                          <input type="text" value={carFormData.color} onChange={(e) => setCarFormData({...carFormData, color: e.target.value})} className="w-full bg-[#050505] border border-white/10 p-4 text-sm text-white outline-none focus:border-primary transition-colors" placeholder="e.g. Midnight Black" />
+                          <label className="text-[10px] text-slate-400 uppercase tracking-[0.15em] mb-2 block font-bold">Color</label>
+                          <input type="text" value={carFormData.color} onChange={(e) => setCarFormData({...carFormData, color: e.target.value})} className="w-full bg-slate-50 border border-slate-200 p-4 text-sm text-slate-900 outline-none focus:border-primary transition-colors rounded-xl" placeholder="e.g. Midnight Black" />
                         </div>
                       </div>
                       <div className="grid grid-cols-2 gap-6">
                         <div>
-                          <label className="text-[10px] text-white/40 uppercase tracking-[0.15em] mb-2 block">Seats</label>
-                          <input type="number" value={carFormData.seats} onChange={(e) => setCarFormData({...carFormData, seats: parseInt(e.target.value) || 0})} className="w-full bg-[#050505] border border-white/10 p-4 text-sm text-white outline-none focus:border-primary transition-colors" />
+                          <label className="text-[10px] text-slate-400 uppercase tracking-[0.15em] mb-2 block font-bold">Seats</label>
+                          <input type="number" value={carFormData.seats} onChange={(e) => setCarFormData({...carFormData, seats: parseInt(e.target.value) || 0})} className="w-full bg-slate-50 border border-slate-200 p-4 text-sm text-slate-900 outline-none focus:border-primary transition-colors rounded-xl" />
                         </div>
                         <div>
-                          <label className="text-[10px] text-white/40 uppercase tracking-[0.15em] mb-2 block">Transmission</label>
-                          <select value={carFormData.transmission} onChange={(e) => setCarFormData({...carFormData, transmission: e.target.value})} className="w-full bg-[#050505] border border-white/10 p-4 text-sm text-white outline-none focus:border-primary transition-colors appearance-none">
+                          <label className="text-[10px] text-slate-400 uppercase tracking-[0.15em] mb-2 block font-bold">Transmission</label>
+                          <select value={carFormData.transmission} onChange={(e) => setCarFormData({...carFormData, transmission: e.target.value})} className="w-full bg-slate-50 border border-slate-200 p-4 text-sm text-slate-900 outline-none focus:border-primary transition-colors rounded-xl appearance-none cursor-pointer">
                             <option value="Automatic">Automatic</option>
                             <option value="Manual">Manual</option>
                           </select>
@@ -559,74 +558,74 @@ export default function AdminPage() {
 
                       <div className="grid grid-cols-2 gap-6">
                         <div>
-                          <label className="text-[10px] text-white/40 uppercase tracking-[0.15em] mb-2 block">Suitcases (Large)</label>
-                          <input type="number" value={carFormData.suitcases} onChange={(e) => setCarFormData({...carFormData, suitcases: parseInt(e.target.value) || 0})} className="w-full bg-[#050505] border border-white/10 p-4 text-sm text-white outline-none focus:border-primary transition-colors" />
+                          <label className="text-[10px] text-slate-400 uppercase tracking-[0.15em] mb-2 block font-bold">Suitcases (Large)</label>
+                          <input type="number" value={carFormData.suitcases} onChange={(e) => setCarFormData({...carFormData, suitcases: parseInt(e.target.value) || 0})} className="w-full bg-slate-50 border border-slate-200 p-4 text-sm text-slate-900 outline-none focus:border-primary transition-colors rounded-xl" />
                         </div>
                         <div>
-                          <label className="text-[10px] text-white/40 uppercase tracking-[0.15em] mb-2 block">Bags (Small)</label>
-                          <input type="number" value={carFormData.bags} onChange={(e) => setCarFormData({...carFormData, bags: parseInt(e.target.value) || 0})} className="w-full bg-[#050505] border border-white/10 p-4 text-sm text-white outline-none focus:border-primary transition-colors" />
+                          <label className="text-[10px] text-slate-400 uppercase tracking-[0.15em] mb-2 block font-bold">Bags (Small)</label>
+                          <input type="number" value={carFormData.bags} onChange={(e) => setCarFormData({...carFormData, bags: parseInt(e.target.value) || 0})} className="w-full bg-slate-50 border border-slate-200 p-4 text-sm text-slate-900 outline-none focus:border-primary transition-colors rounded-xl" />
                         </div>
                       </div>
 
                       <div className="grid grid-cols-2 gap-6">
                         <div>
-                          <label className="text-[10px] text-white/40 uppercase tracking-[0.15em] mb-2 block">Doors</label>
-                          <input type="number" value={carFormData.doors} onChange={(e) => setCarFormData({...carFormData, doors: parseInt(e.target.value) || 0})} className="w-full bg-[#050505] border border-white/10 p-4 text-sm text-white outline-none focus:border-primary transition-colors" />
+                          <label className="text-[10px] text-slate-400 uppercase tracking-[0.15em] mb-2 block font-bold">Doors</label>
+                          <input type="number" value={carFormData.doors} onChange={(e) => setCarFormData({...carFormData, doors: parseInt(e.target.value) || 0})} className="w-full bg-slate-50 border border-slate-200 p-4 text-sm text-slate-900 outline-none focus:border-primary transition-colors rounded-xl" />
                         </div>
                         <div>
-                          <label className="text-[10px] text-white/40 uppercase tracking-[0.15em] mb-2 block">Min Driver Age</label>
-                          <input type="number" value={carFormData.minAge} onChange={(e) => setCarFormData({...carFormData, minAge: parseInt(e.target.value) || 0})} className="w-full bg-[#050505] border border-white/10 p-4 text-sm text-white outline-none focus:border-primary transition-colors" />
+                          <label className="text-[10px] text-slate-400 uppercase tracking-[0.15em] mb-2 block font-bold">Min Driver Age</label>
+                          <input type="number" value={carFormData.minAge} onChange={(e) => setCarFormData({...carFormData, minAge: parseInt(e.target.value) || 0})} className="w-full bg-slate-50 border border-slate-200 p-4 text-sm text-slate-900 outline-none focus:border-primary transition-colors rounded-xl" />
                         </div>
                       </div>
 
                       <div>
-                        <label className="text-[10px] text-white/40 uppercase tracking-[0.15em] mb-2 block">Rental Terms & Conditions</label>
-                        <textarea value={carFormData.terms} onChange={(e) => setCarFormData({...carFormData, terms: e.target.value})} className="w-full h-32 bg-[#050505] border border-white/10 p-4 text-sm text-white outline-none focus:border-primary transition-colors resize-none" placeholder="Enter rental rules and conditions..." />
+                        <label className="text-[10px] text-slate-400 uppercase tracking-[0.15em] mb-2 block font-bold">Rental Terms & Conditions</label>
+                        <textarea value={carFormData.terms} onChange={(e) => setCarFormData({...carFormData, terms: e.target.value})} className="w-full h-32 bg-slate-50 border border-slate-200 p-4 text-sm text-slate-900 outline-none focus:border-primary transition-colors resize-none rounded-xl" placeholder="Enter rental rules and conditions..." />
                       </div>
                     </div>
 
-                    <div className="border-t border-white/5 pt-6 mt-6">
-                      <label className="text-[10px] text-white/40 uppercase tracking-[0.15em] mb-2 block">Vehicle Description</label>
-                      <textarea value={carFormData.description} onChange={(e) => setCarFormData({...carFormData, description: e.target.value})} className="w-full h-32 bg-[#050505] border border-white/10 p-4 text-sm text-white outline-none focus:border-primary transition-colors resize-none" placeholder="Enter detailed specifications and description..." />
+                    <div className="border-t border-slate-100 pt-6 mt-6">
+                      <label className="text-[10px] text-slate-400 uppercase tracking-[0.15em] mb-2 block font-bold">Vehicle Description</label>
+                      <textarea value={carFormData.description} onChange={(e) => setCarFormData({...carFormData, description: e.target.value})} className="w-full h-32 bg-slate-50 border border-slate-200 p-4 text-sm text-slate-900 outline-none focus:border-primary transition-colors resize-none rounded-xl" placeholder="Enter detailed specifications and description..." />
                     </div>
 
-                    <label className="flex items-center gap-3 cursor-pointer p-4 border border-white/5 bg-[#050505] mt-4 hover:border-white/20 transition-colors">
-                      <div className={`w-4 h-4 border flex items-center justify-center transition-colors ${carFormData.available ? 'bg-primary border-primary' : 'border-white/20'}`}>
+                    <label className="flex items-center gap-3 cursor-pointer p-4 border border-slate-100 bg-slate-50 mt-4 hover:border-slate-300 transition-colors rounded-xl">
+                      <div className={`w-4 h-4 border flex items-center justify-center transition-colors rounded ${carFormData.available ? 'bg-primary border-primary' : 'border-slate-300 bg-white'}`}>
                         {carFormData.available && <span className="text-white text-[10px]">✓</span>}
                       </div>
                       <input type="checkbox" checked={carFormData.available} onChange={(e) => setCarFormData({...carFormData, available: e.target.checked})} className="hidden" />
-                      <span className="text-xs tracking-widest uppercase text-white/70">Vehicle is available for public</span>
+                      <span className="text-xs tracking-widest uppercase text-slate-600 font-bold">Vehicle is available for public</span>
                     </label>
                   </div>
 
                   {/* Right Column: Images & Submit */}
                   <div className="space-y-6 flex flex-col">
                     <div>
-                      <label className="text-[10px] text-white/40 uppercase tracking-[0.15em] mb-2 block">Media Gallery</label>
-                      <div className="relative border border-dashed border-white/20 bg-[#050505] hover:border-primary/50 transition-colors cursor-pointer group">
+                      <label className="text-[10px] text-slate-400 uppercase tracking-[0.15em] mb-2 block font-bold">Media Gallery</label>
+                      <div className="relative border border-dashed border-slate-300 bg-slate-50 hover:border-primary transition-colors cursor-pointer group rounded-2xl">
                         <input type="file" multiple accept="image/*" onChange={handleImageUpload} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" />
                         <div className="py-16 px-6 text-center flex flex-col items-center">
-                          <svg className="w-8 h-8 text-white/20 mb-4 group-hover:text-primary transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-                          <p className="text-xs font-bold tracking-widest text-white uppercase">Click or drag images here</p>
-                          <p className="text-[9px] text-white/30 tracking-widest uppercase mt-2">Max 5 high-res images</p>
+                          <svg className="w-8 h-8 text-slate-300 mb-4 group-hover:text-primary transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                          <p className="text-xs font-bold tracking-widest text-slate-900 uppercase">Click or drag images here</p>
+                          <p className="text-[9px] text-slate-400 tracking-widest uppercase mt-2">Max 5 high-res images</p>
                         </div>
                       </div>
                     </div>
 
-                    <div className="border-t border-white/5 pt-4 mt-4">
-                      <label className="text-[10px] text-white/40 uppercase tracking-[0.15em] mb-2 block">Or Add Image URL (If Upload Fails)</label>
+                    <div className="border-t border-slate-100 pt-4 mt-4">
+                      <label className="text-[10px] text-slate-400 uppercase tracking-[0.15em] mb-2 block font-bold">Or Add Image URL (If Upload Fails)</label>
                       <div className="flex gap-2">
                         <input 
                           type="url" 
                           value={tempImageUrl}
                           onChange={(e) => setTempImageUrl(e.target.value)}
                           placeholder="https://images.unsplash.com/..." 
-                          className="w-full bg-[#050505] border border-white/10 p-3 text-sm text-white outline-none focus:border-primary transition-colors" 
+                          className="w-full bg-slate-50 border border-slate-200 p-3 text-sm text-slate-900 outline-none focus:border-primary transition-colors rounded-xl" 
                         />
                         <button 
                           type="button"
                           onClick={addImageUrl}
-                          className="px-4 bg-white/10 hover:bg-white/20 text-white text-xs font-bold uppercase tracking-widest transition-colors"
+                          className="px-4 bg-slate-100 hover:bg-slate-200 text-slate-600 text-xs font-bold uppercase tracking-widest transition-colors rounded-xl border border-slate-200"
                         >
                           ADD
                         </button>
@@ -634,25 +633,25 @@ export default function AdminPage() {
                     </div>
 
                     {uploadingImages && (
-                      <div className="text-center py-4 border border-white/5 bg-[#050505]">
+                      <div className="text-center py-4 border border-slate-100 bg-slate-50 rounded-xl">
                         <p className="text-[10px] font-bold text-primary uppercase tracking-widest animate-pulse">Uploading Media...</p>
                       </div>
                     )}
 
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-3 flex-grow content-start mt-4">
                       {carFormData.images.map((url, i) => (
-                        <div key={i} className="relative aspect-square border border-white/10 group overflow-hidden bg-[#050505]">
-                          <Image src={url} alt={`Preview ${i}`} fill className="object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
-                          <button type="button" onClick={() => removeImage(url)} className="absolute top-2 right-2 w-6 h-6 bg-red-500/80 backdrop-blur text-white flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-500">✕</button>
+                        <div key={i} className="relative aspect-square border border-slate-100 group overflow-hidden bg-slate-50 rounded-xl">
+                          <Image src={url} alt={`Preview ${i}`} fill className="object-cover transition-opacity" />
+                          <button type="button" onClick={() => removeImage(url)} className="absolute top-2 right-2 w-6 h-6 bg-red-500/80 backdrop-blur text-white flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-50 rounded-full shadow-lg">✕</button>
                         </div>
                       ))}
                     </div>
 
-                    <div className="pt-6 border-t border-white/5 mt-auto flex gap-4">
-                      <button type="button" onClick={() => setIsCarModalOpen(false)} className="flex-1 py-4 bg-transparent border border-white/10 text-white/70 hover:text-white hover:border-white/30 text-xs font-bold uppercase tracking-widest transition-all">
+                    <div className="pt-6 border-t border-slate-100 mt-auto flex gap-4">
+                      <button type="button" onClick={() => setIsCarModalOpen(false)} className="flex-1 py-4 bg-transparent border border-slate-200 text-slate-500 hover:text-slate-900 hover:border-slate-400 text-xs font-bold uppercase tracking-widest transition-all rounded-xl">
                         CANCEL
                       </button>
-                      <button type="submit" disabled={uploadingImages} className="flex-1 py-4 bg-white text-black text-xs font-bold uppercase tracking-widest hover:bg-white/90 transition-all disabled:opacity-50">
+                      <button type="submit" disabled={uploadingImages} className="flex-1 py-4 bg-slate-900 text-white text-xs font-bold uppercase tracking-widest hover:bg-slate-800 transition-all disabled:opacity-50 rounded-xl shadow-xl">
                         SAVE VEHICLE
                       </button>
                     </div>

@@ -6,6 +6,7 @@
  * @param {string} message - The message to send
  */
 export function openWhatsApp(phone, message) {
+  const cleanPhone = phone.replace(/\D/g, '');
   const encoded = encodeURIComponent(message);
-  window.open(`https://wa.me/${phone}?text=${encoded}`, '_blank');
+  window.open(`https://wa.me/${cleanPhone}?text=${encoded}`, '_blank');
 }

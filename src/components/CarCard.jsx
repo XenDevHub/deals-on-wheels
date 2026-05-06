@@ -7,7 +7,7 @@ import { useLanguage } from "@/lib/LanguageContext";
 
 const CarCard = ({ car, mode, onBook }) => {
   const { t } = useLanguage();
-  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "8801XXXXXXXXX";
+  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "61433178890";
 
   const handleInquiry = () => {
     const message = `Hi Deals on Wheels! I'm interested in a long-term rental for the ${car.name}. Please share details.`;

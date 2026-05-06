@@ -24,13 +24,7 @@ export default function Footer() {
             <p className="text-lg leading-relaxed max-w-sm">
               Redefining automotive excellence in Melbourne. Experience the ultimate in premium car rentals and certified pre-owned sales.
             </p>
-            <div className="flex gap-4">
-              {['facebook', 'instagram', 'twitter', 'linkedin'].map((social) => (
-                <a key={social} href="#" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-primary hover:border-primary transition-all group">
-                  <span className="material-symbols-outlined text-[20px] text-white group-hover:text-white">{social}</span>
-                </a>
-              ))}
-            </div>
+           
           </div>
 
           {/* Quick Links */}

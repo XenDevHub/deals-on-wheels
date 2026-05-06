@@ -78,7 +78,7 @@ export default function SalesPage() {
     return filteredCars.slice(start, start + ITEMS_PER_PAGE);
   }, [filteredCars, currentPage]);
 
-  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "8801XXXXXXXXX";
+  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "61433178890";
 
   const handleBuy = (car) => {
     const message = `Hi Deals on Wheels! I'm interested in buying the ${car.name} (${car.year}). Price: $${car.price?.toLocaleString()}. Please contact me.`;
@@ -234,60 +234,59 @@ export default function SalesPage() {
                       </div>
                       <div className="flex items-center gap-1.5 border-x border-slate-50 px-2 justify-center">
                         <span className="material-symbols-outlined text-primary text-[18px] font-bold">settings</span>
-                        <span className="text-[10px] font-black text-slate-700 uppercase">{car.transmission?.substring(0,4) || "AUTO"}</span>
+                        <span className="text-[10px] font-black text-slate-700 uppercase">{car.transmission?.substring(0, 4) || "AUTO"}</span>
                       </div>
                       <div className="flex items-center gap-1.5 justify-end">
                         <span className="material-symbols-outlined text-primary text-[18px] font-bold">local_gas_station</span>
-                        <span className="text-[10px] font-black text-slate-700 uppercase">{car.fuelType?.substring(0,3) || "PET"}</span>
+                        <span className="text-[10px] font-black text-slate-700 uppercase">{car.fuelType?.substring(0, 3) || "PET"}</span>
                       </div>
                     </div>
                     <button
                       onClick={() => handleBuy(car)}
                       className="w-full py-4 border-2 border-primary text-primary rounded-lg font-button hover:bg-primary hover:text-on-primary transition-all duration-200"
                     >
-                      Buy via WhatsApp
+                      Send Inquiry
                     </button>
                   </div>
                 </div>
               ))}
-              </div>
-            )}
+            </div>
+          )}
 
-            {/* Pagination Controls */}
-            {totalPages > 1 && !loading && filteredCars.length > 0 && (
-              <div className="flex justify-center items-center gap-4 mt-12">
-                <button
-                  onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
-                  disabled={currentPage === 1}
-                  className="w-10 h-10 rounded-full flex items-center justify-center border border-outline-variant text-on-surface-variant hover:bg-surface-container disabled:opacity-50 disabled:hover:bg-transparent transition-colors"
-                >
-                  <span className="material-symbols-outlined text-[20px]">chevron_left</span>
-                </button>
-                <div className="flex gap-2">
-                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                    <button
-                      key={page}
-                      onClick={() => setCurrentPage(page)}
-                      className={`w-10 h-10 rounded-full font-label-md text-label-md transition-colors ${
-                        currentPage === page
-                          ? "bg-primary text-on-primary"
-                          : "text-on-surface-variant hover:bg-surface-container"
+          {/* Pagination Controls */}
+          {totalPages > 1 && !loading && filteredCars.length > 0 && (
+            <div className="flex justify-center items-center gap-4 mt-12">
+              <button
+                onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                disabled={currentPage === 1}
+                className="w-10 h-10 rounded-full flex items-center justify-center border border-outline-variant text-on-surface-variant hover:bg-surface-container disabled:opacity-50 disabled:hover:bg-transparent transition-colors"
+              >
+                <span className="material-symbols-outlined text-[20px]">chevron_left</span>
+              </button>
+              <div className="flex gap-2">
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                  <button
+                    key={page}
+                    onClick={() => setCurrentPage(page)}
+                    className={`w-10 h-10 rounded-full font-label-md text-label-md transition-colors ${currentPage === page
+                        ? "bg-primary text-on-primary"
+                        : "text-on-surface-variant hover:bg-surface-container"
                       }`}
-                    >
-                      {page}
-                    </button>
-                  ))}
-                </div>
-                <button
-                  onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
-                  disabled={currentPage === totalPages}
-                  className="w-10 h-10 rounded-full flex items-center justify-center border border-outline-variant text-on-surface-variant hover:bg-surface-container disabled:opacity-50 disabled:hover:bg-transparent transition-colors"
-                >
-                  <span className="material-symbols-outlined text-[20px]">chevron_right</span>
-                </button>
+                  >
+                    {page}
+                  </button>
+                ))}
               </div>
-            )}
-          </section>
+              <button
+                onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                disabled={currentPage === totalPages}
+                className="w-10 h-10 rounded-full flex items-center justify-center border border-outline-variant text-on-surface-variant hover:bg-surface-container disabled:opacity-50 disabled:hover:bg-transparent transition-colors"
+              >
+                <span className="material-symbols-outlined text-[20px]">chevron_right</span>
+              </button>
+            </div>
+          )}
+        </section>
       </main>
       <Footer />
     </div>

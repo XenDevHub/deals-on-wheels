@@ -1,6 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { openWhatsApp } from '@/lib/whatsapp';
 
 export default function ContactSection() {
+  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "61433178890";
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    message: ''
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    const text = `*New Inquiry from Deals on Wheels*\n\n*Name:* ${formData.name}\n*Phone:* ${formData.phone}\n*Message:* ${formData.message}`;
+    openWhatsApp(whatsappNumber, text);
+  };
+
   return (
     <section id="contact" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-8">
@@ -54,22 +77,45 @@ export default function ContactSection() {
 
             <div className="bg-white/5 backdrop-blur-md rounded-3xl p-8 lg:p-12 border border-white/10">
               <h3 className="text-2xl font-bold text-white mb-8">Send a Message</h3>
-              <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+              <form className="space-y-6" onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label className="text-xs font-bold uppercase tracking-widest text-slate-500 block mb-2">Name</label>
-                    <input type="text" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white outline-none focus:border-primary transition-colors" placeholder="John Doe" />
+                    <input 
+                      type="text" 
+                      name="name"
+                      required
+                      value={formData.name}
+                      onChange={handleChange}
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white outline-none focus:border-primary transition-colors" 
+                      placeholder="John Doe" 
+                    />
                   </div>
                   <div>
                     <label className="text-xs font-bold uppercase tracking-widest text-slate-500 block mb-2">Phone</label>
-                    <input type="tel" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white outline-none focus:border-primary transition-colors" placeholder="+61..." />
+                    <input 
+                      type="tel" 
+                      name="phone"
+                      required
+                      value={formData.phone}
+                      onChange={handleChange}
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white outline-none focus:border-primary transition-colors" 
+                      placeholder="+61..." 
+                    />
                   </div>
                 </div>
                 <div>
                   <label className="text-xs font-bold uppercase tracking-widest text-slate-500 block mb-2">Message</label>
-                  <textarea className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white outline-none focus:border-primary transition-colors h-32 resize-none" placeholder="How can we help you?" />
+                  <textarea 
+                    name="message"
+                    required
+                    value={formData.message}
+                    onChange={handleChange}
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white outline-none focus:border-primary transition-colors h-32 resize-none" 
+                    placeholder="How can we help you?" 
+                  />
                 </div>
-                <button className="w-full py-4 bg-primary text-white rounded-xl font-bold uppercase tracking-widest hover:opacity-90 active:scale-[0.98] transition-all">
+                <button type="submit" className="w-full py-4 bg-primary text-white rounded-xl font-bold uppercase tracking-widest hover:opacity-90 active:scale-[0.98] transition-all">
                   Send Inquiry
                 </button>
               </form>
@@ -80,3 +126,4 @@ export default function ContactSection() {
     </section>
   );
 }
+

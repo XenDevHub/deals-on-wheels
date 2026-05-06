@@ -1,5 +1,5 @@
 import Image from 'next/image';
-
+import Link from "next/link";
 export default function HeroSection() {
   return (
     <section className="relative min-h-[870px] flex flex-col overflow-hidden">
@@ -40,8 +40,8 @@ export default function HeroSection() {
             <button className="px-8 py-3 rounded-xl bg-primary text-white font-bold shadow-[0_0_20px_rgba(37,99,235,0.4)]">
               Rent a Car
             </button>
-            <button className="px-8 py-3 rounded-xl text-slate-300 font-bold hover:text-white hover:bg-white/10 transition-colors">
-              Buy a Car
+            <button className="px-8 py-3 rounded-xl text-slate-300 font-bold hover:text-white hover:bg-white/10 transition-colors cursor-pointer" >
+              <Link href="/sales">Buy a Car</Link>
             </button>
           </div>
 
