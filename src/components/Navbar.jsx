@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -9,8 +10,19 @@ export default function Navbar() {
   return (
     <header className="bg-white dark:bg-slate-950 docked full-width top-0 sticky z-50 border-b border-slate-100 dark:border-slate-800 shadow-[0px_4px_20px_rgba(30,41,59,0.05)]">
       <div className="flex justify-between items-center w-full px-8 py-4 max-w-7xl mx-auto">
-        <Link href="/" className="text-2xl font-black text-slate-900 dark:text-white tracking-tighter font-display italic">
-          Deals<span className="text-primary">On</span>Wheels
+        <Link href="/" className="flex items-center gap-4 group transition-transform hover:scale-[1.02] active:scale-95 duration-200">
+          <div className="relative h-12 w-12">
+            <Image
+              src="/logo.png"
+              alt="Logo"
+              fill
+              className="object-contain brightness-0 invert"
+              priority
+            />
+          </div>
+          <span className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter font-display italic">
+            Deals<span className="text-primary">On</span>Wheels
+          </span>
         </Link>
         <nav className="hidden md:flex items-center gap-8">
           <Link className="font-display font-medium text-slate-600 dark:text-slate-400 hover:text-primary transition-colors" href="/fleet">Rent</Link>

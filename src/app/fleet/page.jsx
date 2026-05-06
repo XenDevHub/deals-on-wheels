@@ -240,22 +240,22 @@ export default function FleetPage() {
                           <p className="font-body-sm text-body-sm text-on-surface-variant">{car.brand} • {car.year}</p>
                         </div>
                         <div className="text-right">
-                          <span className="font-h3 text-h3 text-primary">৳{car.rentalDaily?.toLocaleString()}</span>
-                          <span className="font-body-sm text-body-sm text-on-surface-variant">/day</span>
+                          <span className="font-h3 text-h3 text-primary">${car.rentalWeekly?.toLocaleString()}</span>
+                          <span className="font-body-sm text-body-sm text-on-surface-variant">/week</span>
                         </div>
                       </div>
-                      <div className="grid grid-cols-3 gap-y-3 gap-x-4 mb-6">
-                        <div className="flex items-center gap-2 text-on-surface-variant">
-                          <span className="material-symbols-outlined text-[20px]">airline_seat_recline_extra</span>
-                          <span className="font-body-sm text-body-sm">{car.seats || 5} Seats</span>
+                      <div className="grid grid-cols-3 gap-2 py-4 border-y border-slate-50 mb-6">
+                        <div className="flex items-center gap-2">
+                          <span className="material-symbols-outlined text-primary text-[18px] font-bold">airline_seat_recline_normal</span>
+                          <span className="text-[10px] font-black text-slate-700">{car.seats || 5}</span>
                         </div>
-                        <div className="flex items-center gap-2 text-on-surface-variant">
-                          <span className="material-symbols-outlined text-[20px]">settings</span>
-                          <span className="font-body-sm text-body-sm">{car.transmission || "Auto"}</span>
+                        <div className="flex items-center gap-2 border-x border-slate-50 px-2 justify-center">
+                          <span className="material-symbols-outlined text-primary text-[18px] font-bold">settings</span>
+                          <span className="text-[10px] font-black text-slate-700 uppercase">{car.transmission?.substring(0,4) || "AUTO"}</span>
                         </div>
-                        <div className="flex items-center gap-2 text-on-surface-variant">
-                          <span className="material-symbols-outlined text-[20px]">local_gas_station</span>
-                          <span className="font-body-sm text-body-sm">{car.fuelType || "Petrol"}</span>
+                        <div className="flex items-center gap-2 justify-end">
+                          <span className="material-symbols-outlined text-primary text-[18px] font-bold">local_gas_station</span>
+                          <span className="text-[10px] font-black text-slate-700 uppercase">{car.fuelType?.substring(0,3) || "PET"}</span>
                         </div>
                       </div>
                       <button

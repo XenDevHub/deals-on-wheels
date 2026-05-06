@@ -81,62 +81,99 @@ export default function SalesPage() {
   const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "8801XXXXXXXXX";
 
   const handleBuy = (car) => {
-    const message = `Hi Deals on Wheels! I'm interested in buying the ${car.name} (${car.year}). Price: ৳${car.price?.toLocaleString()}. Please contact me.`;
+    const message = `Hi Deals on Wheels! I'm interested in buying the ${car.name} (${car.year}). Price: $${car.price?.toLocaleString()}. Please contact me.`;
     openWhatsApp(whatsappNumber, message);
   };
 
   return (
     <div className="bg-surface font-body-md text-on-surface min-h-screen flex flex-col">
       <Navbar />
-      <main className="max-w-7xl mx-auto px-8 py-12 flex-grow">
-        {/* Search & Filter Bar */}
-        <section className="mb-12">
-          <div className="flex flex-col gap-6 bg-surface-container rounded-xl p-8 shadow-[0px_4px_20px_rgba(30,41,59,0.05)]">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-              <h1 className="font-h1 text-h1 text-on-surface">Find Your Next Ride</h1>
-              <button onClick={resetFilters} className="flex items-center gap-2 text-primary font-semibold hover:opacity-80 transition-opacity">
-                <span className="material-symbols-outlined">refresh</span>
-                <span className="font-label-lg text-label-lg">Reset Filters</span>
-              </button>
+
+      {/* Premium Sales Header Section */}
+      <section className="relative py-20 bg-slate-900 overflow-hidden">
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_50%_-20%,#3b82f6,transparent_70%)]" />
+        </div>
+        <div className="max-w-7xl mx-auto px-8 relative z-10 text-center">
+          <span className="text-primary font-bold uppercase tracking-[0.3em] text-sm block mb-6 animate-in fade-in slide-in-from-bottom-4 duration-700">Sales Gallery</span>
+          <h1 className="font-display text-5xl lg:text-7xl font-black text-white leading-tight mb-8 animate-in fade-in slide-in-from-bottom-6 duration-1000">
+            Available For <span className="text-primary italic">Sale</span>
+          </h1>
+          <p className="text-lg lg:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed animate-in fade-in slide-in-from-bottom-8 duration-1000">
+            Discover your next masterpiece. Our certified selection of premium vehicles represents the pinnacle of automotive excellence.
+          </p>
+        </div>
+      </section>
+
+      <main className="max-w-7xl mx-auto px-8 py-16 flex-grow">
+        {/* Search and Filters Header */}
+        <div className="bg-white rounded-[2rem] p-8 lg:p-10 shadow-[0px_4px_30px_rgba(0,0,0,0.05)] border border-slate-100 mb-16">
+          <div className="flex flex-col md:flex-row md:items-center justify-between mb-10 gap-6">
+            <div className="flex items-center gap-3">
+              <span className="w-12 h-0.5 bg-primary" />
+              <h2 className="font-display font-bold text-slate-900 tracking-wider uppercase text-sm">Find Your Vehicle</h2>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-              <div className="flex flex-col gap-2">
-                <label className="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Brand</label>
-                <select
-                  value={brandFilter}
-                  onChange={(e) => setBrandFilter(e.target.value)}
-                  className="h-[48px] rounded-lg border border-outline-variant bg-white px-4 focus:ring-2 focus:ring-primary outline-none appearance-none"
-                >
-                  {uniqueBrands.map((b) => (
-                    <option key={b} value={b}>{b}</option>
-                  ))}
-                </select>
-              </div>
-              <div className="flex flex-col gap-2">
-                <label className="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Year Range</label>
-                <div className="flex items-center gap-2">
-                  <input
-                    className="w-full h-[48px] rounded-lg border border-outline-variant bg-white px-4 focus:ring-2 focus:ring-primary outline-none"
-                    placeholder="From"
-                    type="number"
-                    value={yearFrom}
-                    onChange={(e) => setYearFrom(e.target.value)}
-                  />
-                  <input
-                    className="w-full h-[48px] rounded-lg border border-outline-variant bg-white px-4 focus:ring-2 focus:ring-primary outline-none"
-                    placeholder="To"
-                    type="number"
-                    value={yearTo}
-                    onChange={(e) => setYearTo(e.target.value)}
-                  />
-                </div>
-              </div>
-              <div className="flex flex-col gap-2">
-                <label className="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">
-                  Max Price: ৳{(maxPrice / 100000).toFixed(0)} Lakh
-                </label>
+            <button onClick={resetFilters} className="flex items-center gap-2 text-primary font-bold uppercase tracking-widest text-xs hover:opacity-70 transition-opacity">
+              <span className="material-symbols-outlined text-sm">refresh</span>
+              Reset All
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="space-y-2">
+              <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 block ml-1">Search</label>
+              <div className="relative">
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 material-symbols-outlined text-lg">search</span>
                 <input
-                  className="accent-primary h-12 w-full"
+                  type="text"
+                  placeholder="Model name..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full h-14 bg-slate-50 border border-slate-200 rounded-xl pl-12 pr-4 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-sm"
+                />
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 block ml-1">Brand</label>
+              <select
+                value={brandFilter}
+                onChange={(e) => setBrandFilter(e.target.value)}
+                className="w-full h-14 bg-slate-50 border border-slate-200 rounded-xl px-4 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-sm appearance-none cursor-pointer"
+              >
+                {uniqueBrands.map((b) => (
+                  <option key={b} value={b}>{b}</option>
+                ))}
+              </select>
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 block ml-1">Year Range</label>
+              <div className="flex gap-2">
+                <input
+                  className="w-full h-14 bg-slate-50 border border-slate-200 rounded-xl px-4 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-sm"
+                  placeholder="From"
+                  type="number"
+                  value={yearFrom}
+                  onChange={(e) => setYearFrom(e.target.value)}
+                />
+                <input
+                  className="w-full h-14 bg-slate-50 border border-slate-200 rounded-xl px-4 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-sm"
+                  placeholder="To"
+                  type="number"
+                  value={yearTo}
+                  onChange={(e) => setYearTo(e.target.value)}
+                />
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 block ml-1">
+                Max: ${maxPrice?.toLocaleString()}
+              </label>
+              <div className="h-14 flex items-center px-2">
+                <input
+                  className="accent-primary w-full cursor-pointer"
                   type="range"
                   min={500000}
                   max={50000000}
@@ -144,24 +181,10 @@ export default function SalesPage() {
                   value={maxPrice}
                   onChange={(e) => setMaxPrice(parseInt(e.target.value))}
                 />
-                <div className="flex justify-between text-label-md font-medium text-tertiary">
-                  <span>৳5L</span>
-                  <span>৳5Cr+</span>
-                </div>
-              </div>
-              <div className="flex flex-col gap-2">
-                <label className="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Search</label>
-                <input
-                  type="text"
-                  placeholder="Search by name..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="h-[48px] rounded-lg border border-outline-variant bg-white px-4 focus:ring-2 focus:ring-primary outline-none"
-                />
               </div>
             </div>
           </div>
-        </section>
+        </div>
 
         {/* Marketplace Grid */}
         <section className="mb-12">
@@ -201,21 +224,21 @@ export default function SalesPage() {
                         <p className="font-body-sm text-tertiary">{car.year} • {car.color || car.brand}</p>
                       </div>
                       <div className="text-right">
-                        <p className="text-h3 font-h3 text-primary">৳{car.price?.toLocaleString()}</p>
+                        <p className="text-h3 font-h3 text-primary">${car.price?.toLocaleString()}</p>
                       </div>
                     </div>
-                    <div className="grid grid-cols-3 gap-2 py-4 border-y border-slate-100">
-                      <div className="flex flex-col items-center gap-1 text-tertiary">
-                        <span className="material-symbols-outlined text-[20px]">speed</span>
-                        <span className="text-label-md">{car.mileage || "N/A"}</span>
+                    <div className="grid grid-cols-3 gap-2 py-4 border-y border-slate-50 mb-2">
+                      <div className="flex items-center gap-1.5">
+                        <span className="material-symbols-outlined text-primary text-[18px] font-bold">speed</span>
+                        <span className="text-[10px] font-black text-slate-700">{car.mileage || "N/A"}</span>
                       </div>
-                      <div className="flex flex-col items-center gap-1 text-tertiary">
-                        <span className="material-symbols-outlined text-[20px]">settings</span>
-                        <span className="text-label-md">{car.transmission || "Auto"}</span>
+                      <div className="flex items-center gap-1.5 border-x border-slate-50 px-2 justify-center">
+                        <span className="material-symbols-outlined text-primary text-[18px] font-bold">settings</span>
+                        <span className="text-[10px] font-black text-slate-700 uppercase">{car.transmission?.substring(0,4) || "AUTO"}</span>
                       </div>
-                      <div className="flex flex-col items-center gap-1 text-tertiary">
-                        <span className="material-symbols-outlined text-[20px]">local_gas_station</span>
-                        <span className="text-label-md">{car.fuelType || "Petrol"}</span>
+                      <div className="flex items-center gap-1.5 justify-end">
+                        <span className="material-symbols-outlined text-primary text-[18px] font-bold">local_gas_station</span>
+                        <span className="text-[10px] font-black text-slate-700 uppercase">{car.fuelType?.substring(0,3) || "PET"}</span>
                       </div>
                     </div>
                     <button

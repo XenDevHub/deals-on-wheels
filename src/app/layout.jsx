@@ -16,6 +16,9 @@ const inter = Inter({
 export const metadata = {
   title: "Deals on Wheels | Exclusive Premium Car Rentals & Sales",
   description: "Drive Your Dreams, Rent Your Freedom. Experience the ultimate driving luxury.",
+  icons: {
+    icon: "/logo.png",
+  },
 };
 
 export default function RootLayout({ children }) {

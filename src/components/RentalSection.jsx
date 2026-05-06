@@ -25,26 +25,26 @@ export default function RentalSection() {
   if (cars.length === 0) return null;
 
   return (
-    <section className="py-section-gap max-w-7xl mx-auto px-8">
-      <div className="flex justify-between items-end mb-stack-lg">
-        <div className="space-y-stack-sm">
-          <span className="text-primary font-label-lg uppercase tracking-widest">Premium Fleet</span>
-          <h2 className="font-h2 text-h2">Curated Rental Experience</h2>
+    <section className="py-24 max-w-7xl mx-auto px-8">
+      <div className="flex justify-between items-end mb-12">
+        <div className="space-y-2">
+          <span className="text-primary font-bold uppercase tracking-[0.2em] text-xs block">Premium Fleet</span>
+          <h2 className="font-display text-4xl font-black text-slate-900 leading-tight">Curated Rental Experience</h2>
         </div>
-        <Link className="text-primary font-button flex items-center gap-2 hover:underline" href="/fleet">
-          View All Fleet <span className="material-symbols-outlined">arrow_forward</span>
+        <Link className="text-primary font-bold flex items-center gap-2 hover:translate-x-2 transition-transform uppercase tracking-widest text-xs" href="/fleet">
+          View Full Fleet <span className="material-symbols-outlined text-sm">arrow_forward</span>
         </Link>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {cars.map((car) => (
-          <div key={car.id} className="bg-white rounded-xl shadow-[0px_4px_20px_rgba(30,41,59,0.05)] overflow-hidden group hover:shadow-xl transition-all duration-300">
+          <div key={car.id} className="bg-white rounded-2xl overflow-hidden shadow-[0px_4px_30px_rgba(0,0,0,0.05)] border border-slate-100 group hover:shadow-2xl transition-all duration-500">
             <div className="h-64 overflow-hidden relative bg-slate-100">
               {car.images?.[0] ? (
                 <Image
                   src={car.images[0]}
                   alt={car.name}
                   fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-500"
+                  className="object-cover group-hover:scale-110 transition-transform duration-700"
                   sizes="(max-width: 768px) 100vw, 33vw"
                 />
               ) : (
@@ -53,41 +53,47 @@ export default function RentalSection() {
                 </div>
               )}
               {car.insuranceIncluded && (
-                <div className="absolute top-4 right-4 bg-green-500/90 text-white px-3 py-1 rounded text-label-md flex items-center gap-1">
-                  <span className="material-symbols-outlined text-[14px]">verified_user</span> Insured
+                <div className="absolute top-4 right-4">
+                  <span className="bg-green-500/90 backdrop-blur-md text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest flex items-center gap-1">
+                    <span className="material-symbols-outlined text-[12px]">verified_user</span> Insured
+                  </span>
                 </div>
               )}
               {car.premium && (
-                <div className="absolute top-4 left-4 bg-primary text-on-primary px-3 py-1 rounded text-label-md">PREMIUM</div>
+                <div className="absolute top-4 left-4">
+                  <span className="bg-primary text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">Premium</span>
+                </div>
               )}
             </div>
-            <div className="p-stack-lg">
-              <div className="flex justify-between items-start mb-stack-md">
+            <div className="p-8">
+              <div className="flex justify-between items-start mb-6">
                 <div>
-                  <h3 className="font-h3 text-h3">{car.name}</h3>
-                  <p className="text-on-surface-variant text-body-sm">{car.brand} • {car.year}</p>
+                  <h3 className="font-display text-xl font-bold text-slate-900 mb-1">{car.name}</h3>
+                  <p className="text-slate-500 text-xs uppercase tracking-wider">{car.brand} • {car.year}</p>
                 </div>
                 <div className="text-right">
-                  <span className="text-primary font-h3">৳{car.rentalDaily?.toLocaleString()}</span>
-                  <p className="text-label-md text-on-surface-variant uppercase">/ Day</p>
+                  <span className="text-primary font-display text-xl font-black">${car.rentalWeekly?.toLocaleString()}</span>
+                  <p className="text-[10px] text-slate-400 uppercase tracking-widest font-bold">/ Week</p>
                 </div>
               </div>
-              <div className="grid grid-cols-3 gap-2 py-stack-md border-y border-outline-variant/30 mb-stack-md">
-                <div className="flex flex-col items-center gap-1">
-                  <span className="material-symbols-outlined text-outline">airline_seat_recline_normal</span>
-                  <span className="text-label-md">{car.seats || 5} Seats</span>
+              
+              <div className="grid grid-cols-3 gap-2 py-6 border-y border-slate-50 mb-8">
+                <div className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-primary text-[18px] font-bold">airline_seat_recline_normal</span>
+                  <span className="text-[10px] font-black text-slate-700 uppercase">{car.seats || 5}</span>
                 </div>
-                <div className="flex flex-col items-center gap-1">
-                  <span className="material-symbols-outlined text-outline">settings</span>
-                  <span className="text-label-md">{car.transmission === "Manual" ? "Manual" : "Auto"}</span>
+                <div className="flex items-center gap-2 border-x border-slate-50 px-2 justify-center">
+                  <span className="material-symbols-outlined text-primary text-[18px] font-bold">settings</span>
+                  <span className="text-[10px] font-black text-slate-700 uppercase">{car.transmission === "Manual" ? "MNL" : "AUTO"}</span>
                 </div>
-                <div className="flex flex-col items-center gap-1">
-                  <span className="material-symbols-outlined text-outline">local_gas_station</span>
-                  <span className="text-label-md">{car.fuelType || "Petrol"}</span>
+                <div className="flex items-center gap-2 justify-end">
+                  <span className="material-symbols-outlined text-primary text-[18px] font-bold">local_gas_station</span>
+                  <span className="text-[10px] font-black text-slate-700 uppercase">{car.fuelType?.substring(0,3) || "PET"}</span>
                 </div>
               </div>
-              <Link href="/fleet" className="w-full py-3 border-2 border-primary text-primary rounded-lg font-button hover:bg-primary hover:text-on-primary transition-all block text-center">
-                Rent Now
+
+              <Link href="/fleet" className="w-full py-4 bg-slate-900 text-white rounded-xl font-bold text-xs uppercase tracking-[0.2em] hover:bg-primary transition-all block text-center shadow-lg shadow-slate-200 hover:shadow-primary/30">
+                Book Now
               </Link>
             </div>
           </div>

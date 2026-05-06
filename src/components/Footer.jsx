@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -7,8 +8,18 @@ export default function Footer() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-20">
           {/* Brand Column */}
           <div className="lg:col-span-4 space-y-8">
-            <div className="text-3xl font-black text-white tracking-tighter font-display italic">
-              Deals<span className="text-primary">On</span>Wheels
+            <div className="flex items-center gap-4">
+              <div className="relative h-14 w-14">
+                <Image
+                  src="/logo.png"
+                  alt="DealsOnWheels"
+                  fill
+                  className="object-contain brightness-0 invert"
+                />
+              </div>
+              <div className="text-3xl font-black text-white tracking-tighter font-display italic">
+                Deals<span className="text-primary">On</span>Wheels
+              </div>
             </div>
             <p className="text-lg leading-relaxed max-w-sm">
               Redefining automotive excellence in Melbourne. Experience the ultimate in premium car rentals and certified pre-owned sales.

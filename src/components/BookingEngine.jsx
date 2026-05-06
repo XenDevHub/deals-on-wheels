@@ -32,7 +32,7 @@ const BookingEngine = ({ car, isOpen, onClose }) => {
   };
 
   const totalDays = calculateDays();
-  const totalCost = totalDays * (car?.rentalDaily || 0);
+  const totalCost = Math.round((totalDays * (car?.rentalWeekly || 0)) / 7);
 
   const isFormValid = formData.name && formData.phone && formData.pickupDate && formData.returnDate && totalDays > 0;
 
@@ -85,7 +85,7 @@ const BookingEngine = ({ car, isOpen, onClose }) => {
       return;
     }
 
-    const message = `Hello Deals on Wheels! I would like to book a rental.\n\nName: ${formData.name}\nContact: ${formData.phone}\nEmail: ${formData.email || "N/A"}\nCar: ${car.name}\nPickup: ${formData.pickupDate}\nReturn: ${formData.returnDate}\nDays: ${totalDays}\nLocation: ${formData.pickupLocation || "N/A"}\nEstimated Cost: ৳${totalCost.toLocaleString()}\nNotes: ${formData.notes || "None"}\n\nI have agreed to the Terms & Conditions.`;
+    const message = `Hello Deals on Wheels! I would like to book a rental.\n\nName: ${formData.name}\nContact: ${formData.phone}\nEmail: ${formData.email || "N/A"}\nCar: ${car.name}\nPickup: ${formData.pickupDate}\nReturn: ${formData.returnDate}\nDays: ${totalDays}\nLocation: ${formData.pickupLocation || "N/A"}\nEstimated Cost: $${totalCost.toLocaleString()}\nNotes: ${formData.notes || "None"}\n\nI have agreed to the Terms & Conditions.`;
     openWhatsApp(whatsappNumber, message);
   };
 
@@ -132,19 +132,13 @@ const BookingEngine = ({ car, isOpen, onClose }) => {
 
               <div className="bg-white rounded-lg p-4 border border-slate-200 space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span className="text-slate-500">Daily Rate</span>
-                  <span className="font-bold text-primary">৳{car.rentalDaily?.toLocaleString()}</span>
+                  <span className="text-slate-500">Weekly Rate</span>
+                  <span className="font-bold text-primary">${car.rentalWeekly?.toLocaleString()}</span>
                 </div>
-                {car.rentalWeekly > 0 && (
-                  <div className="flex justify-between text-sm">
-                    <span className="text-slate-500">Weekly Rate</span>
-                    <span className="font-bold text-slate-700">৳{car.rentalWeekly?.toLocaleString()}</span>
-                  </div>
-                )}
                 {totalDays > 0 && (
                   <div className="flex justify-between text-sm pt-2 border-t border-slate-100">
                     <span className="text-slate-900 font-medium">{totalDays} Day{totalDays > 1 ? "s" : ""} Total</span>
-                    <span className="font-bold text-primary text-lg">৳{totalCost.toLocaleString()}</span>
+                    <span className="font-bold text-primary text-lg">${totalCost.toLocaleString()}</span>
                   </div>
                 )}
               </div>
@@ -234,7 +228,7 @@ const BookingEngine = ({ car, isOpen, onClose }) => {
               <div className="space-y-4 text-sm text-slate-600 leading-relaxed whitespace-pre-line border-t border-slate-200 pt-6">
                 {car?.terms || `01. Minimum Age: Driver must be at least ${car?.minAge || 25} years old.
 02. Identification: Valid Driving License and Passport/NID required.
-03. Security Deposit: A refundable deposit of ৳20,000 required.
+03. Security Deposit: A refundable deposit of $1,000 required.
 04. Fuel Policy: Vehicle must be returned with same fuel level.
 05. Damage Policy: Client is responsible for any minor damages or traffic violations during rental.`}
               </div>

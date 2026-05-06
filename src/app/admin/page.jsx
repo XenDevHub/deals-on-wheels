@@ -49,7 +49,7 @@ export default function AdminPage() {
     mileage: "",
     color: "",
     minAge: 25,
-    terms: "01. Minimum Age: Driver must be at least 25 years old with a valid driving license.\n02. Identification: Passport or National ID required for security verification.\n03. Security Deposit: A refundable security deposit of ৳20,000 is required upon delivery.\n04. Usage: Vehicle must be driven within national boundaries only.\n05. Fuel Policy: Vehicle will be delivered with a full tank and must be returned with a full tank."
+    terms: "01. Minimum Age: Driver must be at least 25 years old with a valid driving license.\n02. Identification: Valid Driving License and Passport required.\n03. Security Deposit: A refundable security deposit of $1,000 is required.\n04. Usage: Vehicle must be driven within state boundaries or as per agreement.\n05. Fuel Policy: Vehicle will be delivered with a full tank and must be returned with a full tank."
   });
   const [uploadingImages, setUploadingImages] = useState(false);
   const [tempImageUrl, setTempImageUrl] = useState("");
@@ -117,7 +117,7 @@ export default function AdminPage() {
         type: "rental", price: 0, rentalDaily: 0, rentalWeekly: 0,
         description: "", available: true, images: [],
         premium: false, seats: 5, suitcases: 2, bags: 2, transmission: "Automatic", doors: 4, gps: true, insuranceIncluded: false, fuelType: "Petrol", mileage: "", color: "", minAge: 25,
-        terms: "01. Minimum Age: Driver must be at least 25 years old with a valid driving license.\n02. Identification: Passport or National ID required for security verification.\n03. Security Deposit: A refundable security deposit of ৳20,000 is required upon delivery.\n04. Usage: Vehicle must be driven within national boundaries only.\n05. Fuel Policy: Vehicle will be delivered with a full tank and must be returned with a full tank."
+        terms: "01. Minimum Age: Driver must be at least 25 years old with a valid driving license.\n02. Identification: Valid Driving License and Passport required.\n03. Security Deposit: A refundable security deposit of $1,000 is required.\n04. Usage: Vehicle must be driven within state boundaries or as per agreement.\n05. Fuel Policy: Vehicle will be delivered with a full tank and must be returned with a full tank."
       });
       fetchData();
     } catch (error) {
@@ -209,9 +209,19 @@ export default function AdminPage() {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="relative z-10 w-full max-w-md bg-[#0a0a0a] border border-white/10 p-10 shadow-2xl"
         >
-          <div className="text-center mb-10">
-            <h1 className="text-5xl font-bebas text-white tracking-widest mb-2">ADMIN</h1>
-            <p className="text-xs text-white/40 uppercase tracking-[0.2em]">Authorized Personnel Only</p>
+          <div className="text-center mb-10 flex flex-col items-center">
+            <div className="relative h-16 w-16 mb-4">
+              <Image
+                src="/logo.png"
+                alt="Logo"
+                fill
+                className="object-contain brightness-0 invert"
+              />
+            </div>
+            <h1 className="text-4xl font-black italic font-display text-white tracking-tighter mb-2">
+              Deals<span className="text-primary">On</span>Wheels
+            </h1>
+            <p className="text-[10px] text-white/40 uppercase tracking-[0.2em]">Authorized Personnel Only</p>
           </div>
 
           <form onSubmit={handleLogin} className="space-y-6">
@@ -248,9 +258,25 @@ export default function AdminPage() {
   return (
     <div className="min-h-screen bg-[#050505] text-white selection:bg-primary/30 selection:text-white">
       {/* Header */}
-      <header className="border-b border-white/5 bg-[#0a0a0a]/80 backdrop-blur-xl sticky top-0 z-30">
-        <div className="container mx-auto px-6 h-20 flex justify-between items-center">
-          <Link href="/" className="text-2xl font-bebas text-white tracking-widest hover:text-white/80 transition-colors">DEALS ON WHEELS <span className="text-primary ml-2">ADMIN</span></Link>
+      <div className="border-b border-white/5 bg-[#0a0a0a] sticky top-0 z-40">
+        <div className="max-w-7xl mx-auto px-8 py-4 flex justify-between items-center">
+          <div className="flex items-center gap-6">
+            <Link href="/" className="flex items-center gap-3 group">
+              <div className="relative h-10 w-10">
+                <Image
+                  src="/logo.png"
+                  alt="Logo"
+                  fill
+                  className="object-contain brightness-0 invert"
+                />
+              </div>
+              <span className="text-2xl font-black italic font-display text-white tracking-tighter">
+                Deals<span className="text-primary">On</span>Wheels
+              </span>
+            </Link>
+            <div className="h-6 w-px bg-white/10 hidden md:block" />
+            <span className="text-[10px] tracking-[0.3em] uppercase text-white/40 hidden md:block">Inventory Dashboard</span>
+          </div>
           <div className="flex items-center gap-6">
             <Link href="/" className="text-[10px] font-bold text-white/60 hover:text-white border border-white/10 px-4 py-2 uppercase tracking-widest transition-colors hidden md:block">
               BACK TO SITE
@@ -261,7 +287,7 @@ export default function AdminPage() {
             </button>
           </div>
         </div>
-      </header>
+      </div>
 
       <main className="container mx-auto px-6 py-12">
         {/* Tabs */}
@@ -453,19 +479,15 @@ export default function AdminPage() {
                       
                       {/* Explicit labels for pricing */}
                       <div>
-                        <label className="text-[10px] text-white/40 uppercase tracking-[0.15em] mb-2 block">Total Sale Price (BDT)</label>
-                        <input type="number" value={carFormData.price} onChange={(e) => setCarFormData({...carFormData, price: parseInt(e.target.value) || 0})} className="w-full bg-[#050505] border border-white/10 p-4 text-sm font-mono text-white outline-none focus:border-primary transition-colors" placeholder="e.g. 15000000" />
+                        <label className="text-[10px] text-white/40 uppercase tracking-[0.15em] mb-2 block">Total Sale Price (AUD)</label>
+                        <input type="number" value={carFormData.price} onChange={(e) => setCarFormData({...carFormData, price: parseInt(e.target.value) || 0})} className="w-full bg-[#050505] border border-white/10 p-4 text-sm font-mono text-white outline-none focus:border-primary transition-colors" placeholder="e.g. 45000" />
                         <p className="text-[9px] text-white/30 mt-1">Leave 0 if not for sale.</p>
                       </div>
 
                       <div className="grid grid-cols-2 gap-6">
-                        <div>
-                          <label className="text-[10px] text-white/40 uppercase tracking-[0.15em] mb-2 block">Daily Rental Rate (BDT)</label>
-                          <input type="number" value={carFormData.rentalDaily} onChange={(e) => setCarFormData({...carFormData, rentalDaily: parseInt(e.target.value) || 0})} className="w-full bg-[#050505] border border-white/10 p-4 text-sm font-mono text-white outline-none focus:border-primary transition-colors" placeholder="e.g. 5000" />
-                        </div>
-                        <div>
-                          <label className="text-[10px] text-white/40 uppercase tracking-[0.15em] mb-2 block">Weekly Rental Rate (BDT)</label>
-                          <input type="number" value={carFormData.rentalWeekly} onChange={(e) => setCarFormData({...carFormData, rentalWeekly: parseInt(e.target.value) || 0})} className="w-full bg-[#050505] border border-white/10 p-4 text-sm font-mono text-white outline-none focus:border-primary transition-colors" placeholder="e.g. 30000" />
+                        <div className="md:col-span-2">
+                          <label className="text-[10px] text-white/40 uppercase tracking-[0.15em] mb-2 block">Weekly Rental Rate (AUD) *</label>
+                          <input type="number" value={carFormData.rentalWeekly} onChange={(e) => setCarFormData({...carFormData, rentalWeekly: parseInt(e.target.value) || 0})} className="w-full bg-[#050505] border border-white/10 p-4 text-sm font-mono text-white outline-none focus:border-primary transition-colors" placeholder="e.g. 700" />
                         </div>
                       </div>
                     </div>
