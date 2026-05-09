@@ -1,15 +1,15 @@
 export default function WhoRentsSection() {
   return (
-    <section className="py-24 bg-slate-50">
-      <div className="max-w-7xl mx-auto px-8">
-        <div className="text-center mb-16">
-          <h2 className="font-display text-4xl lg:text-5xl font-bold text-slate-900 mb-6">Who Chooses Our Premium Hybrids?</h2>
-          <p className="text-slate-600 font-body-lg max-w-2xl mx-auto text-lg">
+    <section className="py-16 md:py-24 bg-slate-50">
+      <div className="max-w-7xl 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 md:px-8">
+        <div className="text-center mb-10 md:mb-16">
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl 2xl:text-6xl font-bold text-slate-900 mb-4 md:mb-6">Who Chooses Our Premium Hybrids?</h2>
+          <p className="text-slate-600 font-body-lg max-w-2xl mx-auto text-base sm:text-lg">
             From full-time rideshare professionals to daily commuters, we provide the perfect efficient vehicle for your needs.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 w-full max-w-5xl 2xl:max-w-7xl mx-auto">
           {/* Card 1 */}
           <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 flex flex-col h-full hover:shadow-md transition-shadow">
             <div className="flex items-center gap-4 mb-6">

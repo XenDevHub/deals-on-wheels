@@ -33,11 +33,11 @@ export default function SalesSection() {
   if (cars.length === 0) return null;
 
   return (
-    <section className="py-24 max-w-7xl mx-auto px-8">
-      <div className="flex justify-between items-end mb-12">
+    <section className="py-16 md:py-24 max-w-7xl 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 md:px-8">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6 mb-8 md:mb-12">
         <div className="space-y-2">
           <span className="text-primary font-bold uppercase tracking-[0.2em] text-xs block">Certified Sales</span>
-          <h2 className="font-display text-4xl font-black text-slate-900 leading-tight">Find Your Permanent Drive</h2>
+          <h2 className="font-display text-3xl md:text-4xl 2xl:text-5xl font-black text-slate-900 leading-tight">Find Your Permanent Drive</h2>
         </div>
         <Link className="text-primary font-bold flex items-center gap-2 hover:translate-x-2 transition-transform uppercase tracking-widest text-xs" href="/sales">
           Explore Inventory <span className="material-symbols-outlined text-sm">arrow_forward</span>

@@ -1,8 +1,8 @@
 export default function WhyChooseUs() {
   return (
     <section className="bg-surface-container py-section-gap">
-      <div className="max-w-7xl mx-auto px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <div className="max-w-7xl 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 md:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center">
           <div className="space-y-stack-lg">
             <span className="text-primary font-label-lg uppercase tracking-widest">Why Choose Us</span>
             <h2 className="font-display text-display leading-tight">Elevating the Standard of Automotive Luxury.</h2>

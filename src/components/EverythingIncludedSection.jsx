@@ -18,16 +18,16 @@ export default function EverythingIncludedSection() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section className="py-24 bg-slate-50 relative overflow-hidden">
+    <section className="py-16 md:py-24 bg-slate-50 relative overflow-hidden">
       <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
 
-      <div className="max-w-7xl mx-auto px-8 relative z-10">
-        <div className="grid lg:grid-cols-12 gap-16 items-start">
+      <div className="max-w-7xl 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 md:px-8 relative z-10">
+        <div className="grid lg:grid-cols-12 gap-10 md:gap-16 items-start">
           
           {/* Left Column - Content & Active Feature */}
-          <div className="lg:col-span-5 sticky top-32">
-            <h2 className="font-display text-4xl lg:text-5xl font-bold text-slate-900 leading-tight mb-8">
-              What's Covered in Your <span className="text-primary">Weekly Subscription</span>
+          <div className="lg:col-span-5 lg:sticky lg:top-32">
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl 2xl:text-6xl font-bold text-slate-900 leading-tight mb-6 md:mb-8">
+              What's Covered in Your <span className="text-primary block md:inline">Weekly Subscription</span>
             </h2>
             
             {/* Highlight Box */}
@@ -59,13 +59,13 @@ export default function EverythingIncludedSection() {
                   key={index}
                   onMouseEnter={() => setActiveIndex(index)}
                   onClick={() => setActiveIndex(index)}
-                  className={`flex flex-col items-center justify-center p-6 rounded-2xl text-center transition-all duration-300 border ${
+                  className={`flex flex-col items-center justify-center p-4 sm:p-6 rounded-2xl text-center transition-all duration-300 border ${
                     activeIndex === index 
                       ? "bg-primary text-white border-primary shadow-lg scale-105" 
                       : "bg-white border-slate-100 text-slate-600 hover:bg-slate-50 hover:border-slate-200"
                   }`}
                 >
-                  <span className={`material-symbols-outlined text-3xl mb-4 ${activeIndex === index ? "text-white" : "text-primary"}`}>
+                  <span className={`material-symbols-outlined text-3xl mb-3 sm:mb-4 ${activeIndex === index ? "text-white" : "text-primary"}`}>
                     {item.icon}
                   </span>
                   <span className={`font-semibold text-sm ${activeIndex === index ? "text-white" : "text-slate-900"}`}>

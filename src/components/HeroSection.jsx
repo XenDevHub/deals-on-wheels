@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from "next/link";
 export default function HeroSection() {
   return (
-    <section className="relative min-h-[870px] flex flex-col overflow-hidden">
+    <section className="relative min-h-[100svh] lg:min-h-[870px] xl:min-h-[900px] flex flex-col overflow-hidden">
       {/* Background Image & Gradient */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -18,31 +18,31 @@ export default function HeroSection() {
       </div>
 
       {/* Top Content: Text (Centered in available space above the search box) */}
-      <div className="relative z-10 max-w-7xl mx-auto px-8 w-full flex-grow flex flex-col justify-center pt-32 pb-16">
-        <div className="max-w-full text-white">
-          <h1 className="font-display text-5xl lg:text-8xl font-black mb-6 leading-tight tracking-tight">
-            Drive Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-primary drop-shadow-[0_0_15px_rgba(59,130,246,0.5)]">Ambition.</span>
+      <div className="relative z-10 max-w-7xl 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 md:px-8 w-full flex-grow flex flex-col justify-center pt-24 md:pt-32 pb-12 md:pb-16">
+        <div className="max-w-full text-white text-center lg:text-left mt-16 md:mt-0">
+          <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-8xl 2xl:text-9xl font-black mb-4 md:mb-6 leading-tight tracking-tight">
+            Drive Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-primary drop-shadow-[0_0_15px_rgba(59,130,246,0.5)] block lg:inline">Ambition.</span>
           </h1>
-          <p className="text-xl lg:text-2xl text-slate-300 leading-relaxed max-w-2xl font-medium">
+          <p className="text-lg sm:text-xl lg:text-2xl 2xl:text-3xl text-slate-300 leading-relaxed max-w-2xl mx-auto lg:mx-0 font-medium">
             Experience the pinnacle of automotive engineering with our curated fleet of premium rentals and certified sales inventory.
           </p>
         </div>
       </div>
 
       {/* Bottom Content: Search Box (Pushed to the very bottom) */}
-      <div className="relative z-10 max-w-7xl mx-auto px-8 w-full pb-10">
+      <div className="relative z-10 max-w-7xl 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 md:px-8 w-full pb-8 md:pb-10">
         {/* Search/Toggle Component - Premium Glassmorphism */}
-        <div className="backdrop-blur-xl bg-white/10 border border-white/20 p-6 md:p-8 rounded-[2rem] shadow-2xl max-w-5xl relative overflow-hidden group">
+        <div className="backdrop-blur-xl bg-white/10 border border-white/20 p-4 sm:p-6 md:p-8 rounded-3xl md:rounded-[2rem] shadow-2xl max-w-5xl 2xl:max-w-7xl relative overflow-hidden group">
           {/* Subtle animated glow inside the glass panel */}
           <div className="absolute inset-0 bg-gradient-to-r from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none"></div>
 
-          <div className="flex gap-2 mb-8 p-1.5 bg-slate-900/50 rounded-2xl w-fit border border-white/10 backdrop-blur-md">
-            <button className="px-8 py-3 rounded-xl bg-primary text-white font-bold shadow-[0_0_20px_rgba(37,99,235,0.4)]">
+          <div className="flex flex-wrap sm:flex-nowrap gap-2 mb-6 md:mb-8 p-1.5 bg-slate-900/50 rounded-2xl w-full sm:w-fit border border-white/10 backdrop-blur-md">
+            <button className="flex-1 sm:flex-none px-4 sm:px-8 py-3 rounded-xl bg-primary text-white font-bold shadow-[0_0_20px_rgba(37,99,235,0.4)] text-sm sm:text-base">
               Rent a Car
             </button>
-            <button className="px-8 py-3 rounded-xl text-slate-300 font-bold hover:text-white hover:bg-white/10 transition-colors cursor-pointer" >
-              <Link href="/sales">Buy a Car</Link>
-            </button>
+            <Link href="/sales" className="flex-1 sm:flex-none px-4 sm:px-8 py-3 rounded-xl text-slate-300 font-bold hover:text-white hover:bg-white/10 transition-colors text-center text-sm sm:text-base cursor-pointer">
+              Buy a Car
+            </Link>
           </div>
 
           {/* Rental Form */}

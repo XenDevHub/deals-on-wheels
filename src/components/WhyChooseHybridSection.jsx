@@ -1,15 +1,15 @@
 export default function WhyChooseHybridSection() {
   return (
-    <section className="py-24 bg-white relative overflow-hidden">
+    <section className="py-16 md:py-24 bg-white relative overflow-hidden">
       {/* Premium Background Effects - Light Theme */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-7xl h-full opacity-30 pointer-events-none">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[150px]"></div>
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-400/20 rounded-full blur-[150px]"></div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-8 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-20">
-          <h2 className="font-display text-4xl lg:text-5xl font-bold text-slate-900 mb-6">
+      <div className="max-w-7xl 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 md:px-8 relative z-10">
+        <div className="text-center max-w-3xl mx-auto mb-12 md:mb-20">
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl 2xl:text-6xl font-bold text-slate-900 mb-4 md:mb-6">
             Why Drivers Prefer Our Hybrid Fleet
           </h2>
           <p className="text-slate-600 text-lg leading-relaxed">

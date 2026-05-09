@@ -12,10 +12,10 @@ const comparisonData = [
 
 export default function RentVsBuySection() {
   return (
-    <section className="py-24 bg-white">
-      <div className="max-w-5xl mx-auto px-8">
-        <div className="text-center mb-16">
-          <h2 className="font-display text-4xl lg:text-5xl font-bold text-slate-900 mb-6">
+    <section className="py-16 md:py-24 bg-white">
+      <div className="max-w-5xl 2xl:max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+        <div className="text-center mb-10 md:mb-16">
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl 2xl:text-6xl font-bold text-slate-900 mb-4 md:mb-6">
             Renting a Hybrid vs. Buying New
           </h2>
           <p className="text-slate-600 text-lg">
@@ -26,32 +26,32 @@ export default function RentVsBuySection() {
         {/* Premium Comparison Table */}
         <div className="relative">
           {/* Header Row */}
-          <div className="grid grid-cols-3 gap-4 mb-4 items-end px-6">
+          <div className="grid grid-cols-3 gap-2 md:gap-4 mb-4 items-end px-2 md:px-6">
             <div className="col-span-1"></div>
-            <div className="col-span-1 text-center pb-4">
-              <h3 className="font-display text-2xl font-bold text-primary">Renting with DealsOnWheels</h3>
+            <div className="col-span-1 text-center pb-2 md:pb-4">
+              <h3 className="font-display text-sm sm:text-base md:text-2xl font-bold text-primary">Renting with DealsOnWheels</h3>
             </div>
-            <div className="col-span-1 text-center pb-4">
-              <h3 className="font-display text-xl font-semibold text-slate-500">Buying New</h3>
+            <div className="col-span-1 text-center pb-2 md:pb-4">
+              <h3 className="font-display text-xs sm:text-sm md:text-xl font-semibold text-slate-500">Buying New</h3>
             </div>
           </div>
 
           {/* Table Body */}
-          <div className="relative z-10 bg-slate-50 rounded-3xl p-6 shadow-xl border border-slate-100">
+          <div className="relative z-10 bg-slate-50 rounded-[2rem] p-4 md:p-6 shadow-xl border border-slate-100">
             {/* Renting Highlight Backdrop */}
-            <div className="absolute top-0 left-1/3 w-1/3 h-full bg-white rounded-2xl shadow-xl scale-105 border border-primary/20 z-0"></div>
+            <div className="absolute top-0 left-1/3 w-1/3 h-full bg-white rounded-2xl md:rounded-[2rem] shadow-xl md:scale-105 border border-primary/20 z-0"></div>
 
             <div className="relative z-10 divide-y divide-slate-200">
               {comparisonData.map((row, index) => (
-                <div key={index} className="grid grid-cols-3 gap-4 py-6 items-center hover:bg-slate-100/50 transition-colors rounded-xl px-4">
+                <div key={index} className="grid grid-cols-3 gap-2 md:gap-4 py-4 md:py-6 items-center hover:bg-slate-100/50 transition-colors rounded-xl px-2 md:px-4">
                   {/* Label */}
                   <div className="col-span-1">
-                    <p className="font-semibold text-slate-900">{row.label}</p>
+                    <p className="font-semibold text-slate-900 text-xs sm:text-sm md:text-base">{row.label}</p>
                   </div>
                   
                   {/* Rent Column (Highlighted) */}
-                  <div className="col-span-1 flex items-center justify-center gap-3">
-                    <p className="font-bold text-slate-900 text-center">{row.rent}</p>
+                  <div className="col-span-1 flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-3">
+                    <p className="font-bold text-slate-900 text-center text-xs sm:text-sm md:text-base">{row.rent}</p>
                     {row.rentCheck ? (
                       <span className="material-symbols-outlined text-green-600 font-bold bg-green-50 rounded-full p-1 text-sm">check</span>
                     ) : (
@@ -60,8 +60,8 @@ export default function RentVsBuySection() {
                   </div>
 
                   {/* Buy Column (Muted) */}
-                  <div className="col-span-1 flex items-center justify-center gap-3 opacity-60">
-                    <p className="text-slate-600 font-medium text-center">{row.buy}</p>
+                  <div className="col-span-1 flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-3 opacity-60">
+                    <p className="text-slate-600 font-medium text-center text-xs sm:text-sm md:text-base">{row.buy}</p>
                     {row.buyCheck ? (
                       <span className="material-symbols-outlined text-green-600 font-bold text-sm">check</span>
                     ) : (

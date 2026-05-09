@@ -3,9 +3,9 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="bg-slate-900 text-slate-400 py-20 px-8 border-t border-white/5">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-20">
+    <footer className="bg-slate-900 text-slate-400 py-12 md:py-20 px-4 sm:px-6 md:px-8 border-t border-white/5">
+      <div className="max-w-7xl 2xl:max-w-screen-2xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 mb-12 md:mb-20">
           {/* Brand Column */}
           <div className="lg:col-span-4 space-y-8">
             <div className="flex items-center gap-4">

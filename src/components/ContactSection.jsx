@@ -25,20 +25,20 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-8">
-        <div className="bg-slate-900 rounded-[3rem] overflow-hidden relative shadow-2xl">
+    <section id="contact" className="py-16 md:py-24 bg-white">
+      <div className="max-w-7xl 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 md:px-8">
+        <div className="bg-slate-900 rounded-[2rem] md:rounded-[3rem] overflow-hidden relative shadow-2xl">
           {/* Decorative Gradients */}
           <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/20 to-transparent pointer-events-none" />
           <div className="absolute bottom-0 left-0 w-1/2 h-full bg-gradient-to-r from-blue-500/10 to-transparent pointer-events-none" />
           
-          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 p-12 lg:p-20">
+          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 p-6 sm:p-8 md:p-12 lg:p-20">
             <div>
-              <span className="text-primary font-bold uppercase tracking-[0.3em] text-sm block mb-6">Contact Us</span>
-              <h2 className="font-display text-4xl lg:text-5xl font-black text-white leading-tight mb-8">
+              <span className="text-primary font-bold uppercase tracking-[0.3em] text-sm block mb-4 md:mb-6">Contact Us</span>
+              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl 2xl:text-6xl font-black text-white leading-tight mb-6 md:mb-8">
                 Ready to Start Your <span className="text-primary italic">Journey?</span>
               </h2>
-              <p className="text-slate-400 text-lg mb-12 max-w-md">
+              <p className="text-slate-400 text-base md:text-lg mb-8 md:mb-12 max-w-md">
                 Our team is standing by to provide you with the ultimate automotive experience. Reach out via any of the channels below.
               </p>
               
@@ -75,8 +75,8 @@ export default function ContactSection() {
               </div>
             </div>
 
-            <div className="bg-white/5 backdrop-blur-md rounded-3xl p-8 lg:p-12 border border-white/10">
-              <h3 className="text-2xl font-bold text-white mb-8">Send a Message</h3>
+            <div className="bg-white/5 backdrop-blur-md rounded-3xl p-6 sm:p-8 lg:p-12 border border-white/10">
+              <h3 className="text-2xl font-bold text-white mb-6 md:mb-8">Send a Message</h3>
               <form className="space-y-6" onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>

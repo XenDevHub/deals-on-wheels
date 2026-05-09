@@ -207,7 +207,7 @@ export default function AdminPage() {
           initial={{ scale: 0.9, opacity: 0, y: 20 }} 
           animate={{ scale: 1, opacity: 1, y: 0 }} 
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="relative z-10 w-full max-w-md bg-white border border-slate-200 p-10 shadow-2xl rounded-2xl"
+          className="relative z-10 w-full max-w-md bg-white border border-slate-200 p-6 md:p-10 shadow-2xl rounded-2xl"
         >
           <div className="text-center mb-10 flex flex-col items-center">
             <div className="relative h-16 w-16 mb-4">
@@ -259,8 +259,8 @@ export default function AdminPage() {
     <div className="min-h-screen bg-white text-slate-900 selection:bg-primary/10 selection:text-primary">
       {/* Header */}
       <div className="border-b border-slate-100 bg-white sticky top-0 z-40">
-        <div className="max-w-7xl mx-auto px-8 py-4 flex justify-between items-center">
-          <div className="flex items-center gap-6">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 py-4 flex justify-between items-center">
+          <div className="flex items-center gap-3 md:gap-6">
             <Link href="/" className="flex items-center gap-3 group">
               <div className="relative h-10 w-10">
                 <Image
@@ -270,33 +270,36 @@ export default function AdminPage() {
                   className="object-contain"
                 />
               </div>
-              <span className="text-2xl font-black italic font-display text-slate-900 tracking-tighter">
+              <span className="text-xl sm:text-2xl font-black italic font-display text-slate-900 tracking-tighter">
                 Deals<span className="text-primary">On</span>Wheels
               </span>
             </Link>
             <div className="h-6 w-px bg-slate-200 hidden md:block" />
             <span className="text-[10px] tracking-[0.3em] uppercase text-slate-400 hidden md:block">Inventory Dashboard</span>
           </div>
-          <div className="flex items-center gap-6">
-            <Link href="/" className="text-[10px] font-bold text-slate-500 hover:text-slate-900 border border-slate-200 px-4 py-2 uppercase tracking-widest transition-colors hidden md:block rounded-lg">
+          <div className="flex items-center gap-3 md:gap-6">
+            <Link href="/" className="text-[10px] font-bold text-slate-500 hover:text-slate-900 border border-slate-200 px-3 md:px-4 py-2 uppercase tracking-widest transition-colors hidden md:block rounded-lg">
               BACK TO SITE
             </Link>
+            <Link href="/" className="md:hidden text-slate-500 hover:text-slate-900">
+              <span className="material-symbols-outlined text-xl">home</span>
+            </Link>
             <span className="text-xs text-slate-400 tracking-widest uppercase hidden md:block">{user.email}</span>
-            <button onClick={handleLogout} className="text-[10px] font-bold text-slate-500 hover:text-slate-900 border border-slate-200 px-4 py-2 uppercase tracking-widest transition-colors rounded-lg">
+            <button onClick={handleLogout} className="text-[10px] font-bold text-slate-500 hover:text-slate-900 border border-slate-200 px-3 md:px-4 py-2 uppercase tracking-widest transition-colors rounded-lg">
               LOGOUT
             </button>
           </div>
         </div>
       </div>
 
-      <main className="container mx-auto px-6 py-12">
+      <main className="container mx-auto px-4 sm:px-6 py-8 md:py-12">
         {/* Tabs */}
         <div className="flex gap-2 mb-12 border-b border-slate-100 pb-px">
           {["bookings", "cars"].map(tab => (
             <button 
               key={tab} 
               onClick={() => setActiveTab(tab)}
-              className={`px-8 py-4 text-xs font-bold tracking-widest uppercase transition-all relative ${
+              className={`px-4 sm:px-8 py-3 sm:py-4 text-xs font-bold tracking-widest uppercase transition-all relative ${
                 activeTab === tab ? "text-slate-900" : "text-slate-400 hover:text-slate-600"
               }`}
             >
@@ -361,8 +364,8 @@ export default function AdminPage() {
           </motion.div>
         ) : (
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-            <div className="flex justify-between items-end mb-8">
-              <h2 className="text-3xl font-bebas text-slate-900 tracking-widest">INVENTORY</h2>
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between items-start gap-4 mb-6 md:mb-8">
+              <h2 className="text-2xl sm:text-3xl font-bebas text-slate-900 tracking-widest">INVENTORY</h2>
               <button 
                 onClick={() => {
                   setEditingCar(null);
@@ -438,8 +441,8 @@ export default function AdminPage() {
                 <button onClick={() => setIsCarModalOpen(false)} className="text-slate-400 hover:text-slate-900 transition-colors">✕</button>
               </div>
 
-              <div className="p-6 md:p-10 overflow-y-auto no-scrollbar">
-                <form onSubmit={handleCarSubmit} className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+              <div className="p-4 md:p-6 lg:p-10 overflow-y-auto no-scrollbar">
+                <form onSubmit={handleCarSubmit} className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
                   
                   {/* Left Column: Details */}
                   <div className="space-y-6">
@@ -448,7 +451,7 @@ export default function AdminPage() {
                       <input type="text" value={carFormData.name} onChange={(e) => setCarFormData({...carFormData, name: e.target.value})} className="w-full bg-slate-50 border border-slate-200 p-4 text-sm text-slate-900 outline-none focus:border-primary transition-colors rounded-xl" required placeholder="e.g. Porsche 911 GT3 RS" />
                     </div>
                     
-                    <div className="grid grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                       <div>
                         <label className="text-[10px] text-slate-400 uppercase tracking-[0.15em] mb-2 block font-bold">Brand</label>
                         <input type="text" value={carFormData.brand} onChange={(e) => setCarFormData({...carFormData, brand: e.target.value})} className="w-full bg-slate-50 border border-slate-200 p-4 text-sm text-slate-900 outline-none focus:border-primary transition-colors rounded-xl" required placeholder="e.g. Porsche" />
@@ -459,7 +462,7 @@ export default function AdminPage() {
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                       <div>
                         <label className="text-[10px] text-slate-400 uppercase tracking-[0.15em] mb-2 block font-bold">Manufacture Year</label>
                         <input type="number" value={carFormData.year} onChange={(e) => setCarFormData({...carFormData, year: e.target.value})} className="w-full bg-slate-50 border border-slate-200 p-4 text-sm text-slate-900 outline-none focus:border-primary transition-colors rounded-xl" required />
@@ -494,7 +497,7 @@ export default function AdminPage() {
                     <div className="border-t border-slate-100 pt-6 mt-6 space-y-6">
                       <h3 className="text-xs font-bold text-slate-900 uppercase tracking-widest mb-4">Detailed Specifications</h3>
                       
-                      <div className="grid grid-cols-2 gap-6">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                         <label className="flex items-center gap-3 cursor-pointer p-4 border border-slate-100 bg-slate-50 hover:border-slate-300 transition-colors rounded-xl">
                           <div className={`w-4 h-4 border flex items-center justify-center transition-colors rounded ${carFormData.premium ? 'bg-primary border-primary' : 'border-slate-300 bg-white'}`}>
                             {carFormData.premium && <span className="text-white text-[10px]">✓</span>}
@@ -512,7 +515,7 @@ export default function AdminPage() {
                         </label>
                       </div>
 
-                      <div className="grid grid-cols-2 gap-6">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                         <label className="flex items-center gap-3 cursor-pointer p-4 border border-slate-100 bg-slate-50 hover:border-slate-300 transition-colors rounded-xl">
                           <div className={`w-4 h-4 border flex items-center justify-center transition-colors rounded ${carFormData.insuranceIncluded ? 'bg-green-500 border-green-500' : 'border-slate-300 bg-white'}`}>
                             {carFormData.insuranceIncluded && <span className="text-white text-[10px]">✓</span>}
@@ -532,7 +535,7 @@ export default function AdminPage() {
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-2 gap-6">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                         <div>
                           <label className="text-[10px] text-slate-400 uppercase tracking-[0.15em] mb-2 block font-bold">Mileage (km)</label>
                           <input type="text" value={carFormData.mileage} onChange={(e) => setCarFormData({...carFormData, mileage: e.target.value})} className="w-full bg-slate-50 border border-slate-200 p-4 text-sm text-slate-900 outline-none focus:border-primary transition-colors rounded-xl" placeholder="e.g. 12,000" />
@@ -542,7 +545,7 @@ export default function AdminPage() {
                           <input type="text" value={carFormData.color} onChange={(e) => setCarFormData({...carFormData, color: e.target.value})} className="w-full bg-slate-50 border border-slate-200 p-4 text-sm text-slate-900 outline-none focus:border-primary transition-colors rounded-xl" placeholder="e.g. Midnight Black" />
                         </div>
                       </div>
-                      <div className="grid grid-cols-2 gap-6">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                         <div>
                           <label className="text-[10px] text-slate-400 uppercase tracking-[0.15em] mb-2 block font-bold">Seats</label>
                           <input type="number" value={carFormData.seats} onChange={(e) => setCarFormData({...carFormData, seats: parseInt(e.target.value) || 0})} className="w-full bg-slate-50 border border-slate-200 p-4 text-sm text-slate-900 outline-none focus:border-primary transition-colors rounded-xl" />
@@ -556,7 +559,7 @@ export default function AdminPage() {
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-2 gap-6">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                         <div>
                           <label className="text-[10px] text-slate-400 uppercase tracking-[0.15em] mb-2 block font-bold">Suitcases (Large)</label>
                           <input type="number" value={carFormData.suitcases} onChange={(e) => setCarFormData({...carFormData, suitcases: parseInt(e.target.value) || 0})} className="w-full bg-slate-50 border border-slate-200 p-4 text-sm text-slate-900 outline-none focus:border-primary transition-colors rounded-xl" />
@@ -567,7 +570,7 @@ export default function AdminPage() {
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-2 gap-6">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                         <div>
                           <label className="text-[10px] text-slate-400 uppercase tracking-[0.15em] mb-2 block font-bold">Doors</label>
                           <input type="number" value={carFormData.doors} onChange={(e) => setCarFormData({...carFormData, doors: parseInt(e.target.value) || 0})} className="w-full bg-slate-50 border border-slate-200 p-4 text-sm text-slate-900 outline-none focus:border-primary transition-colors rounded-xl" />

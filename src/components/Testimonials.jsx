@@ -1,7 +1,7 @@
 export default function Testimonials() {
   return (
     <section className="py-section-gap bg-slate-950 text-white">
-      <div className="max-w-7xl mx-auto px-8">
+      <div className="max-w-7xl 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 md:px-8">
         <div className="text-center mb-16 max-w-2xl mx-auto">
           <span className="text-primary font-label-lg uppercase tracking-widest">Client Testimonials</span>
           <h2 className="font-display text-display mt-4">Voices of Excellence</h2>
