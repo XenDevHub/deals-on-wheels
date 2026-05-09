@@ -3,8 +3,8 @@ export default function Testimonials() {
     <section className="py-section-gap bg-slate-950 text-white">
       <div className="max-w-7xl 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 md:px-8">
         <div className="text-center mb-16 max-w-2xl mx-auto">
-          <span className="text-primary font-label-lg uppercase tracking-widest">Client Testimonials</span>
-          <h2 className="font-display text-display mt-4">Voices of Excellence</h2>
+          <span className="text-primary font-label-lg uppercase tracking-widest text-xs sm:text-sm">Client Testimonials</span>
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-black mt-2 md:mt-4">Voices of Excellence</h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-gutter">
           {/* Testimonial 1 */}
@@ -16,7 +16,7 @@ export default function Testimonials() {
               <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
               <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
             </div>
-            <p className="font-body-lg mb-8 italic">"The rental experience was seamless. From the digital booking to the vehicle handover, DealsOnWheels sets a new benchmark for automotive services."</p>
+            <p className="font-body-lg mb-6 md:mb-8 italic text-sm sm:text-base md:text-lg text-slate-300">"The rental experience was seamless. From the digital booking to the vehicle handover, DealsOnWheels sets a new benchmark for automotive services."</p>
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-full overflow-hidden">
                 <img
@@ -40,7 +40,7 @@ export default function Testimonials() {
               <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
               <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
             </div>
-            <p className="font-body-lg mb-8 italic">"I purchased my certified pre-owned BMW through them. The transparency and level of inspection gave me total peace of mind. Highly recommended."</p>
+            <p className="font-body-lg mb-6 md:mb-8 italic text-sm sm:text-base md:text-lg text-slate-300">"I purchased my certified pre-owned BMW through them. The transparency and level of inspection gave me total peace of mind. Highly recommended."</p>
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-full overflow-hidden">
                 <img
@@ -64,7 +64,7 @@ export default function Testimonials() {
               <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
               <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
             </div>
-            <p className="font-body-lg mb-8 italic">"Their fleet variety is unmatched. Whether I need a rugged SUV for a weekend trip or a sleek sedan for business meetings, they always deliver."</p>
+            <p className="font-body-lg mb-6 md:mb-8 italic text-sm sm:text-base md:text-lg text-slate-300">"Their fleet variety is unmatched. Whether I need a rugged SUV for a weekend trip or a sleek sedan for business meetings, they always deliver."</p>
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-full overflow-hidden">
                 <img

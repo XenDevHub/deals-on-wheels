@@ -35,8 +35,8 @@ export default function EverythingIncludedSection() {
               <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-6">
                 <span className="material-symbols-outlined text-primary text-3xl">{inclusions[activeIndex].icon}</span>
               </div>
-              <h3 className="font-h3 text-2xl text-slate-900 mb-4">{inclusions[activeIndex].title}</h3>
-              <p className="text-slate-600 text-lg leading-relaxed">
+              <h3 className="font-h3 text-xl sm:text-2xl text-slate-900 mb-2 sm:mb-4 font-bold">{inclusions[activeIndex].title}</h3>
+              <p className="text-slate-600 text-sm sm:text-base lg:text-lg leading-relaxed">
                 {inclusions[activeIndex].description}
               </p>
             </div>
@@ -46,7 +46,7 @@ export default function EverythingIncludedSection() {
               <span className="material-symbols-outlined ml-2 group-hover:translate-x-1 transition-transform">arrow_forward</span>
             </Link>
             
-            <p className="text-sm text-slate-500 mt-6">
+            <p className="text-xs sm:text-sm text-slate-500 mt-6">
               *Features may vary by specific model. <Link href="/#contact" className="underline hover:text-primary">Contact us</Link> for details.
             </p>
           </div>
@@ -68,7 +68,7 @@ export default function EverythingIncludedSection() {
                   <span className={`material-symbols-outlined text-3xl mb-3 sm:mb-4 ${activeIndex === index ? "text-white" : "text-primary"}`}>
                     {item.icon}
                   </span>
-                  <span className={`font-semibold text-sm ${activeIndex === index ? "text-white" : "text-slate-900"}`}>
+                  <span className={`font-semibold text-xs sm:text-sm ${activeIndex === index ? "text-white" : "text-slate-900"}`}>
                     {item.title}
                   </span>
                 </button>

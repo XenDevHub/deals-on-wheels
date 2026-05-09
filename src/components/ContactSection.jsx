@@ -48,8 +48,8 @@ export default function ContactSection() {
                     <span className="material-symbols-outlined text-white text-2xl">phone_iphone</span>
                   </div>
                   <div>
-                    <p className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-1">Call Us 24/7</p>
-                    <a href="tel:+61433178890" className="text-xl font-display font-bold text-white hover:text-primary transition-colors">+61 433 178 890</a>
+                    <p className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-slate-500 mb-1">Call Us 24/7</p>
+                    <a href="tel:+61433178890" className="text-lg sm:text-xl font-display font-bold text-white hover:text-primary transition-colors">+61 433 178 890</a>
                   </div>
                 </div>
 
@@ -58,8 +58,8 @@ export default function ContactSection() {
                     <span className="material-symbols-outlined text-white text-2xl">alternate_email</span>
                   </div>
                   <div>
-                    <p className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-1">Email Support</p>
-                    <a href="mailto:dealsonwheelsonthego@gmail.com" className="text-lg font-display font-bold text-white hover:text-primary transition-colors break-all">dealsonwheelsonthego@gmail.com</a>
+                    <p className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-slate-500 mb-1">Email Support</p>
+                    <a href="mailto:dealsonwheelsonthego@gmail.com" className="text-base sm:text-lg font-display font-bold text-white hover:text-primary transition-colors break-all">dealsonwheelsonthego@gmail.com</a>
                   </div>
                 </div>
 
@@ -68,8 +68,8 @@ export default function ContactSection() {
                     <span className="material-symbols-outlined text-white text-2xl">location_on</span>
                   </div>
                   <div>
-                    <p className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-1">Our Location</p>
-                    <p className="text-xl font-display font-bold text-white uppercase tracking-tight">Melbourne, Victoria</p>
+                    <p className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-slate-500 mb-1">Our Location</p>
+                    <p className="text-lg sm:text-xl font-display font-bold text-white uppercase tracking-tight">Melbourne, Victoria</p>
                   </div>
                 </div>
               </div>

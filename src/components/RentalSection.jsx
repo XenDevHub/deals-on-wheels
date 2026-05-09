@@ -72,8 +72,8 @@ export default function RentalSection() {
                   <p className="text-slate-500 text-xs uppercase tracking-wider">{car.brand} • {car.year}</p>
                 </div>
                 <div className="text-right">
-                  <span className="text-primary font-display text-xl font-black">${car.rentalWeekly?.toLocaleString()}</span>
-                  <p className="text-[10px] text-slate-400 uppercase tracking-widest font-bold">/ Week</p>
+                  <span className="text-primary font-display text-lg sm:text-xl font-black">${car.rentalWeekly?.toLocaleString()}</span>
+                  <p className="text-[9px] sm:text-[10px] text-slate-400 uppercase tracking-widest font-bold">/ Week</p>
                 </div>
               </div>
               

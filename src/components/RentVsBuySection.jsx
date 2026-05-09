@@ -18,7 +18,7 @@ export default function RentVsBuySection() {
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl 2xl:text-6xl font-bold text-slate-900 mb-4 md:mb-6">
             Renting a Hybrid vs. Buying New
           </h2>
-          <p className="text-slate-600 text-lg">
+          <p className="text-slate-600 text-base sm:text-lg">
             For high-mileage drivers, subscribing preserves your savings and turns unpredictable maintenance into a flat, manageable fee.
           </p>
         </div>
