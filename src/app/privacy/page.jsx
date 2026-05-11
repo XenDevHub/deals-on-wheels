@@ -54,7 +54,8 @@ export default function PrivacyPolicy() {
             <h2 className="text-2xl font-bold text-slate-900 mb-4 font-display italic">Contact Us</h2>
             <p>If there are any questions regarding this privacy policy, you may contact us at:</p>
             <div className="mt-4 text-slate-900 font-bold">
-              <p>Email: dealsonwheelsonthego@gmail.com</p>
+              <p>Email: sales@dealsonwheelsonthego.com.au</p>
+              <p>Email: support@dealsonwheelsonthego.com.au</p>
               <p>Phone: +61 433 178 890</p>
             </div>
           </section>

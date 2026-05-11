@@ -59,7 +59,10 @@ export default function ContactSection() {
                   </div>
                   <div>
                     <p className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-slate-500 mb-1">Email Support</p>
-                    <a href="mailto:dealsonwheelsonthego@gmail.com" className="text-base sm:text-lg font-display font-bold text-white hover:text-primary transition-colors break-all">dealsonwheelsonthego@gmail.com</a>
+                    <div className="flex flex-col gap-1">
+                      <a href="mailto:sales@dealsonwheelsonthego.com.au" className="text-sm sm:text-base font-display font-bold text-white hover:text-primary transition-colors">sales@dealsonwheelsonthego.com.au</a>
+                      <a href="mailto:support@dealsonwheelsonthego.com.au" className="text-sm sm:text-base font-display font-bold text-white hover:text-primary transition-colors">support@dealsonwheelsonthego.com.au</a>
+                    </div>
                   </div>
                 </div>
 

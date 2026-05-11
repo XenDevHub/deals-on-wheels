@@ -69,7 +69,10 @@ export default function AboutPage() {
                 <span className="material-symbols-outlined text-3xl">mail</span>
               </div>
               <h3 className="text-sm font-bold uppercase tracking-widest text-slate-400 mb-2">Our Email</h3>
-              <a href="mailto:dealsonwheelsonthego@gmail.com" className="text-sm font-bold text-slate-900 break-all">dealsonwheelsonthego@gmail.com</a>
+              <div className="flex flex-col gap-2">
+                <a href="mailto:sales@dealsonwheelsonthego.com.au" className="text-sm font-bold text-slate-900">sales@dealsonwheelsonthego.com.au</a>
+                <a href="mailto:support@dealsonwheelsonthego.com.au" className="text-sm font-bold text-slate-900">support@dealsonwheelsonthego.com.au</a>
+              </div>
             </div>
             <div className="bg-white p-10 rounded-[2rem] shadow-xl shadow-slate-200/50 border border-slate-100 flex flex-col items-center text-center group hover:-translate-y-2 transition-all duration-300">
               <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-colors">

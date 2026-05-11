@@ -41,7 +41,7 @@ export default function Footer() {
           {/* Contact Column */}
           <div className="lg:col-span-6 space-y-8">
             <h4 className="text-white font-bold uppercase tracking-widest text-sm">Get In Touch</h4>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-[1fr_1.4fr] gap-8">
               <div className="flex gap-4">
                 <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center flex-shrink-0 border border-white/10">
                   <span className="material-symbols-outlined text-primary">phone_iphone</span>
@@ -57,7 +57,10 @@ export default function Footer() {
                 </div>
                 <div>
                   <p className="text-white font-bold text-sm uppercase tracking-wider mb-1">Our Email</p>
-                  <a href="mailto:dealsonwheelsonthego@gmail.com" className="text-[15px] hover:text-primary transition-colors break-all">dealsonwheelsonthego@gmail.com</a>
+                  <div className="flex flex-col gap-1">
+                    <a href="mailto:sales@dealsonwheelsonthego.com.au" className="text-[14px] hover:text-primary transition-colors">sales@dealsonwheelsonthego.com.au</a>
+                    <a href="mailto:support@dealsonwheelsonthego.com.au" className="text-[14px] hover:text-primary transition-colors">support@dealsonwheelsonthego.com.au</a>
+                  </div>
                 </div>
               </div>
               <div className="flex gap-4 md:col-span-2">
